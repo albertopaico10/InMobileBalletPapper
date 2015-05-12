@@ -7,6 +7,7 @@ public class UserRequest {
 	public String namesUser;
 	public String lastNameUser;
 	public String dniUser;
+	public String recordingDevice;
 	
 	public String getEmail() {
 		return email;
@@ -44,8 +45,11 @@ public class UserRequest {
 	public void setDniUser(String dniUser) {
 		this.dniUser = dniUser;
 	}
-	
-	
-	
+	public String getRecordingDevice() {
+		return recordingDevice;
+	}
+	public void setRecordingDevice(String recordingDevice) {
+		this.recordingDevice = recordingDevice;
+	}
 	
 }

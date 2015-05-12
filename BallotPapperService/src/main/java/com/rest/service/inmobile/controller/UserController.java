@@ -32,4 +32,12 @@ public class UserController {
 		return beanResponse;
 	}
 	
+	@RequestMapping(value = CommonConstants.ValueRequestMapping.VALIDATE_USER, method = RequestMethod.POST)
+	public @ResponseBody UserResponse validateUser(@RequestBody UserRequest beanRequest) {
+		logger.info("Start validateUser.");
+		logger.info("Correo : "+beanRequest.getEmail()+"** Password : "+beanRequest.getPassword());
+		UserResponse beanResponse=userManager.validateUser(beanRequest);
+		return beanResponse;
+	}
+	
 }

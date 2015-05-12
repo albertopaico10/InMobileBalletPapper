@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="lblPrueba">Hola Mundo de Alberto Paico</string>
+    <string name="hello">Hello World!</string>
+    <string name="app_name">BalletPaper</string>
+    <string name="lblTitleLogin">Bienvenido a BalletPaper</string>
+    <string name="email_hint">Correo electronicó</string>
+    <string name="logoDescription">Logo BalletPaper</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="sigIn">LOGIN</string>
+    <string name="registration">Crear Cuenta</string>
+    <string name="forgetPassword">¿Olvidaste tu Contraseña?</string>
+    <string name="nameRegister">Nombres</string>
+    <string name="lastNameRegister">Apellidos</string>
+    <string name="dniRegister">Documento de Identidad (DNI)</string>
+    <string name="chkAdult">Soy mayor de edad (18)</string>
+    <string name="chkAcceptTerm">Acepto los terminos y Condiciones</string>
+    <string name="btnRegister">Registrarse</string>
+    <string name="btnDenounce">Denunciar</string>
+    <string name="btnMyDenounce">Mis Denuncias</string>
+    <string name="btnMyInformation">Mis Datos</string>
+    <string name="btnRecomendation">Recomendaciones</string>
+    <string name="erroremail_pwd">Invalid e-mail or password</string>
+    <string name="next">Siguiente</string>
+    <string name="lblTituloFotos">Paso 1. Tome las fotos necesarias para la denuncia</string>
+    <string name="fieldRequired">Campo requerido</string>
+    <string name="welcomeMessagesTitle">Registro Exitoso</string>
+    <string name="welcomeMessagesBody">Su registro fue exito. Por favor de click en el boton para loguearse en la aplicacion y empezar a registrar sus denuncias.</string>
+    <string name="welcomeMessagesThankYou">Gracias por su preferencia</string>
+    <string name="emailExit">El correo ya se encuentra registro. Por favor ingrese otro</string>
+    <string name="validationFail">El password es incorrecto</string>
+    <string name="watingLogin">Por favor espere estamos validando su cuenta</string>
+    <string name="emailNotExit">El correo no se encuentra registrado en nuestra aplicación. Ingrese en "Crear Cuenta"</string>
+    
+</resources>

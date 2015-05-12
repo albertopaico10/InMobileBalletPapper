@@ -12,6 +12,7 @@ CREATE TABLE tb_User(
 	namesUser varchar(500),
 	lastNameUser varchar(500),
 	dniUser varchar(15),
+	recordingDevice varchar(100),
 	status INT,
 	date_created TIMESTAMP DEFAULT NOW(),
 	date_updated TIMESTAMP DEFAULT NOW(),

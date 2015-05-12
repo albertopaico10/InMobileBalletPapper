@@ -29,10 +29,12 @@ public class User implements Serializable {
 	private String email;
 
 	private String lastNameUser;
-
+	
 	private String namesUser;
 
 	private String passwordUser;
+	
+	private String recordingDevice;
 
 	private int status;
 
@@ -141,6 +143,14 @@ public class User implements Serializable {
 
 	public void setUserUpdated(int userUpdated) {
 		this.userUpdated = userUpdated;
+	}
+
+	public String getRecordingDevice() {
+		return recordingDevice;
+	}
+
+	public void setRecordingDevice(String recordingDevice) {
+		this.recordingDevice = recordingDevice;
 	}
 
 }

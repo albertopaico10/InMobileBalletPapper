@@ -17,6 +17,7 @@ public class ReqRespManagerImpl implements ReqRespManager{
 	ReqRespHibernate reqRespHibernate;
 	
 	public Object saveOrUpdate(Object beanObject,String typeValue,int idUser,int idReqResp) {
+		System.out.println("***** idUser : "+idUser+"**** idReqResp : "+idReqResp);
 		Object returnObject=new Object();
 		RequestResponse reqResp=new RequestResponse();
 		//--Convert Object in String Json
@@ -28,7 +29,7 @@ public class ReqRespManagerImpl implements ReqRespManager{
 				reqResp.setResponse(strValue);
 				reqResp.setRequest(beanReqResp.getRequest());
 				reqResp.setTypeOperation(beanReqResp.getTypeOperation());
-				reqResp.setIdUser(beanReqResp.getIdUser());
+				reqResp.setIdUser(idUser);
 			}else{
 				reqResp.setRequest(strValue);	
 				reqResp.setTypeOperation(typeValue);

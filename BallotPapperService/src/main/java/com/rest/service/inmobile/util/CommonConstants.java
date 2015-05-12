@@ -4,6 +4,7 @@ public class CommonConstants {
 
 	public class ValueRequestMapping{
 		public static final String CREATE_USER = "/rest/user/create";
+		public static final String VALIDATE_USER = "/rest/user/validation";
 	}
 	
 	public class TypeOperationReqResp{

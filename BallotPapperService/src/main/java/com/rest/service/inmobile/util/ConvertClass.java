@@ -13,6 +13,7 @@ public class ConvertClass {
 		userDataBase.setNamesUser(beanRequest.getNamesUser());
 		userDataBase.setLastNameUser(beanRequest.getLastNameUser());
 		userDataBase.setDniUser(beanRequest.getDniUser());
+		userDataBase.setRecordingDevice(beanRequest.getRecordingDevice());
 		return userDataBase;
 	}
 }

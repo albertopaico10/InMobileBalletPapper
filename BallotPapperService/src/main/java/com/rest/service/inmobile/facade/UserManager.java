@@ -9,5 +9,5 @@ import com.rest.service.inmobile.bean.user.UserResponse;
 public interface UserManager {
 	
 	public UserResponse saveUserInformation(UserRequest beanRequest);
-	
+	public UserResponse validateUser(UserRequest userRequest);
 }
