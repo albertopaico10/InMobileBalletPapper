@@ -25,6 +25,12 @@
     <item name="idPhotoImageViewN2" type="id">false</item>
     <item name="idPhotoImageViewN3" type="id">false</item>
     <item name="btnNextPhoto" type="id">false</item>
-    
+    <item name="idTxtPlate" type="id">false</item>
+    <item name="idTxtAditionalComment" type="id">false</item>
+    <item name="idLblLatitude" type="id">false</item>
+    <item name="idLblLongitud" type="id">false</item>
+    <item name="idLblFullAddress" type="id">false</item>
+    <item name="idBntRegisterComplient" type="id">false</item>
+    <item name="idTxtIdCode" type="id">false</item>
 
 </resources>

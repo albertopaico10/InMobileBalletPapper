@@ -1,24 +1,15 @@
 package com.example.balletpaper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class PrincipalMainActivity extends ActionBarActivity  {
-
+public class SuccessRecordActivity extends ActionBarActivity {
 	
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.principalmenu);
-	}
-	
-	public void onClickRedirectCamera(View v){
-		Intent i = new Intent(this, TakePhotoActivity.class);
-		startActivity(i);
+		setContentView(R.layout.successrecord);
 	}
 	
 	@Override

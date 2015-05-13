@@ -117,13 +117,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		System.out.println("Entereeeeeeee onSaveInstanceState");
-		// Save UI state changes to the savedInstanceState.
-		// This bundle will be passed to onCreate if the process is
-		// killed and restarted.
-
-		// savedInstanceState.putBoolean("MyBoolean", true);
-		// savedInstanceState.putDouble("myDouble", 1.9);
-		// savedInstanceState.putInt("MyInt", 1);
 		savedInstanceState.putString("rootFileImageN1", rootFileImageN1);
 		savedInstanceState.putString("rootFileImageN2", rootFileImageN2);
 		savedInstanceState.putString("rootFileImageN3", rootFileImageN3);
@@ -147,6 +140,11 @@ public class TakePhotoActivity extends ActionBarActivity {
 		System.out.println("ENTRE3.............!!!");
 		Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, 3);
+	}
+	
+	public void onClickRedirectContinueRegis() {
+		Intent i = new Intent(this, RegisterComplientActivity.class);
+		startActivity(i);
 	}
 
 	@Override
