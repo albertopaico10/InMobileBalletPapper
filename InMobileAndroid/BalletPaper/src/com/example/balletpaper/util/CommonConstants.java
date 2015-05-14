@@ -3,10 +3,10 @@ package com.example.balletpaper.util;
 public class CommonConstants {
 
 	public class URLService {
-		public static final String CREATE_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/create";
-		public static final String VALIDATION_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/validation";
-//		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
-//		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
+//		public static final String CREATE_USER = "http://192.168.43.174:8080/BallotPapperService/rest/user/create";
+//		public static final String VALIDATION_USER = "http://192.168.43.174:8080/BallotPapperService/rest/user/validation";
+		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
+		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
 	}
 	
 	public class GenericValues{

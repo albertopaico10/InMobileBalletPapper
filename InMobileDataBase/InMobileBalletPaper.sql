@@ -31,3 +31,48 @@ CREATE TABLE tb_Request_Response(
 	date_created TIMESTAMP DEFAULT NOW(),
 	user_created INT
 );
+
+CREATE TABLE tb_Complient(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	idUser int,
+	status int,
+	longitude varchar(20),
+	latitude varchar(20),
+	completeAddress varchar(100),
+	comments varchar(200),
+	date_created TIMESTAMP DEFAULT NOW(),
+	user_created INT
+);
+
+ALTER TABLE tb_Complient
+ADD FOREIGN KEY (idUser)
+REFERENCES tb_User(id);
+
+/*Table Image*/
+CREATE TABLE tb_Image(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	categoryImage VARCHAR(200),
+	img LONGBLOB NOT NULL,
+	status int,
+	date_created TIMESTAMP DEFAULT NOW(),
+	date_updated TIMESTAMP DEFAULT NOW(),
+	user_created INT,
+	user_updated INT
+);
+
+CREATE TABLE tb_Complaint_Image(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	idComplaint int,
+	idUser int,
+	idImage int,
+	date_created TIMESTAMP DEFAULT NOW(),
+	user_created INT
+);
+
+ALTER TABLE tb_Complaint_Image
+ADD FOREIGN KEY (idComplaint)
+REFERENCES tb_Complient(id);
+
+ALTER TABLE tb_Complaint_Image
+ADD FOREIGN KEY (idImage)
+REFERENCES tb_Image(id);

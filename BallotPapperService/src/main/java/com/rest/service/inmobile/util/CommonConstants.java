@@ -5,14 +5,15 @@ public class CommonConstants {
 	public class ValueRequestMapping{
 		public static final String CREATE_USER = "/rest/user/create";
 		public static final String VALIDATE_USER = "/rest/user/validation";
+		public static final String SAVE_IMAGE = "/rest/image/save";
+		public static final String SAVE_COMPLIENT = "/rest/complient/save";
 	}
 	
 	public class TypeOperationReqResp{
 		public static final String OPERATION_CREATE_USER="CREATE_USER";
 		public static final String OPERATION_VALIDATE_USER="VALIDATE_USER";
-		public static final String OPERATION_SAVE_RESTAURANT="SAVE_RESTAURANT";
-		public static final String OPERATION_UPLOAD_LOGO_RESTAURANT="UPLOAD_LOGO_RESTAURANT";
-		public static final String OPERATION_SAVE_PROVIDER = "SAVE_PROVIDER";
+		public static final String OPERATION_UPLOAD_IMAGE_MOBILE="UPLOAD_IMAGE_MOBILE";
+		public static final String OPERATION_SAVE_COMPLIENT = "SAVE_COMPLIENT";
 	}
 	
 	public class CodeResponse{
