@@ -34,7 +34,10 @@ public class Complaint implements Serializable {
 	private String longitude;
 
 	private int status;
-
+	
+	@Column(name="number_plate")
+	private String numberPlate;
+	
 	@Column(name="user_created")
 	private int userCreated;
 
@@ -111,6 +114,14 @@ public class Complaint implements Serializable {
 
 	public void setUserCreated(int userCreated) {
 		this.userCreated = userCreated;
+	}
+
+	public String getNumberPlate() {
+		return numberPlate;
+	}
+
+	public void setNumberPlate(String numberPlate) {
+		this.numberPlate = numberPlate;
 	}
 
 }

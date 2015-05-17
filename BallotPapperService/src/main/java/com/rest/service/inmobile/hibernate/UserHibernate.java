@@ -6,4 +6,5 @@ public interface UserHibernate {
 	public int saveUserResponseId(User userBean)throws Exception;
 	public boolean existEmail(String email)throws Exception;
 	public User validateUser(String email,String password)throws Exception;
+	public User getUser(String idUser) throws Exception;
 }

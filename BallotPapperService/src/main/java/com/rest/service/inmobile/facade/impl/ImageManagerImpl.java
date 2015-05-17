@@ -32,11 +32,6 @@ public class ImageManagerImpl implements ImageManager {
 
 	public ImageResponse saveImage(ImageRequest beanRequest) {
 		ImageResponse beanResponse = new ImageResponse();
-		// --Save Json in Data Base
-		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(beanRequest,
-				CommonConstants.TypeOperationReqResp.OPERATION_UPLOAD_IMAGE_MOBILE,beanRequest.getIdUser(), 0);
-		System.out.println("ID Response : " + valueReqResp.getId());
-
 		try {
 			//--Save Image
 			Image image=ConvertClass.convertImageToDataBase(beanRequest);
@@ -55,9 +50,6 @@ public class ImageManagerImpl implements ImageManager {
 			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_ERROR);
 			beanResponse.setMessageResponse(e.getMessage());
 		}
-		
-		reqRespManager.saveOrUpdate(beanResponse,CommonConstants.TypeOperationReqResp.OPERATION_UPLOAD_IMAGE_MOBILE,
-				beanRequest.getIdUser(),valueReqResp.getId());
 		return beanResponse;
 	}
 

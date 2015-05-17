@@ -41,7 +41,7 @@ public class UserManagerImpl implements UserManager {
 				idUser=userHibernate.saveUserResponseId(userDataBase);
 				beanUserResponse.setIdUser(idUser);
 				//--Send Email
-				buidlEmailCreationUser(beanRequest.getEmail());
+//				buidlEmailCreationUser(beanRequest.getEmail());
 				//--Build Response for web service client
 				beanUserResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_USER);
 				beanUserResponse.setMessagesResponse("The user was created successfully.");
@@ -91,10 +91,10 @@ public class UserManagerImpl implements UserManager {
 					userBeanResponse.setIdUser(userBean.getId());
 					userBeanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_VALIDATION);
 					userBeanResponse.setMessagesResponse("The Email was validate correctly");
-					userBeanResponse.setDescription(userBean.getEmail());
+					userBeanResponse.setDescription(userBean.getNamesUser()+" "+userBean.getLastNameUser());
 				}else{
 					userBeanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_FAIL_VALIDATION);
-					userBeanResponse.setMessagesResponse("The email or password is incorrect");
+					userBeanResponse.setMessagesResponse("Password is incorrect");
 					userBeanResponse.setIdUser(9999);
 				}
 			}else{

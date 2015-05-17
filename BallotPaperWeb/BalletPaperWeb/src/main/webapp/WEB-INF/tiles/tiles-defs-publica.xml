@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+
+	<definition name="tiles.index.private"
+		template="/WEB-INF/private/principal/principalPage.jsp">
+		<put-attribute name="cabecera" value="/WEB-INF/private/principal/headerPage.jsp" />
+		<put-attribute name="contenidoIzq" value="/WEB-INF/private/principal/leftPage.jsp" />
+		<put-attribute name="contenidoCentro" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="contenidoDcho" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="pie" value="/WEB-INF/private/principal/footPage.jsp" />
+	</definition>
+	
+	<definition name="tiles.index.public"
+		template="/WEB-INF/public/principal/principalPage.jsp">
+		<put-attribute name="cabecera" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="contenidoIzq" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="contenidoCentro" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="contenidoDcho" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="pie" value="/WEB-INF/common/blank.jsp" />
+	</definition>
+
+	<definition name="welcomePage" extends="tiles.index.private">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/private/welcomePage.jsp" />
+	</definition>
+	
+	<definition name="loginPage" extends="tiles.index.public">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/public/loginPage.jsp" />
+	</definition>
+	
+	
+	
+</tiles-definitions>

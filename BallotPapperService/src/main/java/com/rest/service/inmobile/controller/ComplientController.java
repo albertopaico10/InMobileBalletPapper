@@ -20,6 +20,7 @@ public class ComplientController {
 	
 	@RequestMapping(value = CommonConstants.ValueRequestMapping.SAVE_COMPLIENT,	method = RequestMethod.POST)
 	public @ResponseBody ComplientResponse saveComplient(@RequestBody ComplientRequest beanRequest) {
+		System.out.println("entre a saveComplient");
 		ComplientResponse beanResponse=complientManager.saveComplient(beanRequest);
 		return beanResponse;
 	}

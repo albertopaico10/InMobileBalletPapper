@@ -34,10 +34,11 @@ public class ConvertClass {
 	public static Complaint convertComplientToDataBase(ComplientRequest beanRequest){
 		Complaint beanComplient=new Complaint();
 		beanComplient.setComments(beanRequest.getCommentsAdditional());
-		beanComplient.setCompleteAddress(beanRequest.getCompleteAddress());
+		beanComplient.setCompleteAddress(UtilMethods.descriptValue(beanRequest.getAddressFull()));
 		beanComplient.setIdUser(beanRequest.getIdUser());
 		beanComplient.setLatitude(beanRequest.getLatitude());
 		beanComplient.setLongitude(beanRequest.getLongitude());
+		beanComplient.setNumberPlate(beanRequest.getNumberPlate());
 		return beanComplient;
 	}
 	

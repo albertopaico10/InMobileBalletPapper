@@ -9,6 +9,12 @@ public class CommonConstants {
 		public static final String SAVE_COMPLIENT = "/rest/complient/save";
 	}
 	
+	public class EncriptedValues{
+		public static final String ALGORITHM_MD5="MD5";
+		public static final String ALGORITHM_AES="AES";
+		public static final String KEY_VALUE_ENCRIPTED="inMobileKeyPublic";
+	}
+	
 	public class TypeOperationReqResp{
 		public static final String OPERATION_CREATE_USER="CREATE_USER";
 		public static final String OPERATION_VALIDATE_USER="VALIDATE_USER";
@@ -32,13 +38,14 @@ public class CommonConstants {
 		public final static String CODE_RESPONSE_SUCCESS_DISTRICT="SUCCESS_DISTRICT";
 		public final static String CODE_RESPONSE_SUCCESS_IMAGE="SUCCESS_INSERT_IMAGE";
 		public final static String CODE_RESPONSE_SUCCESS_RESTAURANT="SUCCESS_INSERT_RESTAURANT";
-		public final static String CODE_RESPONSE_SUCCESS_PROVIDE="SUCCESS_INSERT_PROVIDER";
+		public final static String CODE_RESPONSE_SUCCESS_COMPLAINT="SUCCESS_COMPLAINT";
 	}
 	
 	public class Email{
 		public final static String EMAIL_FROM="albertopaico10@gmail.com";
 		public final static String PASSWORD_FROM="Pa55w0rd4097";
 		public final static String SUBJECT_CREATION_USER="InMobile - Creation User";
+		public final static String SUBJECT_COMPLETE_COMPLAINT="InMobile - Registro Denuncia";
 		public final static String EMAIL_TRUE="true";
 		public final static String EMAIL_SMTP_GMAIL="smtp.gmail.com";
 		public final static String EMAIL_PORT_GMAIL="587";

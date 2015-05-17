@@ -20,4 +20,25 @@ public class UtilMethods {
 	    }
 	    return data;
 	}
+	
+	public static String bytesToHexString(byte[] bytes) {
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(String.format("%02x", b & 0xff));
+		}
+		return sb.toString();
+	}
+	
+	public static String encriptValue(String value){
+		String valueEncript="";
+		byte[] byteValue=value.getBytes();
+		valueEncript=bytesToHexString(byteValue);
+		return valueEncript;
+	}
+	
+	public static String descriptValue(String valueEncript){
+		byte[] byteValue=hexStringToByteArray(valueEncript);
+		String valueNormal=new String(byteValue);
+		return valueNormal;
+	}
 }

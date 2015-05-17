@@ -40,6 +40,7 @@ CREATE TABLE tb_Complient(
 	latitude varchar(20),
 	completeAddress varchar(100),
 	comments varchar(200),
+	number_plate varchar(20),
 	date_created TIMESTAMP DEFAULT NOW(),
 	user_created INT
 );
