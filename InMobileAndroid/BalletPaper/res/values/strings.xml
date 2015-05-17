@@ -33,5 +33,22 @@
     <string name="validationFail">El password es incorrecto</string>
     <string name="watingLogin">Por favor espere estamos validando su cuenta</string>
     <string name="emailNotExit">El correo no se encuentra registrado en nuestra aplicación. Ingrese en "Crear Cuenta"</string>
+    <string name="lblNumberPlate">Numero de Placa</string>
+    <string name="lblAditionalComment">Comentarios Adicionales</string>
+    <string name="lblTitleStep2Register">Paso2. Información complementaria de la denuncia</string>
+    <string name="btnRegistrar">Registrar Denuancia</string>
+    <string name="successTitle">Denuncia registrada con exito</string>
+    <string name="strBodyMessageSuccess">Su denuncia fue registrado con exito en la aplicacion, le estaremos informando sobre el proceso de la denuncia</string>
+    <string name="btnStrOtherComplaint">Menu Principal</string>
+    <string name="strIdAttention">El id de la atención</string>
+    <string name="strConfigGPS">No se ha configurado el GPS. Porfavor hacerlo antes de continuar.</string>
+    <string name="errorInGeneral">Ocurrio un error interno por favor revisar</string>
+    <string name="errorSaveComplaint">#1 Ocurrio un error cuando grabo la información</string>
+    <string name="errorSaveImage">#2 Ocurrio un error cuando se subian las fotos</string>
+    <string name="lblDireccion">Dirección : </string>
+    <string name="lblInsertDireccion">Ingrese dirección</string>
+    <string name="strMessagesCodeResponse">Su numero denuncia es : </string>
+    <string name="emailFormat">Formato de Correo Incorrecto</string>
+    <string name="strUploadOnePhoto">Tiene que tomar por lo menos una foto</string>
     
 </resources>

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -22,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.balletpaper.sql.DB_BalletPaper;
 import com.example.balletpaper.util.CommonConstants;
 import com.example.balletpaper.util.UtilMethods;
 
@@ -36,6 +38,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 	private CheckBox registerAceptTermin;
 	private Button registerSaveBtn;
 	private String responseService="";
+	private DB_BalletPaper dbBalletPaper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,13 @@ public class RegisterUserActivity extends ActionBarActivity {
 		registerAceptTermin = (CheckBox) findViewById(R.id.idChkAcceptTerm);
 
 		registerSaveBtn = (Button) findViewById(R.id.idBtnRegister);
+		
+		createAndroidDatase();
 
+	}
+
+	private void createAndroidDatase() {
+		dbBalletPaper = new DB_BalletPaper(this, "DB_AndroidBalletPaper", null, 1);
 	}
 
 	public void onClickSaveUser(View v) {
@@ -83,7 +92,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 			JSONObject dato = new JSONObject();
 			try {
 				dato.put(CommonConstants.RequestValueUser.EMAIL_REQUEST_USER, registerEmail.getText());
-				dato.put(CommonConstants.RequestValueUser.PASSWORD_REQUEST_USER, UtilMethods.encryptIt(registerpassword.getText().toString()));
+				dato.put(CommonConstants.RequestValueUser.PASSWORD_REQUEST_USER, UtilMethods.encriptValue(registerpassword.getText().toString()));
 				dato.put(CommonConstants.RequestValueUser.TYPECUSTOMER_REQUEST_USER, "1");
 				dato.put(CommonConstants.RequestValueUser.NAMEUSER_REQUEST_USER, registerName.getText());
 				dato.put(CommonConstants.RequestValueUser.LASTNAMEUSER_REQUEST_USER, registerLastName.getText());
@@ -100,7 +109,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 			} catch (Exception e) {
 				// Close progress dialog
 				dialog.dismiss();
-				Toast.makeText(RegisterUserActivity.this, "Hubo un error en el proceso de Registro de Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
+				Toast.makeText(RegisterUserActivity.this, "Hubo un error en el proceso de Registro del Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
 			return null;
 		}
@@ -114,8 +123,10 @@ public class RegisterUserActivity extends ActionBarActivity {
 			try {
 				jObject = new JSONObject(Content);
 				String codeResponse = jObject.getString("codeResponse");
+				int idUserService = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse);
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_USER.equals(codeResponse)){
+					dbBalletPaper.insertUser(registerEmail.getText().toString(), String.valueOf(idUserService));
 					Intent i = new Intent(RegisterUserActivity.this, WelcomeRegisterActivity.class);
 					startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_EXIST.equals(codeResponse)){
@@ -127,29 +138,38 @@ public class RegisterUserActivity extends ActionBarActivity {
 		}
 
 	}
-
+	
 	private boolean validateAllField() {
 		System.out.println("Metofo validateAllField");
 		boolean validateField = true;
 		if (TextUtils.isEmpty(registerEmail.getText())) {
 			validateField = false;
 			registerEmail.setError(getString(R.string.fieldRequired));
-		} else if (TextUtils.isEmpty(registerpassword.getText())) {
+		}
+		if(!TextUtils.isEmpty(registerEmail.getText())){
+			boolean validateEmail=android.util.Patterns.EMAIL_ADDRESS.matcher(registerEmail.getText()).matches();
+			if(!validateEmail){
+				registerEmail.setError(getString(R.string.emailFormat));
+			}
+		}	
+		if (TextUtils.isEmpty(registerpassword.getText())) {
 			validateField = false;
 			registerpassword.setError(getString(R.string.fieldRequired));
-		} else if (TextUtils.isEmpty(registerName.getText())) {
+		}
+		if (TextUtils.isEmpty(registerName.getText())) {
 			validateField = false;
 			registerName.setError(getString(R.string.fieldRequired));
-		} else if (TextUtils.isEmpty(registerLastName.getText())) {
+		}
+		if (TextUtils.isEmpty(registerLastName.getText())) {
 			validateField = false;
 			registerLastName.setError(getString(R.string.fieldRequired));
-		} else if (TextUtils.isEmpty(registerDni.getText())) {
+		}if (TextUtils.isEmpty(registerDni.getText())) {
 			validateField = false;
 			registerDni.setError(getString(R.string.fieldRequired));
-		} else if (!registerAdult.isChecked()) {
+		}if (!registerAdult.isChecked()) {
 			validateField = false;
 			registerAdult.setError(getString(R.string.fieldRequired));
-		} else if (!registerAceptTermin.isChecked()) {
+		}if (!registerAceptTermin.isChecked()) {
 			validateField = false;
 			registerAceptTermin.setError(getString(R.string.fieldRequired));
 		}

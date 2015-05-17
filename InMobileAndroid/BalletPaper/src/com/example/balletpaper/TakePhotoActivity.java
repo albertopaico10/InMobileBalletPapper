@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 	ImageView imgPhotoPicture2;
 	ImageButton btnPhotoPicture3;
 	ImageView imgPhotoPicture3;
+	Button btnNextPage;
 	Uri fileUri = null;
 	String hexImagePhotoN1 = "", hexImagePhotoN2 = "", hexImagePhotoN3 = "";
 	String rootFileImageN1 = "", rootFileImageN2 = "", rootFileImageN3 = "";
@@ -49,10 +51,13 @@ public class TakePhotoActivity extends ActionBarActivity {
 		imgPhotoPicture2 = (ImageView) findViewById(R.id.idPhotoImageViewN2);
 		btnPhotoPicture3 = (ImageButton) findViewById(R.id.idBtnTakePhotoN3);
 		imgPhotoPicture3 = (ImageView) findViewById(R.id.idPhotoImageViewN3);
+		btnNextPage=(Button) findViewById(R.id.btnNextPhoto);
 
 		if (savedInstanceState != null) {
 			// Restore value of members from saved state
 			rootFileImageN1=savedInstanceState.getString("rootFileImageN1");
+			rootFileImageN2=savedInstanceState.getString("rootFileImageN2");
+			rootFileImageN3=savedInstanceState.getString("rootFileImageN3");
 		}
 		
 		if (!TextUtils.isEmpty(rootFileImageN1)) {
@@ -63,10 +68,9 @@ public class TakePhotoActivity extends ActionBarActivity {
 				final Bitmap b = BitmapFactory.decodeStream(getContentResolver().openInputStream(startDir), null,options);
 				imgPhotoPicture1.setImageBitmap(b);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				Toast.makeText(this, "Error in internal Process in Foto (1) : "+e.getMessage(),Toast.LENGTH_LONG).show();
 			}
-		}else if(!TextUtils.isEmpty(rootFileImageN2)){
+		}if(!TextUtils.isEmpty(rootFileImageN2)){
 			try {
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inSampleSize = 24;
@@ -77,7 +81,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 				// TODO Auto-generated catch block
 				Toast.makeText(this, "Error in internal Process in Foto (2) : "+e.getMessage(),Toast.LENGTH_LONG).show();
 			}
-		}else if(!TextUtils.isEmpty(rootFileImageN3)){
+		}if(!TextUtils.isEmpty(rootFileImageN3)){
 			try {
 				BitmapFactory.Options options = new BitmapFactory.Options();
 				options.inSampleSize = 24;
@@ -85,7 +89,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 				final Bitmap b3 = BitmapFactory.decodeStream(getContentResolver().openInputStream(startDir3), null,options);
 				imgPhotoPicture3.setImageBitmap(b3);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				Toast.makeText(this, "Error in internal Process in Foto (3) : "+e.getMessage(),Toast.LENGTH_LONG).show();
 			}
 		}
@@ -110,7 +113,13 @@ public class TakePhotoActivity extends ActionBarActivity {
 				onTakePhoto3();
 			}
 		});
-
+		
+		btnNextPage.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onNextPage();
+			}
+		});
 		
 	}
 	
@@ -148,6 +157,21 @@ public class TakePhotoActivity extends ActionBarActivity {
 		Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, 3);
 	}
+	
+	public void onNextPage() {
+		System.out.println("onNextPage.............!!!");
+		if(validatePhoto()){
+			Intent i = new Intent(getApplicationContext(), RegisterComplientActivity.class);
+			i.putExtra("photo1",rootFileImageN1);
+			i.putExtra("photo2",rootFileImageN2);
+			i.putExtra("photo3",rootFileImageN3);
+			startActivity(i);
+		}else{
+			Toast.makeText(this,getString(R.string.strUploadOnePhoto), Toast.LENGTH_LONG).show();
+		}
+		
+		
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,7 +187,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 				byte[] image = stream.toByteArray();
 				hexImagePhotoN1 = UtilMethods.bytesToHexString(image);
 				rootFileImageN1 = data.getDataString();
-
 				Toast.makeText(this,"La imagen fue tomado con exito", Toast.LENGTH_LONG).show();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
@@ -206,36 +229,13 @@ public class TakePhotoActivity extends ActionBarActivity {
 		}
 	}
 
-	
-
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		// Restore UI state from the savedInstanceState.
-		// This bundle has also been passed to onCreate.
-		// boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
-		// double myDouble = savedInstanceState.getDouble("myDouble");
-		// int myInt = savedInstanceState.getInt("MyInt");
 		rootFileImageN1 = savedInstanceState.getString("rootFileImageN1");
 		rootFileImageN2 = savedInstanceState.getString("rootFileImageN2");
 		rootFileImageN3 = savedInstanceState.getString("rootFileImageN3");
 	}
-
-	// private File getOutputPhotoFile() {
-	// File directory = new File(Environment.getExternalStoragePublicDirectory(
-	// Environment.DIRECTORY_PICTURES), getPackageName());
-	// if (!directory.exists()) {
-	// if (!directory.mkdirs()) {
-	// Toast.makeText(this,
-	// "Failed to create storage directory.",Toast.LENGTH_LONG).show();
-	// return null;
-	// }
-	// }
-	// String timeStamp = new SimpleDateFormat("yyyMMdd_HHmmss",
-	// Locale.UK).format(new Date());
-	// return new File(directory.getPath() + File.separator + "IMG_"
-	// + timeStamp + ".jpg");
-	// }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -254,6 +254,18 @@ public class TakePhotoActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public boolean validatePhoto(){
+		boolean validate=false;
+		if(!TextUtils.isEmpty(rootFileImageN1)){
+			validate=true;
+		}else if(!TextUtils.isEmpty(rootFileImageN2)){
+			validate=true;
+		}else if(!TextUtils.isEmpty(rootFileImageN3)){
+			validate=true;
+		}
+		return validate;
 	}
 
 }

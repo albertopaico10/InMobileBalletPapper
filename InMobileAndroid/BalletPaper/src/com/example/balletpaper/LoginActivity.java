@@ -8,6 +8,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import com.example.balletpaper.sql.DB_BalletPaper;
 import com.example.balletpaper.util.CommonConstants;
 import com.example.balletpaper.util.UtilMethods;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends ActionBarActivity{
 	private EditText emailLogin;
 	private EditText passwordLogin;
 	private TextView txtLnkRegisterUser;
+	private DB_BalletPaper dbBalletPaper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,12 @@ public class LoginActivity extends ActionBarActivity{
 		emailLogin=(EditText)findViewById(R.id.idLoginEmail);
 		passwordLogin=(EditText)findViewById(R.id.idLoginPassword);
 		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
+		
+		createAndroidDatase();
+	}
+	
+	private void createAndroidDatase() {
+		dbBalletPaper = new DB_BalletPaper(this, "DB_AndroidBalletPaper", null, 1);
 	}
 	
 	public void onOkClick(View v){
@@ -63,7 +71,7 @@ public class LoginActivity extends ActionBarActivity{
 			JSONObject dato = new JSONObject();
 			try {
 				dato.put(CommonConstants.RequestLoginUser.EMAIL_REQUEST_USER, emailLogin.getText());
-				dato.put(CommonConstants.RequestLoginUser.PASSWORD_REQUEST_USER, UtilMethods.encryptIt(passwordLogin.getText().toString()));
+				dato.put(CommonConstants.RequestLoginUser.PASSWORD_REQUEST_USER, UtilMethods.encriptValue(passwordLogin.getText().toString()));
 				StringEntity entity = new StringEntity(dato.toString());
 				post.setEntity(entity);
 				
@@ -85,8 +93,11 @@ public class LoginActivity extends ActionBarActivity{
 			try {
 				jObject = new JSONObject(Content);
 				String codeResponse = jObject.getString("codeResponse");
+				int idUser = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse);
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
+					dbBalletPaper.updateUserDesactive();
+					dbBalletPaper.updateUserActive(String.valueOf(idUser));
 					Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
 					startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){
@@ -113,7 +124,14 @@ public class LoginActivity extends ActionBarActivity{
 		if (TextUtils.isEmpty(emailLogin.getText())) {
 			validateField = false;
 			emailLogin.setError(getString(R.string.fieldRequired));
-		} else if (TextUtils.isEmpty(passwordLogin.getText())) {
+		}
+		if(!TextUtils.isEmpty(emailLogin.getText())){
+			boolean validateEmail=android.util.Patterns.EMAIL_ADDRESS.matcher(emailLogin.getText()).matches();
+			if(!validateEmail){
+				emailLogin.setError(getString(R.string.emailFormat));
+			}
+		}		
+		if (TextUtils.isEmpty(passwordLogin.getText())) {
 			validateField = false;
 			passwordLogin.setError(getString(R.string.fieldRequired));
 		} 

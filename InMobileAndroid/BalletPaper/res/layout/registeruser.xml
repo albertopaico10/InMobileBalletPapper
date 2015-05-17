@@ -72,8 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dip"
                 android:hint="@string/dniRegister"
-                android:inputType="textEmailAddress"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:maxLength="8" 
+                android:inputType="number"/>
             
             
             <!-- Adult CheckBox -->

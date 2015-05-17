@@ -3,14 +3,38 @@ package com.example.balletpaper.util;
 public class CommonConstants {
 
 	public class URLService {
-//		public static final String CREATE_USER = "http://192.168.43.174:8080/BallotPapperService/rest/user/create";
-//		public static final String VALIDATION_USER = "http://192.168.43.174:8080/BallotPapperService/rest/user/validation";
-		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
-		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
+		public static final String CREATE_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/create";
+		public static final String VALIDATION_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/validation";
+		public static final String REGISTER_COMPLAINT = "http://192.168.1.34:8080/BallotPapperService/rest/complient/save";
+		public static final String UPLOAD_IMAGE = "http://192.168.1.34:8080/BallotPapperService/rest/image/save";
+//		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
+//		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
 	}
 	
 	public class GenericValues{
 		public static final String MOBILE_RECORD = "MOBILE";
+		public static final String CATEGORY_UPLOAD_IMAGE = "PHOTO_UPLOAD";
+	}
+	
+	public class RequestUploadImage{
+		public static final String CATEGORYIMAGE_REQUEST_IMAGE = "categoryImage";
+		public static final String HEXIMAGE_REQUEST_IMAGE = "hexImage";
+		public static final String IDUSER_REQUEST_IMAGE = "idUser";
+		public static final String IDCOMPLIENT_REQUEST_IMAGE = "idComplient";
+	}
+	
+	public class RequestSaveComplaint{
+		public static final String IDUSER_REQUEST_COMPLAINT = "idUser";
+		public static final String LONGITUDE_REQUEST_COMPLAINT = "longitude";
+		public static final String LATITUDE_REQUEST_COMPLAINT = "latitude";
+		public static final String FULLADDRESS_REQUEST_COMPLAINT = "addressFull";
+		public static final String COMMENT_ADITIONAL_REQUEST_COMPLAINT = "commentsAdditional";
+		public static final String NUMBER_PLATE_REQUEST_COMPLAINT = "numberPlate";
+		public static final String HEX_PHOTO_1_REQUEST_COMPLAINT = "hexPhoto1";
+		public static final String HEX_PHOTO_2_REQUEST_COMPLAINT = "hexPhoto2";
+		public static final String HEX_PHOTO_3_REQUEST_COMPLAINT = "hexPhoto3";
+		public static final String CATEGORY_IMAGE_REQUEST_COMPLAINT = "categoryImage";
+		
 	}
 	
 	public class RequestValueUser{
@@ -30,6 +54,7 @@ public class CommonConstants {
 	
 	public class EncriptedValues{
 		public static final String ALGORITHM_MD5="MD5";
+		public static final String ALGORITHM_AES="AES";		
 		public static final String KEY_VALUE_ENCRIPTED="inMobileKeyPublic";
 	}
 	public class CodeResponse{
@@ -38,6 +63,9 @@ public class CommonConstants {
 		public final static String RESPONSE_SUCCESS_VALIDATION="SUCCESS_VALIDATION_USER";
 		public static final String RESPONSE_EMAIL_EXIST="EMAIL_EXIST";
 		public static final String RESPONSE_EMAIL_NOT_EXIST="EMAIL_NOT_EXIST";
+		public final static String RESPONSE_SUCCESS_COMPLAINT="SUCCESS_COMPLAINT";
+		public final static String RESPONSE_SUCCESS_IMAGE="SUCCESS_INSERT_IMAGE";
+		public final static String RESPONSE_ERROR="ERROR";
 	}
 
 }

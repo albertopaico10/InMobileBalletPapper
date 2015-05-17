@@ -1,26 +1,27 @@
 package com.example.balletpaper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class PrincipalMainActivity extends ActionBarActivity  {
-
+public class SuccessRecordActivity extends ActionBarActivity {
 	
-	@Override
+	private TextView lblIdComplaint;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.principalmenu);
+		setContentView(R.layout.successrecord);
+		lblIdComplaint=(TextView)findViewById(R.id.idTxtIdCode);
+		String idComplaint="";
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			idComplaint = extras.getString("idComplaint");
+		}
+		lblIdComplaint.setText(idComplaint);
 	}
-	
-	public void onClickRedirectCamera(View v){
-		Intent i = new Intent(this, TakePhotoActivity.class);
-		startActivity(i);
-	}
-	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
