@@ -1,5 +1,15 @@
 package com.rest.service.inmobile.util;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.imageio.ImageIO;
+
 import com.google.gson.Gson;
 
 public class UtilMethods {
@@ -40,5 +50,49 @@ public class UtilMethods {
 		byte[] byteValue=hexStringToByteArray(valueEncript);
 		String valueNormal=new String(byteValue);
 		return valueNormal;
+	}
+	
+	public static String convertFormatString(Date date,String formatTo){
+		DateFormat df = new SimpleDateFormat(formatTo);
+		String returnDate = df.format(date);
+		return returnDate;
+	}	
+	
+	public static String getStatusComplaint(int idStatus){
+		String strStatus="";
+		switch(idStatus){
+			case 1:
+				strStatus=CommonConstants.StatusComplaint.STATUS_OPEN;
+				break;
+			case 2:
+				strStatus=CommonConstants.StatusComplaint.STATUS_CLOSE;
+				break;
+			case 3:
+				strStatus=CommonConstants.StatusComplaint.STATUS_DUPLICATED;
+				break;
+			case 4:
+				strStatus=CommonConstants.StatusComplaint.STATUS_PROGESS;
+				break;
+			default:
+				strStatus=CommonConstants.StatusComplaint.STATUS_WITTHOUTSTATUS;
+		}
+		return strStatus;
+	}
+	
+	public static String saveFileInServer(byte[] imgByte,String nameFile,String formatFile,String rootFile)throws Exception{
+		BufferedImage bfi = null;
+		rootFile=rootFile+"/"+nameFile+formatFile;
+		File directory=new File(rootFile);
+		 if (!directory.exists()) {
+			 bfi = ImageIO.read(new ByteArrayInputStream(imgByte));
+			 File outputfile = new File(rootFile);
+			 try {
+				ImageIO.write(bfi, CommonConstants.ImageParameter.FORMAT_PNG, outputfile);
+			 } catch (IOException e) {
+			 	System.out.println("Error : "+e.toString());
+			 }
+			 bfi.flush();
+		 }		 
+		 return nameFile+formatFile;
 	}
 }

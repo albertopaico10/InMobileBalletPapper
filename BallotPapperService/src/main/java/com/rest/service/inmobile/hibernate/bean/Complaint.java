@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="tb_complient")
+@Table(name="tb_Complient")
 public class Complaint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +34,10 @@ public class Complaint implements Serializable {
 	private String longitude;
 
 	private int status;
+	
+	private int typeComplaint;
+	
+	private String distrinctName;
 	
 	@Column(name="number_plate")
 	private String numberPlate;
@@ -124,4 +128,19 @@ public class Complaint implements Serializable {
 		this.numberPlate = numberPlate;
 	}
 
+	public String getDistrinctName() {
+		return distrinctName;
+	}
+
+	public void setDistrinctName(String distrinctName) {
+		this.distrinctName = distrinctName;
+	}
+
+	public int getTypeComplaint() {
+		return typeComplaint;
+	}
+
+	public void setTypeComplaint(int typeComplaint) {
+		this.typeComplaint = typeComplaint;
+	}
 }

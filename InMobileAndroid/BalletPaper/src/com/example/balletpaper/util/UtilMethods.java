@@ -17,6 +17,11 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.example.balletpaper.R;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Base64;
 
 public class UtilMethods {
@@ -68,7 +73,19 @@ public class UtilMethods {
 		valueEncript=bytesToHexString(byteValue);
 		return valueEncript;
 	}
-
 	
+	public static void alertbox(String title, String message,Activity activiy, int idIcon) {
+	    final AlertDialog alertDialog = new AlertDialog.Builder(activiy).create();
+	    alertDialog.setTitle(title);
+	    alertDialog.setMessage(message);
+	    alertDialog.setIcon(idIcon);
+	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+	          public void onClick(DialogInterface dialog, int which) {
+	              alertDialog.cancel();      
+	        } });
+	    alertDialog.show();
+	 }
+
+
 
 }

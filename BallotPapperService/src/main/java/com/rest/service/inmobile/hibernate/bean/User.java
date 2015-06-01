@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="tb_user")
+@Table(name="tb_User")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,8 @@ public class User implements Serializable {
 	private String recordingDevice;
 
 	private int status;
+	
+	private String nameDistrict;
 
 	private int typeUser;
 
@@ -152,5 +154,13 @@ public class User implements Serializable {
 	public void setRecordingDevice(String recordingDevice) {
 		this.recordingDevice = recordingDevice;
 	}
+
+	public String getNameDistrict() {
+		return nameDistrict;
+	}
+
+	public void setNameDistrict(String nameDistrict) {
+		this.nameDistrict = nameDistrict;
+	}	
 
 }

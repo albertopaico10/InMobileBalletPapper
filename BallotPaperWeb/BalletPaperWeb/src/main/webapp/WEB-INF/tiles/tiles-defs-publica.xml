@@ -16,21 +16,40 @@
 	
 	<definition name="tiles.index.public"
 		template="/WEB-INF/public/principal/principalPage.jsp">
-		<put-attribute name="cabecera" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="cabecera" value="/WEB-INF/public/principal/headerPage.jsp" />
 		<put-attribute name="contenidoIzq" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoCentro" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoDcho" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="pie" value="/WEB-INF/common/blank.jsp" />
 	</definition>
 
+	<!-- PRIVADA -->
+
+	<definition name="complaintUserPage" extends="tiles.index.private">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/private/complaintUserPage.jsp" />
+	</definition>
+	
+	<definition name="complaintDistrictPage" extends="tiles.index.private">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/private/complaintDistrictPage.jsp" />
+	</definition>
+	
+	<definition name="complaintDistrictPage" extends="tiles.index.private">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/private/complaintDistrictPage.jsp" />
+	</definition>
+	
 	<definition name="welcomePage" extends="tiles.index.private">
 		<put-attribute name="contenidoCentro" value="/WEB-INF/private/welcomePage.jsp" />
 	</definition>
+
+	<!-- PUBLICA -->
 	
 	<definition name="loginPage" extends="tiles.index.public">
+		<put-attribute name="cabecera" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoCentro" value="/WEB-INF/public/loginPage.jsp" />
 	</definition>
-	
+	<definition name="initPage" extends="tiles.index.public">
+		<put-attribute name="contenidoCentro" value="/WEB-INF/public/initPage.jsp" />
+	</definition>
 	
 	
 </tiles-definitions>

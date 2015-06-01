@@ -7,6 +7,8 @@ public class ImageRequest {
 	public int idUser;
 	public int idComplient;
 	
+	public int idImage;
+	public String rootProject;
 	
 	public String getCategoryImage() {
 		return categoryImage;
@@ -32,4 +34,17 @@ public class ImageRequest {
 	public void setIdComplient(int idComplient) {
 		this.idComplient = idComplient;
 	}
+	public int getIdImage() {
+		return idImage;
+	}
+	public void setIdImage(int idImage) {
+		this.idImage = idImage;
+	}
+	public String getRootProject() {
+		return rootProject;
+	}
+	public void setRootProject(String rootProject) {
+		this.rootProject = rootProject;
+	}
+	
 }

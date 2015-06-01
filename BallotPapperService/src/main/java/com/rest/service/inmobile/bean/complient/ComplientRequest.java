@@ -12,6 +12,7 @@ public class ComplientRequest {
 	public String hexPhoto2;
 	public String hexPhoto3;
 	public String categoryImage;
+	public String district;
 	
 	public int getIdUser() {
 		return idUser;
@@ -72,5 +73,11 @@ public class ComplientRequest {
 	}
 	public void setCategoryImage(String categoryImage) {
 		this.categoryImage = categoryImage;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 }

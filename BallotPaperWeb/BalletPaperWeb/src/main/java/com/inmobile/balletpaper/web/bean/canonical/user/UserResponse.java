@@ -1,11 +1,12 @@
 package com.inmobile.balletpaper.web.bean.canonical.user;
 
 public class UserResponse {
-	private int idUser;
-	private String codeResponse;
-	private String messagesResponse;
-	private String description;
-	
+	public int idUser;
+	public String codeResponse;
+	public String messagesResponse;
+	public String description;
+	public String additional;
+	public int typeUser;
 	
 	public int getIdUser() {
 		return idUser;
@@ -30,5 +31,17 @@ public class UserResponse {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getAdditional() {
+		return additional;
+	}
+	public void setAdditional(String additional) {
+		this.additional = additional;
+	}
+	public int getTypeUser() {
+		return typeUser;
+	}
+	public void setTypeUser(int typeUser) {
+		this.typeUser = typeUser;
 	}
 }

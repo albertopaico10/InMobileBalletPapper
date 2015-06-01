@@ -5,6 +5,8 @@ public class UserResponse {
 	public String codeResponse;
 	public String messagesResponse;
 	public String description;
+	public String additional;
+	public int typeUser;
 	
 	
 	public int getIdUser() {
@@ -30,5 +32,17 @@ public class UserResponse {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getAdditional() {
+		return additional;
+	}
+	public void setAdditional(String additional) {
+		this.additional = additional;
+	}
+	public int getTypeUser() {
+		return typeUser;
+	}
+	public void setTypeUser(int typeUser) {
+		this.typeUser = typeUser;
 	}
 }

@@ -44,79 +44,85 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
-            android:orientation="horizontal" >
+            android:orientation="vertical" 
+             android:padding="10dip">
 
             <!-- Image #1 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN1"
-                style="@style/btnStyleLeadpearl_TakePhoto"
-                android:layout_width="60.0dip"
-                android:layout_height="55.0dip"
+                style="@style/btnStyleLeadpearl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:layout_marginTop="2dip"
                 android:src="@drawable/cameraicon" />
-
+            
             <ImageView
                 android:id="@id/idPhotoImageViewN1"
-                android:layout_width="200dp"
-                android:layout_height="160dp"
-                android:layout_marginLeft="10dip"
-                android:src="@drawable/imagebackgroundn1" />
+                android:layout_width="400dp"
+                android:layout_height="360dp"
+                android:gravity="center"
+                android:visibility="gone" />
+            
         </LinearLayout>
+
+        
 
         <LinearLayout
             android:id="@+id/header3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header2"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="vertical" 
+             android:padding="10dip">
 
             <!-- Image #2 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN2"
-                style="@style/btnStyleLeadpearl_TakePhoto"
-                android:layout_width="60.0dip"
-                android:layout_height="55.0dip"
+                style="@style/btnStyleLeadpearl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:layout_marginTop="2dip"
                 android:src="@drawable/cameraicon" />
+            
+	            <ImageView
+	                android:id="@id/idPhotoImageViewN2"
+	                android:layout_width="400dp"
+	                android:layout_height="360dp"
+	                android:gravity="center"
+	                android:visibility="gone" />
 
-            <ImageView
-                android:id="@id/idPhotoImageViewN2"
-                android:layout_width="200dp"
-                android:layout_height="160dp"
-                android:layout_marginLeft="10dip"
-                android:src="@drawable/imagebackgroundn2" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/header4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header3"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="vertical"
+            android:padding="10dip" >
 
             <!-- Image #3 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN3"
-                style="@style/btnStyleLeadpearl_TakePhoto"
-                android:layout_width="60.0dip"
-                android:layout_height="55.0dip"
+                style="@style/btnStyleLeadpearl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:layout_marginTop="2dip"
                 android:src="@drawable/cameraicon" />
 
-            <ImageView
-                android:id="@id/idPhotoImageViewN3"
-                android:layout_width="200dp"
-                android:layout_height="160dp"
-                android:layout_marginLeft="10dip"
-                android:src="@drawable/imagebackgroundn3" />
+             <ImageView
+	                android:id="@id/idPhotoImageViewN3"
+	                android:layout_width="400dp"
+	                android:layout_height="360dp"
+	                android:gravity="center"
+	                android:visibility="gone" />
+            
         </LinearLayout>
 
         <LinearLayout

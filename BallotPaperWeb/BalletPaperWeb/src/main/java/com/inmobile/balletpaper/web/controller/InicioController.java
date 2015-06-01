@@ -14,10 +14,8 @@ public class InicioController {
 
 	@RequestMapping("inicio.htm")
     public String show(final HttpServletRequest request,final ModelMap model) {
-		System.out.println("inside inicio htm");
-		final RegisterUserDTO tableUser=new RegisterUserDTO();
-		model.addAttribute("loginUsuForm", tableUser);
-		return CommonConstants.Page.REDIRECT_LOGIN_PAGE; 
+		System.out.println("Ruta : "+request.getSession().getServletContext().getRealPath(""));
+		return CommonConstants.Page.REDIRECT_INIT_PAGE; 
 	}
 	
 }

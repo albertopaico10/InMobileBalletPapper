@@ -35,9 +35,25 @@ public class LoginController {
 		model.addAttribute("loginUsuForm", logueoBean);
 		request.setAttribute("messages", returnServiceBean.getMessages());
 		request.setAttribute("messagesSpecific", returnServiceBean.getSpecificMessages());
-
+		request.setAttribute("idUserLogin", returnServiceBean.getIdUser());
+		request.getSession().setAttribute("typeUser", returnServiceBean.getTypeUser());
 
 		return new ModelAndView(returnServiceBean.getReturnPage());   
 		
+	}
+	
+	@RequestMapping("closeSession.htm")
+	public String findUser(final HttpServletRequest request,final ModelMap model) {
+		RegisterUserDTO logueoBean=new RegisterUserDTO();
+		model.addAttribute("loginUsuForm", logueoBean);
+		return CommonConstants.Page.REDIRECT_LOGIN_PAGE;
+	}
+	
+	@RequestMapping("showLogin.htm")
+    public String show(final HttpServletRequest request,final ModelMap model) {
+		System.out.println("inside inicio htm");
+		final RegisterUserDTO tableUser=new RegisterUserDTO();
+		model.addAttribute("loginUsuForm", tableUser);
+		return CommonConstants.Page.REDIRECT_LOGIN_PAGE; 
 	}
 }

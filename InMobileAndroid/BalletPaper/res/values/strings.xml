@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Settings</string>
+
+    <string name="action_settings">Configuración</string>
     <string name="hello_world">Hello world!</string>
     <string name="lblPrueba">Hola Mundo de Alberto Paico</string>
     <string name="hello">Hello World!</string>
-    <string name="app_name">BalletPaper</string>
-    <string name="lblTitleLogin">Bienvenido a BalletPaper</string>
-    <string name="email_hint">Correo electronicó</string>
-    <string name="logoDescription">Logo BalletPaper</string>
+    <string name="app_name">Ojo Vial</string>
+    <string name="lblTitleLogin">Bienvenido a Ojo Vial</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="logoDescription">Logo Ojo Vial</string>
     <string name="password_hint">Contraseña</string>
     <string name="sigIn">LOGIN</string>
     <string name="registration">Crear Cuenta</string>
@@ -15,40 +16,58 @@
     <string name="nameRegister">Nombres</string>
     <string name="lastNameRegister">Apellidos</string>
     <string name="dniRegister">Documento de Identidad (DNI)</string>
-    <string name="chkAdult">Soy mayor de edad (18)</string>
-    <string name="chkAcceptTerm">Acepto los terminos y Condiciones</string>
+    <string name="chkAdult">Soy mayor de edad (18).</string>
+    <string name="chkAcceptTerm">Acepto los Términos y Condiciones.</string>
     <string name="btnRegister">Registrarse</string>
     <string name="btnDenounce">Denunciar</string>
     <string name="btnMyDenounce">Mis Denuncias</string>
     <string name="btnMyInformation">Mis Datos</string>
     <string name="btnRecomendation">Recomendaciones</string>
-    <string name="erroremail_pwd">Invalid e-mail or password</string>
+    <string name="erroremail_pwd">Invalid e-mail or password.</string>
     <string name="next">Siguiente</string>
-    <string name="lblTituloFotos">Paso 1. Tome las fotos necesarias para la denuncia</string>
+    <string name="lblTituloFotos">Paso 1. Tome las fotos necesarias para la denuncia.</string>
     <string name="fieldRequired">Campo requerido</string>
     <string name="welcomeMessagesTitle">Registro Exitoso</string>
-    <string name="welcomeMessagesBody">Su registro fue exito. Por favor de click en el boton para loguearse en la aplicacion y empezar a registrar sus denuncias.</string>
-    <string name="welcomeMessagesThankYou">Gracias por su preferencia</string>
-    <string name="emailExit">El correo ya se encuentra registro. Por favor ingrese otro</string>
-    <string name="validationFail">El password es incorrecto</string>
-    <string name="watingLogin">Por favor espere estamos validando su cuenta</string>
-    <string name="emailNotExit">El correo no se encuentra registrado en nuestra aplicación. Ingrese en "Crear Cuenta"</string>
-    <string name="lblNumberPlate">Numero de Placa</string>
+    <string name="welcomeMessagesBody">Su registro fue éxito. Por favor de click en el boton para loguearse en la aplicación y empezar a registrar sus denuncias.</string>
+    <string name="welcomeMessagesThankYou">Gracias por su preferencia.</string>
+    <string name="emailExit">El correo ya se encuentra registro. Por favor ingrese otro.</string>
+    <string name="validationFail">El password es incorrecto.</string>
+    <string name="watingLogin">Por favor espere estamos validando su cuenta.</string>
+    <string name="emailNotExit">El correo no se encuentra registrado en nuestra aplicación. Ingrese en "Crear Cuenta".</string>
+    <string name="lblNumberPlate">Número de Placa</string>
     <string name="lblAditionalComment">Comentarios Adicionales</string>
-    <string name="lblTitleStep2Register">Paso2. Información complementaria de la denuncia</string>
-    <string name="btnRegistrar">Registrar Denuancia</string>
-    <string name="successTitle">Denuncia registrada con exito</string>
-    <string name="strBodyMessageSuccess">Su denuncia fue registrado con exito en la aplicacion, le estaremos informando sobre el proceso de la denuncia</string>
-    <string name="btnStrOtherComplaint">Menu Principal</string>
+    <string name="lblTitleStep2Register">Paso2. Información complementaria de la denuncia.</string>
+    <string name="btnRegistrar">Registrar Denuncia</string>
+    <string name="successTitle">Denuncia registrada con éxito</string>
+    <string name="strBodyMessageSuccess">Su denuncia fue registrado con éxito en la aplicación, le estaremos informando sobre el proceso de la denuncia.</string>
+    <string name="btnStrOtherComplaint">Menú Principal</string>
     <string name="strIdAttention">El id de la atención</string>
     <string name="strConfigGPS">No se ha configurado el GPS. Porfavor hacerlo antes de continuar.</string>
-    <string name="errorInGeneral">Ocurrio un error interno por favor revisar</string>
-    <string name="errorSaveComplaint">#1 Ocurrio un error cuando grabo la información</string>
-    <string name="errorSaveImage">#2 Ocurrio un error cuando se subian las fotos</string>
+    <string name="errorInGeneral">Ocurrio un error interno por favor revisar.</string>
+    <string name="errorSaveComplaint">#1 Ocurrio un error cuando grabo la información.</string>
+    <string name="errorSaveImage">#2 Ocurrio un error cuando se subian las fotos.</string>
     <string name="lblDireccion">Dirección : </string>
     <string name="lblInsertDireccion">Ingrese dirección</string>
-    <string name="strMessagesCodeResponse">Su numero denuncia es : </string>
+    <string name="strMessagesCodeResponse">Su número denuncia es : </string>
     <string name="emailFormat">Formato de Correo Incorrecto</string>
-    <string name="strUploadOnePhoto">Tiene que tomar por lo menos una foto</string>
+    <string name="strUploadOnePhoto">Tiene que tomar por lo menos una foto.</string>
+    <string name="passwordConfirm_hint">Repetir Contraseña</string>
+    <string name="lblMessagesPassowrdNotCoincided">Las contraseñas no son iguales.</string>
+    <string name="strPhoto1">1..</string>
     
+    <string name="messagesDistrictError">Debe Seleccionar un distrito.</string>
+    <string name="titleAdvertencia">Advertencia</string>
+    <string name="messagesOptionOnlyForWeb">Actualmente solo se encuentra disponible desde la web.\nPor favor ingresar desde un navegador a \nwww.ojovial.com</string>
+	<string name="titleError">Error de Validación.</string>
+	<string name="messagesValidationSelectDistrict">Por favor tiene que Seleccionar un Distrito \n Gracias.</string>
+	<string name="messagesValidationProccessImage">Por favor espere estamos procesando las fotos para adjuntarlas a la denuncia, solo unos segundos más. \n Gracias.</string>
+	<string name="messagesProcessDenounce">Por favor, espere estamos registrando su denuncia.</string>
+	<string name="successTakePhoto">La imagen fue tomado con éxito.</string>
+	<string name="problemTakePhoto">Hubo un problema para guardar la imagen.</string>
+	
+	<string name="titleGPS">GPS - Configuración</string>
+	<string name="messageGPSNotEnabled">GPS no esta habilitado. ¿Desea ir a las opciones del Menú?</string>
+	
+	
+	
 </resources>

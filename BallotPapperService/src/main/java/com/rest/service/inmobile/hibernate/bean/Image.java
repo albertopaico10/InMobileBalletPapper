@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="tb_image")
+@Table(name="tb_Image")
 public class Image implements Serializable {
 	private static final long serialVersionUID = 1L;
 

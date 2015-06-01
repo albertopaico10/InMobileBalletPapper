@@ -1,5 +1,8 @@
 package com.rest.service.inmobile.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,6 +37,22 @@ public class UtilMethodsTest {
 		} catch (Exception e) {
 			System.out.println("Error : "+e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testSomething(){
+		List<String> names=new ArrayList<String>();
+		names.add("toto");
+		names.add("Lala");
+		names.add("papa");
+		int index = names.indexOf("papaaaa"); // index = 2
+		System.out.println("Index : "+index);
+	}
+	
+	@Test
+	public void testGson(){
+		String strValue=UtilMethods.fromObjectToString(24);
+		System.out.println("GSON : "+strValue);
 	}
 	
 }

@@ -1,17 +1,12 @@
 <%@ include file="/WEB-INF/common/taglib.jsp"%>
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
+
+<header>
+	<div class="header-content">
+		<div class="header-content-inner">
 			<h1>
 				<spring:message code="welcome.title.firstPage" />${messagesSpecific}
+				<input type="hidden" id=idUser name="idUser" value="${idUserLogin}"></input>
 			</h1>
 		</div>
 	</div>
-</div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+</header>

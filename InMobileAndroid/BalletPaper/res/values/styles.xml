@@ -26,6 +26,20 @@
         <item name="android:shadowRadius">0.6</item>
     </style>
     
+	<style name="btnStyleBlackpearlBig" parent="@android:style/Widget.Button">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">50.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
 	<style name="btnStyleYellowpearl" parent="@android:style/Widget.Button">
         <item name="android:textSize">18.0sp</item>
         <item name="android:textStyle">bold</item>
@@ -70,6 +84,8 @@
     
 	<style name="btnStyleLeadpearl_TakePhoto" parent="@android:style/Widget.Button">
         <item name="android:scaleType">fitStart</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
         <item name="android:background">@drawable/custom_btn_lead_pearl</item>
         <item name="android:padding">5.0dip</item>
         <item name="android:shadowColor">#ff000000</item>
@@ -77,8 +93,6 @@
         <item name="android:shadowDy">1.0</item>
         <item name="android:shadowRadius">0.6</item>
     </style>
-	
-	
 	
 	<style name="lnkStyle1" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">20dip</item>
@@ -104,6 +118,14 @@
         <item name="android:singleLine">true</item>
     </style>
     
+    <style name="lblStyleTituloWBold" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+	
     <style name="lblStyleSubTituloLstVw" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">10.0sp</item>
         <item name="android:textStyle">normal</item>
@@ -111,7 +133,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-	
+    
      <style name="lblStyleTitulo2" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">11.0sp</item>
         <item name="android:textStyle">italic</item>

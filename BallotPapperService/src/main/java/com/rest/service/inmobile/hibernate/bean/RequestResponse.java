@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="tb_request_response")
+@Table(name="tb_Request_Response")
 public class RequestResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 

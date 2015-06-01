@@ -1,5 +1,7 @@
 package com.rest.service.inmobile.facade.impl;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rest.service.inmobile.bean.complient.ComplientRequest;
 import com.rest.service.inmobile.bean.complient.ComplientResponse;
+import com.rest.service.inmobile.bean.complient.ListComplaintResponse;
 import com.rest.service.inmobile.bean.image.ImageRequest;
 import com.rest.service.inmobile.bean.image.ImageResponse;
 import com.rest.service.inmobile.facade.ComplientManager;
 import com.rest.service.inmobile.facade.ImageManager;
 import com.rest.service.inmobile.facade.ReqRespManager;
 import com.rest.service.inmobile.hibernate.ComplientHibernate;
+import com.rest.service.inmobile.hibernate.TypeComplaintHibernate;
 import com.rest.service.inmobile.hibernate.UserHibernate;
 import com.rest.service.inmobile.hibernate.bean.Complaint;
 import com.rest.service.inmobile.hibernate.bean.RequestResponse;
+import com.rest.service.inmobile.hibernate.bean.TypeComplaint;
 import com.rest.service.inmobile.hibernate.bean.User;
 import com.rest.service.inmobile.util.CommonConstants;
 import com.rest.service.inmobile.util.ConvertClass;
@@ -34,6 +39,9 @@ public class ComplientManagerImpl implements ComplientManager {
 	
 	@Autowired
 	private ComplientHibernate complientHibernate;
+	
+	@Autowired
+	private TypeComplaintHibernate typeComplaintHibernate;
 	
 	@Autowired
 	private UserHibernate userHibernate;
@@ -106,5 +114,117 @@ public class ComplientManagerImpl implements ComplientManager {
 		MailUtil.sendEmail(emilTo,CommonConstants.Email.SUBJECT_COMPLETE_COMPLAINT,body);
 	}
 
+	public ListComplaintResponse getListComplaintByDistrict(int idUser){
+		ListComplaintResponse beanListComplaintResponse=new ListComplaintResponse();
+		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(idUser,
+				CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_DISTRICT,idUser, 0);
+		System.out.println("ID Response : " + valueReqResp.getId());
+		try {
+			//--Find User
+			User beanUser=userHibernate.getUser(String.valueOf(idUser));
+			List<Complaint> listComplaints=complientHibernate.getComplaintByDistrict(beanUser.getNameDistrict());
+			beanListComplaintResponse=ConvertClass.convertFromDataBaseToListComplaint(listComplaints,typeComplaintHibernate);
+			//---Pendiente nombre de infracción....
+			List<TypeComplaint> listTypeComplaint=typeComplaintHibernate.listAllTypeComplaint();
+			beanListComplaintResponse.setListTypeComplaint(ConvertClass.convertDataBaseToTypeComplaint(listTypeComplaint));
+			if(listComplaints.size()>0){
+				beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_LIST_COMPLAINT);
+				beanListComplaintResponse.setMessageResponse("Cantidad de registros que trae : "+listComplaints.size()+" Registros");	
+			}else{
+				beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_EMPTY_LIST_COMPLAINT);
+				beanListComplaintResponse.setMessageResponse("No trae registro la busqueda hecha : "+listComplaints.size()+" Registros");	
+			}
+			
+		} catch (Exception e) {
+			beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_ERROR);
+			beanListComplaintResponse.setMessageResponse(e.getMessage());
+		}
+		reqRespManager.saveOrUpdate(beanListComplaintResponse,CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_DISTRICT,
+				idUser,valueReqResp.getId());
+		return beanListComplaintResponse;
+	}
 	
+	public ListComplaintResponse getListComplaintByUser(int idUser){
+		ListComplaintResponse beanListComplaintResponse=new ListComplaintResponse();
+		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(idUser,
+				CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_USER,idUser, 0);
+		System.out.println("ID Response : " + valueReqResp.getId());
+		try {
+			List<Complaint> listComplaints=complientHibernate.getComplaintByUser(idUser);
+			beanListComplaintResponse=ConvertClass.convertFromDataBaseToListComplaint(listComplaints,typeComplaintHibernate);
+			//---Pendiente nombre de infracción....
+			
+			
+			if(listComplaints.size()>0){
+				beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_LIST_COMPLAINT);
+				beanListComplaintResponse.setMessageResponse("Cantidad de registros que trae : "+listComplaints.size()+" Registros");	
+			}else{
+				beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_EMPTY_LIST_COMPLAINT);
+				beanListComplaintResponse.setMessageResponse("No trae registro la busqueda hecha : "+listComplaints.size()+" Registros");	
+			}
+		} catch (Exception e) {
+			beanListComplaintResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_ERROR);
+			beanListComplaintResponse.setMessageResponse(e.getMessage());
+		}
+		reqRespManager.saveOrUpdate(beanListComplaintResponse,CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_USER,
+				idUser,valueReqResp.getId());
+		return beanListComplaintResponse;
+	}
+	
+	public ComplientResponse getComplaintByNumberPlate(String numberPlate){
+		ComplientResponse beanResponse=new ComplientResponse();
+		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(numberPlate,
+				CommonConstants.TypeOperationReqResp.OPERATION_COMPLAINT_PLATE,0, 0);
+		System.out.println("ID Response : " + valueReqResp.getId());
+		int idUser=0;
+		try {
+			Complaint beanComplaint=complientHibernate.getComplaintByNumberPlate(numberPlate);
+			//--Find Name Type Complaint
+			TypeComplaint beanTypeComplaint=typeComplaintHibernate.getTypeComplaint(beanComplaint.getTypeComplaint());
+			String nameTypeComplaint="";
+			if(beanTypeComplaint!=null){
+				nameTypeComplaint=beanTypeComplaint.getCategoryComplaint();
+			}
+			beanResponse = ConvertClass.convertFromDataBaseToCompleintResponse(beanComplaint,nameTypeComplaint);
+			
+			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_GET_COMPLAINT);
+			beanResponse.setMessageResponse("La busqueda fue correcta");	
+			
+		} catch (Exception e) {
+			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_ERROR);
+			beanResponse.setMessageResponse(e.getMessage());
+		}
+		reqRespManager.saveOrUpdate(beanResponse,CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_USER,
+				0,valueReqResp.getId());
+		return beanResponse;
+	}
+
+	public ComplientResponse updateCompaintType(int idComplaint,int typeComplaint) {
+		ComplientResponse beanResponse=new ComplientResponse();
+		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(idComplaint,
+				CommonConstants.TypeOperationReqResp.OPERATION_COMPLAINT_PLATE,0, 0);
+		try {
+			Complaint beanComplaint=complientHibernate.getComplaintByIdComplaint(idComplaint);
+			beanComplaint.setTypeComplaint(typeComplaint);
+			beanComplaint.setStatus(4);
+			beanComplaint=complientHibernate.saveComplientObject(beanComplaint);
+			//--Find Name Type Complaint
+			TypeComplaint beanTypeComplaint=typeComplaintHibernate.getTypeComplaint(beanComplaint.getTypeComplaint());
+			String nameTypeComplaint="";
+			if(beanTypeComplaint!=null){
+				nameTypeComplaint=beanTypeComplaint.getCategoryComplaint();
+			}
+			beanResponse=ConvertClass.convertFromDataBaseToCompleintResponse(beanComplaint,nameTypeComplaint);
+			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_UPDATE_COMPLAINT);
+			beanResponse.setMessageResponse("Se grabó la primera parte de la denuncia con exito");
+			beanResponse.setIdComplient(beanComplaint.getId());
+		} catch (Exception e) {
+			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_ERROR);
+			beanResponse.setMessageResponse(e.getMessage());
+		}
+		reqRespManager.saveOrUpdate(beanResponse,CommonConstants.TypeOperationReqResp.OPERATION_LIST_COMPLAINT_USER,
+				0,valueReqResp.getId());
+		
+		return beanResponse;
+	}
 }

@@ -1,11 +1,12 @@
 <%@ include file="/WEB-INF/common/taglib.jsp"%>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap/js/1.13.0/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<html:form method="POST" commandName="loginUsuForm" action="validateUser.htm" id="idLoginUsuForm" novalidate="novalidate">
 				<div class="modal-header" id="idTitleLogin">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h1 class="text-center"><spring:message code="page.login.title.login" /></h1>
 				</div>
 				<div class="modal-body">
@@ -21,9 +22,6 @@
 								<button type="submit" class="btn btn-primary btn-lg btn-block"><spring:message code="common.value.accept" /></button>
 							</div>
 						</div>
-						<div id="idDivLnkNewCustomer">
-							<span class="pull-right"><a href="${pageContext.request.contextPath}/apk/BalletPaper.apk" id="lnkNewCustomer"><spring:message code="login.download.apk" /></a></span>
-						</div>
 						<c:if test="${messages == 'FAIL_VALIDATION_USER'}">
 							<label class="error"><spring:message code="login.faild.validations" /></label>
 						</c:if>
@@ -38,7 +36,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="col-md-12">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+						<button class="btn" data-dismiss="modal" aria-hidden="true" onclick="goPrincipalPage();">Cancel</button>
 					</div>
 				</div>
 			</html:form>
@@ -68,4 +66,7 @@ $(document).ready(function() {
 	});
 
 });
+function goPrincipalPage(){
+	document.location="${pageContext.request.contextPath}/inicio.htm";
+}
 </script>

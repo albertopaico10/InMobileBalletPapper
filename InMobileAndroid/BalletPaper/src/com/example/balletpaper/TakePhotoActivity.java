@@ -7,13 +7,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -25,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.balletpaper.util.RealPathUtil;
 import com.example.balletpaper.util.UtilMethods;
 
 public class TakePhotoActivity extends ActionBarActivity {
@@ -39,7 +46,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 	String hexImagePhotoN1 = "", hexImagePhotoN2 = "", hexImagePhotoN3 = "";
 	String rootFileImageN1 = "", rootFileImageN2 = "", rootFileImageN3 = "";
 	
-	
+	File path=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,9 @@ public class TakePhotoActivity extends ActionBarActivity {
 		btnPhotoPicture3 = (ImageButton) findViewById(R.id.idBtnTakePhotoN3);
 		imgPhotoPicture3 = (ImageView) findViewById(R.id.idPhotoImageViewN3);
 		btnNextPage=(Button) findViewById(R.id.btnNextPhoto);
-
+		
+		 path = Environment.getExternalStorageDirectory();
+		
 		if (savedInstanceState != null) {
 			// Restore value of members from saved state
 			rootFileImageN1=savedInstanceState.getString("rootFileImageN1");
@@ -63,20 +72,22 @@ public class TakePhotoActivity extends ActionBarActivity {
 		if (!TextUtils.isEmpty(rootFileImageN1)) {
 			try {
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 24;
+				options.inSampleSize = 5;
 				Uri startDir = Uri.parse(rootFileImageN1);
 				final Bitmap b = BitmapFactory.decodeStream(getContentResolver().openInputStream(startDir), null,options);
 				imgPhotoPicture1.setImageBitmap(b);
+				imgPhotoPicture1.setVisibility(View.VISIBLE);
 			} catch (FileNotFoundException e) {
 				Toast.makeText(this, "Error in internal Process in Foto (1) : "+e.getMessage(),Toast.LENGTH_LONG).show();
 			}
 		}if(!TextUtils.isEmpty(rootFileImageN2)){
 			try {
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 24;
+				options.inSampleSize = 5;
 				Uri startDir2 = Uri.parse(rootFileImageN2);
 				final Bitmap b2 = BitmapFactory.decodeStream(getContentResolver().openInputStream(startDir2), null,options);
 				imgPhotoPicture2.setImageBitmap(b2);
+				imgPhotoPicture2.setVisibility(View.VISIBLE);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				Toast.makeText(this, "Error in internal Process in Foto (2) : "+e.getMessage(),Toast.LENGTH_LONG).show();
@@ -84,10 +95,11 @@ public class TakePhotoActivity extends ActionBarActivity {
 		}if(!TextUtils.isEmpty(rootFileImageN3)){
 			try {
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 24;
+				options.inSampleSize = 5;
 				Uri startDir3 = Uri.parse(rootFileImageN3);
 				final Bitmap b3 = BitmapFactory.decodeStream(getContentResolver().openInputStream(startDir3), null,options);
 				imgPhotoPicture3.setImageBitmap(b3);
+				imgPhotoPicture3.setVisibility(View.VISIBLE);
 			} catch (FileNotFoundException e) {
 				Toast.makeText(this, "Error in internal Process in Foto (3) : "+e.getMessage(),Toast.LENGTH_LONG).show();
 			}
@@ -142,29 +154,44 @@ public class TakePhotoActivity extends ActionBarActivity {
 
 	public void onTakePhoto1() {
 		System.out.println("ENTRE1.............!!!");
-		Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//		startActivityForResult(intent, 1);
+		
+//		 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//	     if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//	           startActivityForResult(takePictureIntent, 1);
+//	     }
+		
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT,"photoBalletPaper");
+		intent.putExtra("return-data", true);
 		startActivityForResult(intent, 1);
+		
+		
 	}
 
 	public void onTakePhoto2() {
 		System.out.println("ENTRE2.............!!!");
-		Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, 2);
 	}
 
 	public void onTakePhoto3() {
 		System.out.println("ENTRE3.............!!!");
-		Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, 3);
 	}
 	
 	public void onNextPage() {
 		System.out.println("onNextPage.............!!!");
 		if(validatePhoto()){
-			Intent i = new Intent(getApplicationContext(), RegisterComplientActivity.class);
-			i.putExtra("photo1",rootFileImageN1);
-			i.putExtra("photo2",rootFileImageN2);
-			i.putExtra("photo3",rootFileImageN3);
+			Intent i = new Intent(TakePhotoActivity.this, RegisterComplientActivity.class);
+			Bundle b = new Bundle();
+			b.putString("photo1",rootFileImageN1);
+			b.putString("photo2",rootFileImageN2);
+			b.putString("photo3",rootFileImageN3);
+			i.putExtras(b);
+			
 			startActivity(i);
 		}else{
 			Toast.makeText(this,getString(R.string.strUploadOnePhoto), Toast.LENGTH_LONG).show();
@@ -180,55 +207,64 @@ public class TakePhotoActivity extends ActionBarActivity {
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
 				Bitmap bp = (Bitmap) data.getExtras().get("data");
-				imgPhotoPicture1.setImageBitmap(bp);
-				Bitmap bitmap = ((BitmapDrawable) imgPhotoPicture1.getDrawable()).getBitmap();
-				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-				byte[] image = stream.toByteArray();
-				hexImagePhotoN1 = UtilMethods.bytesToHexString(image);
-				rootFileImageN1 = data.getDataString();
-				Toast.makeText(this,"La imagen fue tomado con exito", Toast.LENGTH_LONG).show();
+		        imgPhotoPicture1.setImageBitmap(bp);
+		        imgPhotoPicture1.setVisibility(View.VISIBLE);
+		        if(data.getDataString()==null){
+		        	rootFileImageN1=editImageFromIntentNull(getApplicationContext(), bp);
+		        }else{
+		        	rootFileImageN1 = data.getDataString();
+		        }
+				Toast.makeText(this,getString(R.string.successTakePhoto), Toast.LENGTH_LONG).show();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(this, "Hubo un problema para guardar la imagen",Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.problemTakePhoto),Toast.LENGTH_LONG).show();
 			}
 		} else if (requestCode == 2) {
 			if (resultCode == RESULT_OK) {
-				Bitmap bp = (Bitmap) data.getExtras().get("data");
-				imgPhotoPicture2.setImageBitmap(bp);
-				Bitmap bitmap = ((BitmapDrawable) imgPhotoPicture2.getDrawable()).getBitmap();
-				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-				byte[] image = stream.toByteArray();
-				hexImagePhotoN2 = UtilMethods.bytesToHexString(image);
-				rootFileImageN2 = data.getDataString();
-				Toast.makeText(this,"La imagen fue tomado con exito", Toast.LENGTH_LONG).show();
+				Bitmap bp2 = (Bitmap) data.getExtras().get("data");
+				imgPhotoPicture2.setImageBitmap(bp2);
+				imgPhotoPicture2.setVisibility(View.VISIBLE);
+				if(data.getDataString()==null){
+			       	rootFileImageN2=editImageFromIntentNull(getApplicationContext(), bp2);
+			    }else{
+			     	rootFileImageN2 = data.getDataString();
+			    }
+				Toast.makeText(this,getString(R.string.successTakePhoto), Toast.LENGTH_LONG).show();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(this, "Hubo un problema para guardar la imagen",	Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.problemTakePhoto),	Toast.LENGTH_LONG).show();
 			}
 		} else if (requestCode == 3) {
 			if (resultCode == RESULT_OK) {
-				Bitmap bp = (Bitmap) data.getExtras().get("data");
-				imgPhotoPicture3.setImageBitmap(bp);
-				Bitmap bitmap = ((BitmapDrawable) imgPhotoPicture3.getDrawable())
-						.getBitmap();
-				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-				byte[] image = stream.toByteArray();
-				hexImagePhotoN3 = UtilMethods.bytesToHexString(image);
-				rootFileImageN3 = data.getDataString();
-				Toast.makeText(this,"La imagen fue tomado con exito", Toast.LENGTH_LONG).show();
+				Bitmap bp3 = (Bitmap) data.getExtras().get("data");
+				imgPhotoPicture3.setImageBitmap(bp3);
+				imgPhotoPicture3.setVisibility(View.VISIBLE);
+				if(data.getDataString()==null){
+			       	rootFileImageN3=editImageFromIntentNull(getApplicationContext(), bp3);
+			    }else{
+			     	rootFileImageN3 = data.getDataString();
+			    }
+				Toast.makeText(this,getString(R.string.successTakePhoto), Toast.LENGTH_LONG).show();
 			} else if (resultCode == RESULT_CANCELED) {
 				Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(this, "Hubo un problema para guardar la imagen",Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.problemTakePhoto),Toast.LENGTH_LONG).show();
 			}
 		}
 	}
+	
+	public String editImageFromIntentNull(Context inContext, Bitmap inImage) {
+		String path="";
+		inImage = Bitmap.createScaledBitmap(inImage, 1024, 768, true);
+	    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+	    inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
+	    path = Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+	    return path;
+	}
+	 
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -265,6 +301,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 		}else if(!TextUtils.isEmpty(rootFileImageN3)){
 			validate=true;
 		}
+//		validate=true;
 		return validate;
 	}
 

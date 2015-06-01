@@ -3,10 +3,15 @@ package com.example.balletpaper.util;
 public class CommonConstants {
 
 	public class URLService {
-		public static final String CREATE_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/create";
-		public static final String VALIDATION_USER = "http://192.168.1.34:8080/BallotPapperService/rest/user/validation";
-		public static final String REGISTER_COMPLAINT = "http://192.168.1.34:8080/BallotPapperService/rest/complient/save";
-		public static final String UPLOAD_IMAGE = "http://192.168.1.34:8080/BallotPapperService/rest/image/save";
+		public static final String URL_SERVICE = "http://198.38.89.205:8080/";
+//		public static final String URL_SERVICE = "http://192.168.1.34:8080/";
+		public static final String SERVICE_NAME = "BallotPapperService";
+		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";
+		public static final String VALIDATION_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/validation";
+		public static final String REGISTER_COMPLAINT = URL_SERVICE+SERVICE_NAME+"/rest/complient/save";
+		public static final String UPLOAD_IMAGE = URL_SERVICE+SERVICE_NAME+"/rest/image/save";
+		public static final String GET_DISTRICT = URL_SERVICE+SERVICE_NAME+"/rest/list/district/127";
+		
 //		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
 //		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
 	}
@@ -34,6 +39,7 @@ public class CommonConstants {
 		public static final String HEX_PHOTO_2_REQUEST_COMPLAINT = "hexPhoto2";
 		public static final String HEX_PHOTO_3_REQUEST_COMPLAINT = "hexPhoto3";
 		public static final String CATEGORY_IMAGE_REQUEST_COMPLAINT = "categoryImage";
+		public static final String DISTRICT_REQUEST_COMPLAINT = "district";
 		
 	}
 	

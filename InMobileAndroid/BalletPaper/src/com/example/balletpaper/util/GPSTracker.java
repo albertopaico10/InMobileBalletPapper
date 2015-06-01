@@ -1,5 +1,7 @@
 package com.example.balletpaper.util;
 
+import com.example.balletpaper.R;
+
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -154,10 +156,10 @@ public class GPSTracker extends Service implements LocationListener {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
       
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle("GPS Configuración");
   
         // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage("GPS no esta habilitado. ¿Desea ir a las opciones del Menú?");
   
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {

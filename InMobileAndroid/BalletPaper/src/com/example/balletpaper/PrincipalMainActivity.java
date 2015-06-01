@@ -1,5 +1,7 @@
 package com.example.balletpaper;
 
+import com.example.balletpaper.util.UtilMethods;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +21,24 @@ public class PrincipalMainActivity extends ActionBarActivity  {
 	public void onClickRedirectCamera(View v){
 		Intent i = new Intent(this, TakePhotoActivity.class);
 		startActivity(i);
+	}
+	
+	public void onClickMyDenounce(View v){
+		UtilMethods.alertbox(getString(R.string.titleAdvertencia),
+				getString(R.string.messagesOptionOnlyForWeb), 
+				PrincipalMainActivity.this,R.drawable.advertencia);
+	}
+	
+	public void onClickMyInformation(View v){
+		UtilMethods.alertbox(getString(R.string.titleAdvertencia),
+				getString(R.string.messagesOptionOnlyForWeb), 
+				PrincipalMainActivity.this,R.drawable.advertencia);
+	}
+	
+	public void onClickRecommendation(View v){
+		UtilMethods.alertbox(getString(R.string.titleAdvertencia),
+				getString(R.string.messagesOptionOnlyForWeb), 
+				PrincipalMainActivity.this,R.drawable.advertencia);
 	}
 	
 	

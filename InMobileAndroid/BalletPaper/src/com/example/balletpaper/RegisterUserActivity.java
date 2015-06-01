@@ -34,6 +34,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 	private EditText registerName;
 	private EditText registerLastName;
 	private EditText registerDni;
+	private EditText registerpasswordConfirm;
 	private CheckBox registerAdult;
 	private CheckBox registerAceptTermin;
 	private Button registerSaveBtn;
@@ -47,6 +48,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 		System.out.println("Dentro de crear");
 		registerEmail = (EditText) findViewById(R.id.idRegisterEmail);
 		registerpassword = (EditText) findViewById(R.id.idRegisterPassword);
+		registerpasswordConfirm = (EditText) findViewById(R.id.idRegisterPasswordConfirm);
 		registerName = (EditText) findViewById(R.id.idNameUser);
 		registerLastName = (EditText) findViewById(R.id.idLastNameUser);
 		registerDni = (EditText) findViewById(R.id.idDniUser);
@@ -155,6 +157,17 @@ public class RegisterUserActivity extends ActionBarActivity {
 		if (TextUtils.isEmpty(registerpassword.getText())) {
 			validateField = false;
 			registerpassword.setError(getString(R.string.fieldRequired));
+		}
+		if (TextUtils.isEmpty(registerpasswordConfirm.getText())) {
+			validateField = false;
+			registerpasswordConfirm.setError(getString(R.string.fieldRequired));
+		}
+		if (!TextUtils.isEmpty(registerpasswordConfirm.getText())) {
+			System.out.println("PASSWORD CONFIRM : "+registerpasswordConfirm.getText().toString()+"*****"+registerpassword.getText().toString());
+			if(!registerpasswordConfirm.getText().toString().equals(registerpassword.getText().toString())){
+				validateField = false;
+				registerpasswordConfirm.setError(getString(R.string.lblMessagesPassowrdNotCoincided));
+			}
 		}
 		if (TextUtils.isEmpty(registerName.getText())) {
 			validateField = false;

@@ -93,10 +93,18 @@ public class LoginActivity extends ActionBarActivity{
 			try {
 				jObject = new JSONObject(Content);
 				String codeResponse = jObject.getString("codeResponse");
+				String email = jObject.getString("additional");
 				int idUser = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse);
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
 					dbBalletPaper.updateUserDesactive();
+//					boolean exitUser=dbBalletPaper.existIdUserService(String.valueOf(idUser));
+//					if(exitUser){
+//						System.out.println("Tendria que insertarlo no existe en esta Base de Datos");
+//						Toast.makeText(LoginActivity.this, "Se va insertar el usuario en SQL LITE "+idUser+"***"+exitUser,Toast.LENGTH_LONG).show();
+//						dbBalletPaper.insertUser(email, String.valueOf(idUser));	
+//					}
+					dbBalletPaper.insertUser(email, String.valueOf(idUser));	
 					dbBalletPaper.updateUserActive(String.valueOf(idUser));
 					Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
 					startActivity(i);
@@ -128,6 +136,7 @@ public class LoginActivity extends ActionBarActivity{
 		if(!TextUtils.isEmpty(emailLogin.getText())){
 			boolean validateEmail=android.util.Patterns.EMAIL_ADDRESS.matcher(emailLogin.getText()).matches();
 			if(!validateEmail){
+				validateField = false;
 				emailLogin.setError(getString(R.string.emailFormat));
 			}
 		}		

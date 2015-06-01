@@ -26,8 +26,11 @@ public class UserManagerImpl implements UserManager{
 		if(CommonConstants.Response.RESPONSE_SUCCESS_VALIDATION.equals(beanResponse.getCodeResponse())){
 			beanReturn.setReturnPage(CommonConstants.Page.REDIRECT_WELCOME_PAGE);
 			beanReturn.setSpecificMessages(beanResponse.getDescription());
+			beanReturn.setIdUser(beanResponse.getIdUser());
+			beanReturn.setTypeUser(beanResponse.getTypeUser());
 		}else if(CommonConstants.Response.RESPONSE_FAIL_VALIDATION.equals(beanResponse.getCodeResponse()) ||
-				CommonConstants.Response.RESPONSE_NOT_EXITS_USER.equals(beanResponse.getCodeResponse())){
+				CommonConstants.Response.RESPONSE_NOT_EXITS_USER.equals(beanResponse.getCodeResponse())||
+				CommonConstants.Response.RESPONSE_ERROR.equals(beanResponse.getCodeResponse())){
 			beanReturn.setReturnPage(CommonConstants.Page.REDIRECT_LOGIN_PAGE);
 		}
 		beanReturn.setMessages(beanResponse.getCodeResponse());

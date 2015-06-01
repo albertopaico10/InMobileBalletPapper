@@ -7,6 +7,12 @@ public class CommonConstants {
 		public static final String VALIDATE_USER = "/rest/user/validation";
 		public static final String SAVE_IMAGE = "/rest/image/save";
 		public static final String SAVE_COMPLIENT = "/rest/complient/save";
+		public static final String LIST_DISTRICT = "/rest/list/district/{id}";
+		public static final String LIST_COMPLAINT_BY_DISTRICT = "/rest/list/complaintbydistrict/{idUser}";
+		public static final String LIST_COMPLAINT_BY_USER = "/rest/list/complaintbyuser/{idUser}";
+		public static final String LIST_COMPLAINT_BY_PLATE = "/rest/list/numberplate/{numberPlate}";
+		public static final String LIST_IMAGE_BY_COMPLAINT = "/rest/list/imagebycomplaint";
+		public static final String UPDATE_TYPE_COMPLAINT = "/rest/update/typecomplaint/{idComplaint}/{typeComplaint}";
 	}
 	
 	public class EncriptedValues{
@@ -20,6 +26,10 @@ public class CommonConstants {
 		public static final String OPERATION_VALIDATE_USER="VALIDATE_USER";
 		public static final String OPERATION_UPLOAD_IMAGE_MOBILE="UPLOAD_IMAGE_MOBILE";
 		public static final String OPERATION_SAVE_COMPLIENT = "SAVE_COMPLIENT";
+		public static final String OPERATION_LIST_COMPLAINT_DISTRICT = "LIST_COMPLAINT_DISTRICT";
+		public static final String OPERATION_LIST_COMPLAINT_USER = "LIST_COMPLAINT_USER";
+		public static final String OPERATION_COMPLAINT_PLATE = "COMPLAINT_NUMBER_PLATE";
+		public static final String OPERATION_GET_IMAGES = "GET_IMAGES";
 	}
 	
 	public class CodeResponse{
@@ -39,16 +49,43 @@ public class CommonConstants {
 		public final static String CODE_RESPONSE_SUCCESS_IMAGE="SUCCESS_INSERT_IMAGE";
 		public final static String CODE_RESPONSE_SUCCESS_RESTAURANT="SUCCESS_INSERT_RESTAURANT";
 		public final static String CODE_RESPONSE_SUCCESS_COMPLAINT="SUCCESS_COMPLAINT";
+		public final static String CODE_RESPONSE_SUCCESS_GET_IMAGE="SUCCESS_GET_IMAGE";
+		public final static String CODE_RESPONSE_EMPTY_LIST_COMPLAINT="EMPTY_LIST_COMPLAINT";
+		public final static String CODE_RESPONSE_SUCCESS_LIST_COMPLAINT="SUCCESS_LIST_COMPLAINT";
+		public final static String CODE_RESPONSE_SUCCESS_GET_COMPLAINT="SUCCESS_GET_COMPLAINT";
+		public final static String CODE_RESPONSE_SUCCESS_UPDATE_COMPLAINT="SUCCESS_UPDATE_COMPLAINT";
 	}
 	
 	public class Email{
-		public final static String EMAIL_FROM="albertopaico10@gmail.com";
-		public final static String PASSWORD_FROM="Pa55w0rd4097";
+		public final static String EMAIL_FROM="ojovial@inmobile.pe";
+		public final static String PASSWORD_FROM="ojo1234vial";
 		public final static String SUBJECT_CREATION_USER="InMobile - Creation User";
 		public final static String SUBJECT_COMPLETE_COMPLAINT="InMobile - Registro Denuncia";
 		public final static String EMAIL_TRUE="true";
 		public final static String EMAIL_SMTP_GMAIL="smtp.gmail.com";
 		public final static String EMAIL_PORT_GMAIL="587";
+	}
+	
+	
+	public class FormatDate{
+		public static final String FORMAT_DATE_DD_MM_YYYY="dd/MM/yyyy";
+		public static final String FORMAT_HOURS_hh_mm="hh:mm:ss";
+	}
+	
+	public class StatusComplaint{
+		public static final String STATUS_OPEN="Generada";//--1
+		public static final String STATUS_CLOSE="Cerrada";//--2
+		public static final String STATUS_DUPLICATED="Duplicada";//--3
+		public static final String STATUS_PROGESS="En Proceso";//--4
+		public static final String STATUS_WITTHOUTSTATUS="Sin Estado";//--??
+	}
+	
+	public class ImageParameter{
+//		public static final String IMAGE_DIRECTORY="C:\\opt/inmobile/ojovial/photos/";
+		public static final String IMAGE_DIRECTORY="/opt/inmobile/ojovial/photos/";
+//		public static final String IMAGE_DIRECTORY="C:\\Prueba\\";
+		public static final String FORMAT_JPG=".jpg";
+		public static final String FORMAT_PNG="png";
 	}
 	
 }

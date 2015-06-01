@@ -10,44 +10,24 @@
         android:background="@color/gris" >
 
         <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/LinearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dip"
-            android:paddingTop="5dip" >
+            android:orientation="vertical"
+            android:padding="10dip" >
 
             <!-- Logo Start -->
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="4dip"
                 android:contentDescription="@string/logoDescription"
                 android:src="@drawable/success" />
             <!-- Logo Ends -->
 
-        </LinearLayout>
-        <!-- Header Ends -->
-
-
-        <!-- Footer Start -->
-
-        <LinearLayout
-            android:id="@+id/footer"
-            android:layout_width="fill_parent"
-            android:layout_height="90dip"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
-        </LinearLayout>
-        <!-- Footer Ends -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/header"
-            android:orientation="vertical"
-            android:padding="10dip" >
 
             <!-- Mensaje de extito -->
 

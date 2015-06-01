@@ -32,5 +32,9 @@
     <item name="idTxtFullAddress" type="id">false</item>
     <item name="idBntRegisterComplient" type="id">false</item>
     <item name="idTxtIdCode" type="id">false</item>
+    <item name="idLblDistrict" type="id">false</item>
+    <item name="cboDistrict" type="id">false</item>
+    <item name="cboSpecificDistrict" type="id">false</item>
+    <item name="idRegisterPasswordConfirm" type="id">false</item>
 
 </resources>
