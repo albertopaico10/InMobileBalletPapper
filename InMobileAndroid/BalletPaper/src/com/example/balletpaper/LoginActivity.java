@@ -27,10 +27,10 @@ import android.widget.Toast;
 
 public class LoginActivity extends ActionBarActivity{
 
-	private EditText emailLogin;
-	private EditText passwordLogin;
-	private TextView txtLnkRegisterUser;
-	private DB_BalletPaper dbBalletPaper;
+	public EditText emailLogin;
+	public EditText passwordLogin;
+	public TextView txtLnkRegisterUser;
+	public DB_BalletPaper dbBalletPaper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
