@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.balletpaper.sql.DB_BalletPaper;
 import com.example.balletpaper.util.CommonConstants;
 import com.example.balletpaper.util.UtilMethods;
+import com.example.balletpaper.validation.RegisterUserValidation;
 
 public class RegisterUserActivity extends ActionBarActivity {
 
@@ -66,7 +67,8 @@ public class RegisterUserActivity extends ActionBarActivity {
 	}
 
 	public void onClickSaveUser(View v) {
-		boolean validateField = validateAllField();
+		boolean validateField = RegisterUserValidation.isValidateRegisterUserFields(RegisterUserActivity.this,registerEmail,
+				registerpassword,registerpasswordConfirm,registerName,registerLastName,registerDni,registerAdult,registerAceptTermin);
 		if (validateField) {
 			new SaveInformationService().execute();
 		}
@@ -141,54 +143,6 @@ public class RegisterUserActivity extends ActionBarActivity {
 
 	}
 	
-	private boolean validateAllField() {
-		System.out.println("Metofo validateAllField");
-		boolean validateField = true;
-		if (TextUtils.isEmpty(registerEmail.getText())) {
-			validateField = false;
-			registerEmail.setError(getString(R.string.fieldRequired));
-		}
-		if(!TextUtils.isEmpty(registerEmail.getText())){
-			boolean validateEmail=android.util.Patterns.EMAIL_ADDRESS.matcher(registerEmail.getText()).matches();
-			if(!validateEmail){
-				registerEmail.setError(getString(R.string.emailFormat));
-			}
-		}	
-		if (TextUtils.isEmpty(registerpassword.getText())) {
-			validateField = false;
-			registerpassword.setError(getString(R.string.fieldRequired));
-		}
-		if (TextUtils.isEmpty(registerpasswordConfirm.getText())) {
-			validateField = false;
-			registerpasswordConfirm.setError(getString(R.string.fieldRequired));
-		}
-		if (!TextUtils.isEmpty(registerpasswordConfirm.getText())) {
-			System.out.println("PASSWORD CONFIRM : "+registerpasswordConfirm.getText().toString()+"*****"+registerpassword.getText().toString());
-			if(!registerpasswordConfirm.getText().toString().equals(registerpassword.getText().toString())){
-				validateField = false;
-				registerpasswordConfirm.setError(getString(R.string.lblMessagesPassowrdNotCoincided));
-			}
-		}
-		if (TextUtils.isEmpty(registerName.getText())) {
-			validateField = false;
-			registerName.setError(getString(R.string.fieldRequired));
-		}
-		if (TextUtils.isEmpty(registerLastName.getText())) {
-			validateField = false;
-			registerLastName.setError(getString(R.string.fieldRequired));
-		}if (TextUtils.isEmpty(registerDni.getText())) {
-			validateField = false;
-			registerDni.setError(getString(R.string.fieldRequired));
-		}if (!registerAdult.isChecked()) {
-			validateField = false;
-			registerAdult.setError(getString(R.string.fieldRequired));
-		}if (!registerAceptTermin.isChecked()) {
-			validateField = false;
-			registerAceptTermin.setError(getString(R.string.fieldRequired));
-		}
-		return validateField;
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
