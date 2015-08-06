@@ -5,7 +5,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class RegisterUserValidation {
-
 	
 	public static boolean isValidateRegisterUserFields(Context context,EditText registerEmail,EditText registerpassword
 			,EditText registerpasswordConfirm,EditText registerName,EditText registerLastName

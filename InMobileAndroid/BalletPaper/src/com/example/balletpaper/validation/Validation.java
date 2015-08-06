@@ -8,7 +8,12 @@ import android.widget.EditText;
 import com.example.balletpaper.R;
 
 public class Validation {
-    
+    /**
+     * This method validate if email is empty and email format
+     * @param context
+     * @param editText
+     * @return
+     */
 	public static boolean isEmailAddress(Context context,EditText editText) {
 		boolean validationValue=true;
         if(!isEmpty(context,editText)){
@@ -21,7 +26,12 @@ public class Validation {
         }
 		return validationValue;
     }
-	
+	/**
+	 * This Method is only for validate is editeText is empty
+	 * @param context
+	 * @param editText
+	 * @return boolean
+	 */
 	public static boolean isEmpty(Context context,EditText editText) {
 		String errorRequired =  context.getString(R.string.fieldRequired);
 		boolean validationValue=false;
