@@ -3,19 +3,12 @@ package com.example.balletpaper;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -31,9 +24,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.balletpaper.util.RealPathUtil;
-import com.example.balletpaper.util.UtilMethods;
-
 public class TakePhotoActivity extends ActionBarActivity {
 	ImageButton btnPhotoPicture1;
 	ImageView imgPhotoPicture1;
@@ -43,7 +33,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 	ImageView imgPhotoPicture3;
 	Button btnNextPage;
 	Uri fileUri = null;
-	String hexImagePhotoN1 = "", hexImagePhotoN2 = "", hexImagePhotoN3 = "";
 	String rootFileImageN1 = "", rootFileImageN2 = "", rootFileImageN3 = "";
 	
 	File path=null;

@@ -43,6 +43,7 @@ public class LoginServiceImpl implements LoginService {
 		private String Content="";
 		@Override
 		protected void onPreExecute() {
+			dialog.setCancelable(true);
 			dialog.setMessage(gcontext.getString(R.string.watingLogin));
 			dialog.show();
 		}

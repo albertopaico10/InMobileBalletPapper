@@ -4,7 +4,9 @@ import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.balletpaper.bean.ComplaintBean;
 import com.example.balletpaper.bean.LoginBean;
+import com.example.balletpaper.bean.PhotoBean;
 import com.example.balletpaper.bean.RegisterUserBean;
 
 public class ConvertFormatClass {
@@ -30,4 +32,26 @@ public class ConvertFormatClass {
 		return registerUserBean;
 	}
 	
+	
+	public static PhotoBean setValuePhotoBean(String urlPhoto1, String urlPhoto2,
+			String urlPhoto3) {
+		PhotoBean photoBean=new PhotoBean();
+		photoBean.setUrlPhoto1(urlPhoto1);
+		photoBean.setUrlPhoto2(urlPhoto2);
+		photoBean.setUrlPhoto3(urlPhoto3);
+		return photoBean;
+	}
+	
+	public static ComplaintBean setValueComplainBean(EditText txtNumberPlate,EditText txtComment,
+			EditText txtFullAddress,ComplaintBean complainBean){
+		complainBean.setNumberPlate(txtNumberPlate.getText().toString());
+//		if(txtFullAddress.getText()!=null){
+//			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
+//		}
+		if(complainBean.isSelectedDistrict()){
+			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
+		}
+		complainBean.setComment(txtComment.getText().toString());
+		return complainBean;
+	}
 }

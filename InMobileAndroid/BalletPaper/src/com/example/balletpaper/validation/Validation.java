@@ -33,10 +33,9 @@ public class Validation {
 	 * @return boolean
 	 */
 	public static boolean isEmpty(Context context,EditText editText) {
-		String errorRequired =  context.getString(R.string.fieldRequired);
 		boolean validationValue=false;
 		if(TextUtils.isEmpty(editText.getText().toString().trim())){
-			editText.setError(errorRequired);
+			editText.setError(context.getString(R.string.fieldRequired));
 			validationValue=true;
 		}
 		return validationValue;
@@ -69,4 +68,26 @@ public class Validation {
 		}
 		return validationValue;
     }
+
+	public static boolean isNotGetPossitionString(Context context,String value){
+		boolean validationValue=false;
+		if(("0.0".equals(value)||"".equals(value))){
+			validationValue=true;
+		}
+		return validationValue;
+	}
+	
+	public static boolean isShowValue(Context context,EditText editText){
+		boolean validationValue=false;
+		if(editText.isShown()){
+			if(isEmpty(context,editText)){
+				validationValue=true;
+				editText.setError(context.getString(R.string.fieldRequired));
+			}else{
+				validationValue=false;
+			}
+		 }
+		return validationValue;
+	}
+
 }
