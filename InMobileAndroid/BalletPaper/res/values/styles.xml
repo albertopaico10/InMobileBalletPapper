@@ -109,6 +109,15 @@
         <item name="android:orientation">horizontal</item>
     </style>
     
+    <style name="lblStyleMessagesProcess" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
     <style name="lblStyleTitulo" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">13.0sp</item>
         <item name="android:textStyle">bold</item>

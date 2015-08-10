@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,10 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	private TextView lblLatitude;
 	private TextView lblLongitude;
 	private Spinner cboDistrict,cboSpecificAddress;
+	private LinearLayout linearLayoutForm;
+	private LinearLayout linearLayoutProgress;
+	private ProgressBar processBarPhoto;
+	private LinearLayout linearLayoutPhoto;
 			
 	String urlPhoto1 = "", urlPhoto2 = "", urlPhoto3 = "";
 	private DB_BalletPaper dbBalletPaper;
@@ -63,7 +69,12 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		txtFullAddress = (EditText) findViewById(R.id.idTxtFullAddress);
 		cboDistrict = (Spinner) findViewById(R.id.cboDistrict);
 		cboSpecificAddress=(Spinner)findViewById(R.id.cboSpecificDistrict);
-
+		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterComplaint);
+		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
+		
+		linearLayoutPhoto=(LinearLayout)findViewById(R.id.lnLyProgressPhoto);
+		processBarPhoto=(ProgressBar)findViewById(R.id.progressPhoto);
+		
 		//--Recover values from image
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -73,6 +84,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		}
 		//--Set Phone Bean
 		photoBean=ConvertFormatClass.setValuePhotoBean(urlPhoto1,urlPhoto2,urlPhoto3);
+		
 		//--Get Address
 		getPossitionAndAddres(complaintBean);
 		
@@ -114,7 +126,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		});
    		
 		//--Call District
-		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, cboDistrict, list, complaintBean.getDistrict());
+		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, 
+				cboDistrict, list, complaintBean.getDistrict());
 		
 		list.add("Seleccionar Distrito");
 		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
@@ -133,9 +146,9 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 			}
 		});
-   		
-   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean);
-   		
+   		//--Process Photo Image
+   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean,linearLayoutPhoto,processBarPhoto);
+   		//--Process Aditional
    		registerComplientService.processAditional(RegisterComplientActivity.this, complaintBean, dbBalletPaper);
    		
    		complaintBean.setPhotoBean(photoBean);
@@ -148,7 +161,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		//--Set into Complaint Bean
 		complaintBean=ConvertFormatClass.setValueComplainBean(txtNumberPlate, txtComment, txtFullAddress,complaintBean);
 		if (validateField) {
-			registerComplientService.callServiceRegisterComplaint(RegisterComplientActivity.this, complaintBean);
+			registerComplientService.callServiceRegisterComplaint(RegisterComplientActivity.this, complaintBean,
+					linearLayoutForm,linearLayoutProgress);
 		}
 	}
 

@@ -12,6 +12,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.balletpaper.LoginActivity;
@@ -29,23 +32,24 @@ public class LoginServiceImpl implements LoginService {
 	DB_BalletPaper gDbBalletPaper;
 	boolean isCorrect=false;
 	public LoginBean gloginBean=new LoginBean();
-	
-	
-	public void callServiceLogin(Context context,DB_BalletPaper dbBalletPaper,LoginBean loginBean){
+	public LinearLayout gLinearLayoutForm,gLinearLayoutProgress;
+
+	public void callServiceLogin(Context context,DB_BalletPaper dbBalletPaper,LoginBean loginBean,
+			LinearLayout linearLayoutForm,LinearLayout linearLayoutProgress){
 		gcontext=context;
 		gDbBalletPaper=dbBalletPaper;
 		gloginBean=loginBean;
+		gLinearLayoutForm=linearLayoutForm;
+		gLinearLayoutProgress=linearLayoutProgress;
 		new LoginValidateService().execute();	
 	}
 	
 	private class LoginValidateService extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
 		private String Content="";
 		@Override
 		protected void onPreExecute() {
-			dialog.setCancelable(true);
-			dialog.setMessage(gcontext.getString(R.string.watingLogin));
-			dialog.show();
+//			gLinearLayoutForm.setVisibility(View.GONE);
+			gLinearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 		@SuppressWarnings("deprecation")
 		@Override
@@ -65,7 +69,8 @@ public class LoginServiceImpl implements LoginService {
 				System.out.println("La respues que viene : " + respStr);
 				Content = respStr;
 			} catch (Exception e) {
-				dialog.dismiss();
+				gLinearLayoutForm.setVisibility(View.VISIBLE);
+				gLinearLayoutProgress.setVisibility(View.GONE);	
 				Toast.makeText(gcontext, "Hubo un error en el proceso de Registro de Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
 			return null;
@@ -95,14 +100,19 @@ public class LoginServiceImpl implements LoginService {
 					Intent i = new Intent(gcontext, PrincipalMainActivity.class);
 					gcontext.startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){
+					gLinearLayoutForm.setVisibility(View.VISIBLE);
+					gLinearLayoutProgress.setVisibility(View.GONE);	
 					Toast.makeText(gcontext, gcontext.getString(R.string.validationFail),Toast.LENGTH_LONG).show();
 				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_NOT_EXIST.equals(codeResponse)){
+					gLinearLayoutForm.setVisibility(View.VISIBLE);
+					gLinearLayoutProgress.setVisibility(View.GONE);	
 					Toast.makeText(gcontext, gcontext.getString(R.string.emailNotExit),Toast.LENGTH_LONG).show();
 				}
 			} catch (Exception e) {
 				Toast.makeText(gcontext, "Hubo un error en la respuesta del Registro de Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
-			dialog.dismiss();
+			gLinearLayoutForm.setVisibility(View.VISIBLE);
+			gLinearLayoutProgress.setVisibility(View.GONE);	
 		}
 		
 	}

@@ -5,9 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.balletpaper.bean.RegisterUserBean;
 import com.example.balletpaper.service.RegisterUserService;
@@ -15,6 +15,7 @@ import com.example.balletpaper.service.impl.RegisterUserServiceImpl;
 import com.example.balletpaper.sql.DB_BalletPaper;
 import com.example.balletpaper.util.CommonConstants;
 import com.example.balletpaper.util.ConvertFormatClass;
+import com.example.balletpaper.util.UtilMethods;
 import com.example.balletpaper.validation.RegisterUserValidation;
 
 public class RegisterUserActivity extends ActionBarActivity {
@@ -27,10 +28,10 @@ public class RegisterUserActivity extends ActionBarActivity {
 	private EditText registerpasswordConfirm;
 	private CheckBox registerAdult;
 	private CheckBox registerAceptTermin;
-	private Button registerSaveBtn;
-	private String responseService="";
 	private DB_BalletPaper dbBalletPaper;
-
+	private LinearLayout linearLayoutForm;
+	private LinearLayout linearLayoutProgress;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,9 +45,8 @@ public class RegisterUserActivity extends ActionBarActivity {
 		registerDni = (EditText) findViewById(R.id.idDniUser);
 		registerAdult = (CheckBox) findViewById(R.id.idChkAdult);
 		registerAceptTermin = (CheckBox) findViewById(R.id.idChkAcceptTerm);
-
-		registerSaveBtn = (Button) findViewById(R.id.idBtnRegister);
-		
+		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterUser);
+		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		createAndroidDatase();
 
 	}
@@ -61,9 +61,10 @@ public class RegisterUserActivity extends ActionBarActivity {
 		RegisterUserBean registerUserBean=ConvertFormatClass.setValuesRegisterUserBean(registerEmail, registerpassword, registerName,
 				registerLastName, registerDni, "1", CommonConstants.GenericValues.MOBILE_RECORD);
 		if (validateField) {
-			System.out.println("Nuevo Metodo...!!!!");
+			UtilMethods.hideKeyboard(this.getCurrentFocus(),RegisterUserActivity.this);
 			RegisterUserService registerUserService=new RegisterUserServiceImpl();
-			registerUserService.callServiceRegisterUser(RegisterUserActivity.this, registerUserBean, dbBalletPaper);
+			registerUserService.callServiceRegisterUser(RegisterUserActivity.this, registerUserBean,
+					dbBalletPaper,linearLayoutForm,linearLayoutProgress);
 		}
 
 	}

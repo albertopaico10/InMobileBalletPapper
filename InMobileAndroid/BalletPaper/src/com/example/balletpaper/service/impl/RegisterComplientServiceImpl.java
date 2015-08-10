@@ -22,6 +22,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,8 +47,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	Spinner gCboDistrict;
 	List<String> gList= new ArrayList<String>();
 	String gFinalAddress="";
-	
-	
+	public LinearLayout gLinearLayoutForm,gLinearLayoutProgress,gLinearLayoutProgressInformation;
+	public ProgressBar gProgressBarInformation;
 	@Override
 	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> list,String finalAddress) {
 		gFinalAddress=finalAddress;
@@ -56,7 +59,10 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	}
 	
 	@Override
-	public void proccesImage(Context context, PhotoBean photoBean) {
+	public void proccesImage(Context context, PhotoBean photoBean,
+			LinearLayout linearLayoutProgress,ProgressBar processBar) {
+		gLinearLayoutProgressInformation=linearLayoutProgress;
+		gProgressBarInformation=processBar;
 		gcontext=context;
 		gPhotoBean=photoBean;
 		new ProcessImage().execute();
@@ -69,20 +75,21 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		new ProccesAdditionalInformation().execute();
 	}
 	
-	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean){
+	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean
+			,LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress){
 		gcontext=context;
 		gComplaintBean=complaintBean;
+		gLinearLayoutForm=linearLayoutRegisterComplaint;
+		gLinearLayoutProgress=linearLayoutProgress;
 		new SaveInformationDataBaseNew().execute();
 	}
 	
-	private class getListDistrict extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
+	private class getListDistrict extends AsyncTask<Void, Integer, Void> {
 		private String Content = "";
 
 		@Override
 		protected void onPreExecute() {
-			dialog.setMessage("Por favor, cargando los distritos");
-			dialog.show();
+			
 		}
 
 		@SuppressWarnings("deprecation")
@@ -107,9 +114,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			// Close progress dialog
-			dialog.dismiss();
-			
+//			// Close progress dialog
+//			dialog.dismiss();
             JSONObject jsonResponse;
             
             try {
@@ -143,12 +149,11 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	}
 	
 	private class ProcessImage extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
 
 		@Override
 		protected void onPreExecute() {
-			dialog.setMessage("Estamos procesando las images para adjuntarlas a la denuncia. Por favor Espere. \n Gracias");
-			dialog.show();
+			gLinearLayoutProgressInformation.setVisibility(View.VISIBLE);
+			gProgressBarInformation.setProgress(10);
 		}
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -161,9 +166,10 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		}
 		@Override
 		protected void onPostExecute(Void result) {
+			gProgressBarInformation.setProgress(100);
 			gPhotoBean.setCompleteProcessImage(true);
 			Toast.makeText(gcontext,"Se completo el proceso de tratamiento de las fotos. \n Gracias", Toast.LENGTH_LONG).show();
-			dialog.dismiss();
+			gLinearLayoutProgressInformation.setVisibility(View.GONE);
 		}
 		
 	}
@@ -171,6 +177,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	private void processImage() throws Exception {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 5;
+		gProgressBarInformation.setProgress(25);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto1())) {
 			Uri startDir=Uri.parse(gPhotoBean.getUrlPhoto1());
 			Bitmap b1 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
@@ -179,6 +186,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			byte[] image1 = stream.toByteArray();
 			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
 		}
+		gProgressBarInformation.setProgress(50);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto2())) {
 			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto2());
 			final Bitmap b2 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
@@ -187,6 +195,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			byte[] image2 = stream.toByteArray();
 			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
 		}
+		gProgressBarInformation.setProgress(75);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto3())) {
 			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto3());
 			final Bitmap b3 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
@@ -198,21 +207,20 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	}
 	
 	private class ProccesAdditionalInformation extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
 
 		@Override
 		protected void onPreExecute() {
-			dialog.setMessage("Procesando información adicional \n Gracias.");
-			dialog.show();
 		}
 		@Override
 		protected Void doInBackground(Void... params) {
+			gProgressBarInformation.setProgress(50);
 			getUserFromDataBaseAndroid();
 			return null;
 		}
 		@Override
 		protected void onPostExecute(Void result) {
-			dialog.dismiss();
+			gProgressBarInformation.setProgress(100);
+			gLinearLayoutProgressInformation.setVisibility(View.GONE);
 		}
 	}
 	
@@ -224,13 +232,12 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	
 	private class SaveInformationDataBaseNew extends AsyncTask<Void, Void, Void> {
 
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
 		private String Content = "";
 
 		@Override
 		protected void onPreExecute() {
-			dialog.setMessage(gcontext.getString(R.string.messagesProcessDenounce));
-			dialog.show();
+			gLinearLayoutForm.setVisibility(View.GONE);
+			gLinearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 
 		@SuppressWarnings("deprecation")
@@ -265,8 +272,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 				System.out.println("La respues que viene : " + respStr);
 				Content = respStr;
 			} catch (Exception e) {
-				// Close progress dialog
-				dialog.dismiss();
+				gLinearLayoutForm.setVisibility(View.VISIBLE);
+				gLinearLayoutProgress.setVisibility(View.GONE);
 				Toast.makeText(gcontext,"Hubo un error en el proceso de Registro de Denuncia ("+ e.getMessage()+ "). \nDisculpe las molestias.",
 						Toast.LENGTH_LONG).show();
 			}
@@ -275,8 +282,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// Close progress dialog
-			dialog.dismiss();
 
 			JSONObject jObject = null;
 

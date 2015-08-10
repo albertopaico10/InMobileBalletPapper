@@ -53,7 +53,16 @@
     <string name="strUploadOnePhoto">Tiene que tomar por lo menos una foto.</string>
     <string name="passwordConfirm_hint">Repetir Contraseña</string>
     <string name="lblMessagesPassowrdNotCoincided">Las contraseñas no son iguales.</string>
-    <string name="strPhoto1">1..</string>
+	<string name="strPhoto1">1..</string>
+	
+    <string name="loading">Cargando...</string>
+    <string name="loadingValidationUser">Validando...Por favor espere.</string>
+    <string name="loadingRegisterUser">Registrando sus datos...</string>
+    <string name="loadingSaveComplaint">Registrando...Por favor espere.</string>
+    <string name="loadingProcessPhoto">Procesando Fotos...Por favor espere.</string>
+    <string name="loadingProcessDistrict">Cargando Distritos...Por favor espere.</string>
+    <string name="loadingProcessAditional">Procesando...Por favor espere.</string>
+    
     
     <string name="messagesDistrictError">Debe Seleccionar un distrito.</string>
     <string name="titleAdvertencia">Advertencia</string>

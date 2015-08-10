@@ -12,6 +12,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.balletpaper.R;
@@ -28,23 +30,27 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 	public static Context gcontext=null;
 	public RegisterUserBean gRegisterUserBean=new RegisterUserBean();
 	DB_BalletPaper gDbBalletPaper;
+	public LinearLayout gLinearLayoutForm, gLinearLayoutProgress;
+	
 	@Override
-	public void callServiceRegisterUser(Context context,RegisterUserBean registerUserBean,DB_BalletPaper dbBalletPaper) {
+	public void callServiceRegisterUser(Context context,RegisterUserBean registerUserBean,DB_BalletPaper dbBalletPaper,
+			LinearLayout linearLayoutForm,LinearLayout linearLayoutProgress) {
 		gcontext=context;
 		gRegisterUserBean=registerUserBean;
 		gDbBalletPaper=dbBalletPaper;
+		gLinearLayoutForm=linearLayoutForm;
+		gLinearLayoutProgress=linearLayoutProgress;
 		new SaveInformationService().execute();
 		
 	}
 	
 	private class SaveInformationService extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog dialog = new ProgressDialog(gcontext);
 		private String Content="";
 
 		@Override
 		protected void onPreExecute() {
-			dialog.setMessage("Por favor, espere estamo registrando su cuenta");
-			dialog.show();
+//			gLinearLayoutForm.setVisibility(View.GONE);
+			gLinearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 
 		@SuppressWarnings("deprecation")
@@ -73,8 +79,8 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 				System.out.println("La respues que viene : " + respStr);
 				Content = respStr;
 			} catch (Exception e) {
-				// Close progress dialog
-				dialog.dismiss();
+//				gLinearLayoutForm.setVisibility(View.VISIBLE);
+				gLinearLayoutProgress.setVisibility(View.GONE);
 				Toast.makeText(gcontext, "Hubo un error en el proceso de Registro del Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
 			return null;
@@ -82,8 +88,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			// Close progress dialog
-			dialog.dismiss();
 			
 			JSONObject jObject = null;
 			try {
@@ -101,6 +105,8 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 			} catch (Exception e) {
 				Toast.makeText(gcontext, "Hubo un error en la respuesta del Registro de Usuario ("+e.getMessage()+"). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
+			gLinearLayoutForm.setVisibility(View.VISIBLE);
+			gLinearLayoutProgress.setVisibility(View.GONE);	
 		}
 
 	}

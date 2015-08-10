@@ -36,5 +36,7 @@
     <item name="cboDistrict" type="id">false</item>
     <item name="cboSpecificDistrict" type="id">false</item>
     <item name="idRegisterPasswordConfirm" type="id">false</item>
+    <item name="progressBarGeneral" type="id">false</item>
+     <item name="progressBar" type="id">false</item>
 
 </resources>

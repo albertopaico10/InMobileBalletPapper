@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/LinearLayout1"
+            android:id="@+id/lnLyFormLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -54,20 +54,7 @@
                     android:password="true"
                     android:singleLine="true" />
 
-                <!-- Link to Registration Screen -->
-                <!-- <TextView -->
-                <!-- android:id="@id/link_forget_password" -->
-                <!-- style="@style/lnkStyle2" -->
-                <!-- android:layout_width="fill_parent" -->
-                <!-- android:layout_height="wrap_content" -->
-                <!-- android:layout_marginBottom="10dip" -->
-                <!-- android:layout_marginTop="10dip" -->
-                <!-- android:text="@string/forgetPassword" /> -->
-                <!-- Link to Registration Screen -->
-
-
                 <!-- Login button -->
-
                 <Button
                     android:id="@id/ok_button"
                     style="@style/btnStyleBlackpearl"
@@ -89,6 +76,31 @@
                     android:text="@string/registration" />
             <!-- Login Form Ends -->
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lnLyProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:background="#80000000">
+                
+            <ProgressBar
+				android:id="@id/progressBar"
+				style="?android:attr/progressBarStyleLarge"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true" />
+            
+            <TextView
+		        android:id="@+id/txtAddress"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/loadingValidationUser"
+		        style="@style/lblStyleMessagesProcess"/>
+         </LinearLayout>   
+            
     </RelativeLayout>
 
 </ScrollView>
