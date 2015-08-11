@@ -64,8 +64,6 @@
 </section>
 
 <script
-	src="${pageContext.request.contextPath}/resources/bootstrap/js/init/jquery.js"></script>
-<script
 	src="${pageContext.request.contextPath}/resources/bootstrap/js/init/bootstrap.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/bootstrap/js/init/jquery.easing.min.js"></script>

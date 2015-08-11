@@ -9,9 +9,11 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 	<context:component-scan base-package="com.rest.service.inmobile" />
-
+	
 	<mvc:annotation-driven />
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- Load Properties -->
+	<context:property-placeholder location="classpath:/database.properties"/>
 		
 	<!-- Configure to plugin JSON as request and response in method handler -->
 	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -53,17 +55,11 @@
 	</bean>
 	
 	<bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/db_BalletPaperInMobile" />
-<!-- 		<property name="username" value="BalletPaper" /> -->
-<!-- 		<property name="password" value="abc123Mm" /> -->
-		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="driverClassName" value="${connections.driverClassName}" />
+		<property name="url" value="${connections.url}" />
+		<property name="username" value="${connections.username}" />
+		<property name="password" value="${connections.password}" />
 	</bean>
 	<!-- END HIBERNATE CONFIGURATON-->
 	
-<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
-<!-- 	     one of the properties available; the maximum file size in bytes -->
-<!-- 	    <property name="maxUploadSize" value="900000"/> -->
-<!-- 	</bean> -->
 </beans>
