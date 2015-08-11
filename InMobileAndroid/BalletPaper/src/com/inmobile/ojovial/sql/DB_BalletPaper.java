@@ -23,7 +23,8 @@ public class DB_BalletPaper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS USER");
 		onCreate(db);
 	}
-
+	//--From This part to other Specific Class
+	//--TODO
 	public void insertUser(String email, String idUser) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();

@@ -112,8 +112,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		
 		@Override
 		protected void onPostExecute(Void result) {
-//			// Close progress dialog
-//			dialog.dismiss();
             JSONObject jsonResponse;
             
             try {
@@ -122,7 +120,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
             	 JSONArray jsonMainNode = jsonResponse.optJSONArray("ubigeoBean");
             	 System.out.println("2");
             	 int lengthJsonArr = jsonMainNode.length();  
-//            	 districtArray=new String[lengthJsonArr];
             	 System.out.println("3---"+lengthJsonArr);
             	 for(int i=0; i < lengthJsonArr; i++) {
             		 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
@@ -140,7 +137,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			} catch (Exception e) {
 				Toast.makeText(gcontext,"Hubo un error en la respuesta de los ditritos("+ e.getMessage() + "). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
-            System.out.println("CHAUUuuu");
 		}
 
 
@@ -232,7 +228,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 
 		@Override
 		protected void onPreExecute() {
-//			gLinearLayoutForm.setVisibility(View.GONE);
 			gLinearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 

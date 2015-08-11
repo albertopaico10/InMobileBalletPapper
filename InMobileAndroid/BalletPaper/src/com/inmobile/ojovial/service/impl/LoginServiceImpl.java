@@ -45,7 +45,6 @@ public class LoginServiceImpl implements LoginService {
 		private String Content="";
 		@Override
 		protected void onPreExecute() {
-//			gLinearLayoutForm.setVisibility(View.GONE);
 			gLinearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 		@SuppressWarnings("deprecation")
@@ -84,20 +83,12 @@ public class LoginServiceImpl implements LoginService {
 				int idUser = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse+"************++");
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
-//					int cant=gDbBalletPaper.cantidadRegistros();
-//					Toast.makeText(gcontext, "Cantidad de Registros IN LOCAL DB : "+cant,Toast.LENGTH_LONG).show();
 					boolean exitUser=gDbBalletPaper.existIdUserService(String.valueOf(idUser));
-//					Toast.makeText(gcontext, "Existe si o no? ===> "+exitUser,Toast.LENGTH_LONG).show();
 					if(!exitUser){
 						gDbBalletPaper.updateUserDesactive();
 						gDbBalletPaper.insertUser(email, String.valueOf(idUser));
-//						System.out.println("Tendria que insertarlo no existe en esta Base de Datos");
-//						Toast.makeText(LoginActivity.this, "Se va insertar el usuario en SQL LITE "+idUser+"***"+exitUser,Toast.LENGTH_LONG).show();
-//						dbBalletPaper.insertUser(email, String.valueOf(idUser));	
 					}
 					gDbBalletPaper.updateUserActive(String.valueOf(idUser));
-//					int cant2=gDbBalletPaper.cantidadRegistros();
-//					Toast.makeText(gcontext, "Cantidad de Registros IN LOCAL DB After: "+cant2,Toast.LENGTH_LONG).show();
 					Intent i = new Intent(gcontext, PrincipalMainActivity.class);
 					gcontext.startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){

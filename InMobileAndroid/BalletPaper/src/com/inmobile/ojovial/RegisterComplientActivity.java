@@ -112,7 +112,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 					else{
 						UtilMethods.alertbox(getString(R.string.titleError),getString(R.string.messagesValidationProccessImage) , RegisterComplientActivity.this,R.drawable.error);
 					}
-//					new processClass().execute();
 					cboSpecificAddress.setSelection(0);
 				}else{				
 					txtFullAddress.setVisibility(View.GONE);

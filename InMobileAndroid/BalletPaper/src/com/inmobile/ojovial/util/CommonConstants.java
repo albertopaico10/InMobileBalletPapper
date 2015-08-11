@@ -12,8 +12,6 @@ public class CommonConstants {
 		public static final String UPLOAD_IMAGE = URL_SERVICE+SERVICE_NAME+"/rest/image/save";
 		public static final String GET_DISTRICT = URL_SERVICE+SERVICE_NAME+"/rest/list/district/127";
 		
-//		public static final String CREATE_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/create";
-//		public static final String VALIDATION_USER = "http://10.0.2.2:8080/BallotPapperService/rest/user/validation";
 	}
 	
 	public class GenericValues{

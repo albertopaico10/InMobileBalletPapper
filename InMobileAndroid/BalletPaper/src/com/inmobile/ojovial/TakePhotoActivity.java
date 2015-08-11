@@ -126,11 +126,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-		System.out.println("Entereeeeeeee onSaveInstanceState");
-		// Save UI state changes to the savedInstanceState.
-		// This bundle will be passed to onCreate if the process is
-		// killed and restarted.
-
 		// savedInstanceState.putBoolean("MyBoolean", true);
 		// savedInstanceState.putDouble("myDouble", 1.9);
 		// savedInstanceState.putInt("MyInt", 1);
@@ -142,15 +137,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 	}
 
 	public void onTakePhoto1() {
-		System.out.println("ENTRE1.............!!!");
-//		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//		startActivityForResult(intent, 1);
-		
-//		 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//	     if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//	           startActivityForResult(takePictureIntent, 1);
-//	     }
-		
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT,"photoBalletPaper");
 		intent.putExtra("return-data", true);
@@ -290,7 +276,6 @@ public class TakePhotoActivity extends ActionBarActivity {
 		}else if(!TextUtils.isEmpty(rootFileImageN3)){
 			validate=true;
 		}
-//		validate=true;
 		return validate;
 	}
 

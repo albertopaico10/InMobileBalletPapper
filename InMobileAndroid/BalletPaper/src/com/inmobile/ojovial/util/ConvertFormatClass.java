@@ -1,7 +1,5 @@
 package com.inmobile.ojovial.util;
 
-import android.content.Context;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.inmobile.ojovial.bean.ComplaintBean;
@@ -45,9 +43,6 @@ public class ConvertFormatClass {
 	public static ComplaintBean setValueComplainBean(EditText txtNumberPlate,EditText txtComment,
 			EditText txtFullAddress,ComplaintBean complainBean){
 		complainBean.setNumberPlate(txtNumberPlate.getText().toString());
-//		if(txtFullAddress.getText()!=null){
-//			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
-//		}
 		if(complainBean.isSelectedDistrict()){
 			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
 		}
