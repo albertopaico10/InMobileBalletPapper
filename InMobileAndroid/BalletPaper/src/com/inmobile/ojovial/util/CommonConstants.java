@@ -3,8 +3,8 @@ package com.inmobile.ojovial.util;
 public class CommonConstants {
 
 	public class URLService {
-		public static final String URL_SERVICE = "http://198.38.89.205:8080/";
-//		public static final String URL_SERVICE = "http://192.168.1.36:8080/";
+//		public static final String URL_SERVICE = "http://198.38.89.205:8080/";
+		public static final String URL_SERVICE = "http://192.168.1.36:8080/";
 		public static final String SERVICE_NAME = "BallotPapperService";
 		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";
 		public static final String VALIDATION_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/validation";
