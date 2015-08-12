@@ -57,4 +57,5 @@ public class ConvertClassFormat {
 		beanImage.setRootProject(root+CommonConstants.ImageValues.NAME_IMAGE_FILE);
 		return beanImage;
 	}
+	
 }
