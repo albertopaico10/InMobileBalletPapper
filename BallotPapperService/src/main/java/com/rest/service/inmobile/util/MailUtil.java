@@ -14,37 +14,39 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.rest.service.inmobile.bean.email.EmailBean;
+
 public class MailUtil {
 
-	public static void sendEmail(String to, String subject, String body)
+	public static void sendEmail(final EmailBean beanEmail)
 			throws MessagingException {
-		System.out.println("El correo va para : " + to + "/ Asunto : " + subject);
+		System.out.println("El correo va para : " + beanEmail.getToEmail() + "/ Asunto : "+beanEmail.getSubjectEmail());
 
 		Properties props = new Properties();
-		props.put("mail.smtp.auth", CommonConstants.Email.EMAIL_TRUE);
-		props.put("mail.smtp.starttls.enable", CommonConstants.Email.EMAIL_TRUE);
-		props.put("mail.smtp.host", CommonConstants.Email.EMAIL_SMTP_GMAIL);
-		props.put("mail.smtp.port", CommonConstants.Email.EMAIL_PORT_GMAIL);
-		props.put("mail.smtp.ssl.trust", CommonConstants.Email.EMAIL_SMTP_GMAIL);
+		props.put("mail.smtp.auth", beanEmail.getEmailTrue());
+		props.put("mail.smtp.starttls.enable", beanEmail.getEmailTrue());
+		props.put("mail.smtp.host", beanEmail.getEmailSmtp());
+		props.put("mail.smtp.port", beanEmail.getEmailPort());
+		props.put("mail.smtp.ssl.trust", beanEmail.getEmailSmtp());
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(
-								CommonConstants.Email.EMAIL_FROM,
-								CommonConstants.Email.PASSWORD_FROM);
+								beanEmail.getEmailFrom(),
+								beanEmail.getPasswordFrom());
 					}
 				});
 
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(CommonConstants.Email.EMAIL_FROM));
+		message.setFrom(new InternetAddress(beanEmail.getEmailFrom()));
 		message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(to));
-		message.setSubject(subject);
+				InternetAddress.parse(beanEmail.getToEmail()));
+		message.setSubject(beanEmail.getSubjectEmail());
 
 		// Create the message body part
 		BodyPart messageBodyPart = new MimeBodyPart();
-		messageBodyPart.setContent(body, "text/html");
+		messageBodyPart.setContent(beanEmail.getBodyEmail(), "text/html");
 		// Create a multipart message for attachment
 		Multipart multipart = new MimeMultipart();
 		// Set text message part

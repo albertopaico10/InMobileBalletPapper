@@ -57,13 +57,24 @@ public class CommonConstants {
 	}
 	
 	public class Email{
-		public final static String EMAIL_FROM="ojovial@inmobile.pe";
-		public final static String PASSWORD_FROM="ojo1234vial";
-		public final static String SUBJECT_CREATION_USER="InMobile - Creation User";
-		public final static String SUBJECT_COMPLETE_COMPLAINT="InMobile - Registro Denuncia";
-		public final static String EMAIL_TRUE="true";
-		public final static String EMAIL_SMTP_GMAIL="smtp.gmail.com";
-		public final static String EMAIL_PORT_GMAIL="587";
+//		public final static String EMAIL_FROM="ojovial@inmobile.pe";
+//		public final static String PASSWORD_FROM="ojo1234vial";
+//		public final static String SUBJECT_CREATION_USER="InMobile - Creation User";
+//		public final static String SUBJECT_COMPLETE_COMPLAINT="InMobile - Registro Denuncia";
+//		public final static String EMAIL_TRUE="true";
+//		public final static String EMAIL_SMTP_GMAIL="smtp.gmail.com";
+//		public final static String EMAIL_PORT_GMAIL="587";
+		
+		public final static String SYSTEM_PARAM_GENERAL_EMAIL="EMAIL";
+		public final static String SYSTEM_PARAM_EMAIL_FROM="EMAIL_FROM";
+		public final static String SYSTEM_PARAM_PASSWORD_FROM="PASSWORD_FROM";
+		public final static String SYSTEM_PARAM_SUBJECT_CREATION_USER="SUBJECT_CREATION_USER";
+		public final static String SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT="SUBJECT_COMPLETE_COMPLAINT";
+		public final static String SYSTEM_PARAM_EMAIL_TRUE="EMAIL_TRUE";
+		public final static String SYSTEM_PARAM_EMAIL_SMTP_GMAIL="EMAIL_SMTP_GMAIL";
+		public final static String SYSTEM_PARAM_EMAIL_PORT_GMAIL="EMAIL_PORT_GMAIL";
+		public final static String SYSTEM_PARAM_BODY_EMAIL_CREATION_USER="BODY_EMAIL_CREATION_USER";
+		public final static String SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT="BODY_EMAIL_CREATION_USER";
 	}
 	
 	

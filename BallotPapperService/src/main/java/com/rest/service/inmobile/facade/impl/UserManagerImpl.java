@@ -1,14 +1,19 @@
 package com.rest.service.inmobile.facade.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rest.service.inmobile.bean.email.EmailBean;
 import com.rest.service.inmobile.bean.user.UserRequest;
 import com.rest.service.inmobile.bean.user.UserResponse;
 import com.rest.service.inmobile.facade.ReqRespManager;
+import com.rest.service.inmobile.facade.SystemParamManager;
 import com.rest.service.inmobile.facade.UserManager;
 import com.rest.service.inmobile.hibernate.UserHibernate;
 import com.rest.service.inmobile.hibernate.bean.RequestResponse;
@@ -25,7 +30,10 @@ public class UserManagerImpl implements UserManager {
 	private UserHibernate userHibernate;
 
 	@Autowired
-	ReqRespManager reqRespManager;
+	private ReqRespManager reqRespManager;
+	
+	@Autowired
+	private SystemParamManager systemParamManager;
 
 	public UserResponse saveUserInformation(UserRequest beanRequest) {
 		UserResponse beanUserResponse = new UserResponse();
@@ -62,18 +70,9 @@ public class UserManagerImpl implements UserManager {
 	}
 	
 	public void buidlEmailCreationUser(String emilTo)throws MessagingException{
-		String body="<html>"
-				+ "<body>"
-				+ "<p>"
-				+ "<b>InMobile Bienvenido - Test Email</b>"
-				+ "</p><br/>"
-				+ "<p>Estimo Usario:</p><br/>"
-				+ "<p>Se le agradece haber elegido la aplicación</p>"
-				+ "<p>Su cuenta ha sido creada con exito</p>"
-				+ "<p><b>Gracias</b></p>"
-				+ "</body>"
-				+ "</html>";
-		MailUtil.sendEmail(emilTo,CommonConstants.Email.SUBJECT_CREATION_USER,body);
+		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL);
+		beanEmailBean.setToEmail(emilTo);
+		MailUtil.sendEmail(beanEmailBean);
 	}
 
 	public UserResponse validateUser(UserRequest userRequest) {

@@ -11,11 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rest.service.inmobile.bean.complient.ComplientRequest;
 import com.rest.service.inmobile.bean.complient.ComplientResponse;
 import com.rest.service.inmobile.bean.complient.ListComplaintResponse;
+import com.rest.service.inmobile.bean.email.EmailBean;
 import com.rest.service.inmobile.bean.image.ImageRequest;
 import com.rest.service.inmobile.bean.image.ImageResponse;
 import com.rest.service.inmobile.facade.ComplientManager;
 import com.rest.service.inmobile.facade.ImageManager;
 import com.rest.service.inmobile.facade.ReqRespManager;
+import com.rest.service.inmobile.facade.SystemParamManager;
 import com.rest.service.inmobile.hibernate.ComplientHibernate;
 import com.rest.service.inmobile.hibernate.TypeComplaintHibernate;
 import com.rest.service.inmobile.hibernate.UserHibernate;
@@ -45,6 +47,9 @@ public class ComplientManagerImpl implements ComplientManager {
 	
 	@Autowired
 	private UserHibernate userHibernate;
+	
+	@Autowired
+	private SystemParamManager systemParamManager;
 	
 	public ComplientResponse saveComplient(ComplientRequest beanRequest) {
 		ComplientResponse beanResponse=new ComplientResponse();
@@ -95,23 +100,10 @@ public class ComplientManagerImpl implements ComplientManager {
 	}
 	
 	public void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
-		String body="<html>"
-				+ "<body>"
-				+ "<p>"
-				+ "<b>InMobile Generacion de Denuncia - Test Email</b>"
-				+ "</p><br/>"
-				+ "<p>Estimo Usario:</p><br/>"
-				+ "<p>Se le agradece haber elegido la aplicación</p>"
-				+ "<p>Su denuncia fue registrada con exito, aqui el detalle : </p>"
-				+ "<p><b>Id Denuncia : </b>"+idComplaint+"</p>"
-				+ "<p><b>Lugar de la Infracción : </b>"+address+"</p>"
-				+ "<p><b>Placa del Vehiculo : </b>"+numberPlate+"</p>"
-				+ "<p><b>Estados de Denuncia : ABIERTA</b></p>"
-				+ "<p>Le estaremos informando del proceso de esta denuncia</p>"
-				+ "<p><b>Gracias</b></p>"
-				+ "</body>"
-				+ "</html>";
-		MailUtil.sendEmail(emilTo,CommonConstants.Email.SUBJECT_COMPLETE_COMPLAINT,body);
+		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL);
+		beanEmailBean.setToEmail(emilTo);
+		 
+		MailUtil.sendEmail(beanEmailBean);
 	}
 
 	public ListComplaintResponse getListComplaintByDistrict(int idUser){

@@ -9,6 +9,7 @@ import com.rest.service.inmobile.bean.complient.ListComplaintResponse;
 import com.rest.service.inmobile.bean.complient.TypeComplaintResponse;
 import com.rest.service.inmobile.bean.image.ImageRequest;
 import com.rest.service.inmobile.bean.image.ImageResponse;
+import com.rest.service.inmobile.bean.systemparam.SystemParamResponse;
 import com.rest.service.inmobile.bean.ubigeo.Ubigeo;
 import com.rest.service.inmobile.bean.user.UserRequest;
 import com.rest.service.inmobile.hibernate.TypeComplaintHibernate;
@@ -16,6 +17,7 @@ import com.rest.service.inmobile.hibernate.bean.Complaint;
 import com.rest.service.inmobile.hibernate.bean.ComplaintImage;
 import com.rest.service.inmobile.hibernate.bean.District;
 import com.rest.service.inmobile.hibernate.bean.Image;
+import com.rest.service.inmobile.hibernate.bean.SystemParam;
 import com.rest.service.inmobile.hibernate.bean.TypeComplaint;
 import com.rest.service.inmobile.hibernate.bean.User;
 
@@ -141,5 +143,14 @@ public class ConvertClass {
 			listTypeComplaintResponse.add(beanTypeComplaintResponse);
 		}
 		return listTypeComplaintResponse;
+	}
+	
+	public static SystemParamResponse convertFromDataBaseToSystemParamResponse(SystemParam beanSystemParam){
+		SystemParamResponse beanSystemParamResponse=new SystemParamResponse();
+		beanSystemParamResponse.setId(beanSystemParam.getId());
+		beanSystemParamResponse.setNameParam(beanSystemParam.getNameParam());
+		beanSystemParamResponse.setReasonParam(beanSystemParam.getReasonParam());
+		beanSystemParamResponse.setValueParam(beanSystemParam.getValueParam());
+		return beanSystemParamResponse;
 	}
 }
