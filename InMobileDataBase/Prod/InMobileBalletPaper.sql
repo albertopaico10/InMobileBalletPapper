@@ -139,4 +139,27 @@ CREATE TABLE tb_system_param(
 	date_created TIMESTAMP DEFAULT NOW()
 );
 
+/*
+	New Script ---> 11-08-2015
+*/
+CREATE TABLE tb_system_param(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	generalParam VARCHAR(200),
+	nameParam VARCHAR(200),
+	reasonParam VARCHAR(200),
+	valueParam VARCHAR(500),
+	status int,
+	date_created TIMESTAMP DEFAULT NOW()
+);
 
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_FROM','Email for send mail','ojovial@inmobile.pe',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','PASSWORD_FROM','Password for send mail','ojo1234vial',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','SUBJECT_CREATION_USER','Subject Creation User for send mail','InMobile - Creation User',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','SUBJECT_COMPLETE_COMPLAINT','Sbject Complete Complaint for send mail','InMobile - Registro Denuncia',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_TRUE','Configuration Email ','true',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_SMTP_GMAIL','Configuration Value for Send Email SMTP','smtp.gmail.com',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_PORT_GMAIL','Configuration Value for Send Email PORT','587',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_CREATION_USER','Texto para enviar en el correo','<html><body><p><b>InMobile Bienvenido - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su cuenta ha sido creada con exito</p><p><b>Gracias</b></p></body></html>',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_COMPLETE_COMPLAINT','Texto para enviar en el correo de Denuncia Registrada','<html><body><p><b>InMobile Generacion de Denuncia - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su denuncia fue registrada con exito, aqui el detalle : </p><p><b>Id Denuncia : </b>+idComplaint+</p><p><b>Lugar de la Infracción : </b>+address+</p><p><b>Placa del Vehiculo : </b>+numberPlate+</p><p><b>Estados de Denuncia : ABIERTA</b></p><p>Le estaremos informando del proceso de esta denuncia</p><p><b>Gracias</b></p></body></html>;',1);
+
+select * from tb_system_param where generalParam='EMAIL';

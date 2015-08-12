@@ -137,7 +137,7 @@ CREATE TABLE tb_system_param(
 	generalParam VARCHAR(200),
 	nameParam VARCHAR(200),
 	reasonParam VARCHAR(200),
-	valueParam VARCHAR(300),
+	valueParam VARCHAR(500),
 	status int,
 	date_created TIMESTAMP DEFAULT NOW()
 );
@@ -151,4 +151,5 @@ insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,statu
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_PORT_GMAIL','Configuration Value for Send Email PORT','587',1);
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_CREATION_USER','Texto para enviar en el correo','<html><body><p><b>InMobile Bienvenido - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su cuenta ha sido creada con exito</p><p><b>Gracias</b></p></body></html>',1);
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_COMPLETE_COMPLAINT','Texto para enviar en el correo de Denuncia Registrada','<html><body><p><b>InMobile Generacion de Denuncia - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su denuncia fue registrada con exito, aqui el detalle : </p><p><b>Id Denuncia : </b>+idComplaint+</p><p><b>Lugar de la Infracción : </b>+address+</p><p><b>Placa del Vehiculo : </b>+numberPlate+</p><p><b>Estados de Denuncia : ABIERTA</b></p><p>Le estaremos informando del proceso de esta denuncia</p><p><b>Gracias</b></p></body></html>;',1);
-select * from tb_system_param;
+
+select * from tb_system_param where generalParam='EMAIL';
