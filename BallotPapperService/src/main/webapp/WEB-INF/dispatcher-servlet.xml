@@ -35,17 +35,7 @@
 	
 	<bean id="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>com.rest.service.inmobile.hibernate.bean.User</value>
-				<value>com.rest.service.inmobile.hibernate.bean.RequestResponse</value>
-				<value>com.rest.service.inmobile.hibernate.bean.Complaint</value>
-				<value>com.rest.service.inmobile.hibernate.bean.Image</value>
-				<value>com.rest.service.inmobile.hibernate.bean.ComplaintImage</value>
-				<value>com.rest.service.inmobile.hibernate.bean.District</value>
-				<value>com.rest.service.inmobile.hibernate.bean.TypeComplaint</value>
-			</list>
-		</property>
+		<property name="packagesToScan" value="com.rest.service.inmobile.hibernate.bean" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>

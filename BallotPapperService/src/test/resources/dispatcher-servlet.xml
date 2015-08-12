@@ -40,6 +40,7 @@
 				<value>com.rest.service.inmobile.hibernate.bean.Complaint</value>
 				<value>com.rest.service.inmobile.hibernate.bean.Image</value>
 				<value>com.rest.service.inmobile.hibernate.bean.ComplaintImage</value>
+				<value>com.rest.service.inmobile.hibernate.bean.SystemParam</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
