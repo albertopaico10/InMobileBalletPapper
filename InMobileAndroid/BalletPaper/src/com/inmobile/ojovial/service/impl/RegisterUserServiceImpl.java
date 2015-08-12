@@ -94,7 +94,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 				int idUserService = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse);
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_USER.equals(codeResponse)){
-					Toast.makeText(gcontext, "Data a grabar : "+gRegisterUserBean.getRegisterEmail()+"***"+idUserService,Toast.LENGTH_LONG).show();
 					gDbBalletPaper.insertUser(gRegisterUserBean.getRegisterEmail(), String.valueOf(idUserService));
 					Intent i = new Intent(gcontext, WelcomeRegisterActivity.class);
 					gcontext.startActivity(i);
