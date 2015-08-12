@@ -57,7 +57,7 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		return beanEmail;
 	}
 	
-	public EmailBean getEmailInSystemParam(String generalParam) {
+	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation) {
 		EmailBean beanEmail=new EmailBean();
 		List<SystemParam> listSystemParam=systemParamHibernate.listsByParam(generalParam);
 		for(SystemParam beanSystemParam:listSystemParam){
@@ -71,11 +71,13 @@ public class SystemParamManagerImpl implements SystemParamManager {
 				beanEmail.setEmailTrue(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_PASSWORD_FROM.equals(beanSystemParam.getNameParam())){
 				beanEmail.setPasswordFrom(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setSubjectEmail(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_CREATION_USER.equals(beanSystemParam.getNameParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_CREATION_USER.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
 				beanEmail.setSubjectEmail(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_CREATION_USER.equals(beanSystemParam.getNameParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_CREATION_USER.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
+				beanEmail.setBodyEmail(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setBodyEmail(beanSystemParam.getValueParam());
 			}
 		}

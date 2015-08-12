@@ -1,5 +1,7 @@
 package com.inmobile.ojovial.sql;
 
+import com.inmobile.ojovial.bean.UserSqlLiteBean;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -70,6 +72,22 @@ public class DB_BalletPaper extends SQLiteOpenHelper {
 		db.update("USER", contentValues,"isActive = ?",args);
 		db.close();
 		return true;
+	}
+	
+	public UserSqlLiteBean getRecoverActiveUser(){
+		UserSqlLiteBean beanUser=new UserSqlLiteBean();
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor res = db.rawQuery("select * from USER where isActive='Y'", null);
+		if(res.moveToFirst()){
+			do {
+				System.out.println("Id SQL Lite : "+Integer.parseInt(res.getString(0))+"||"+res.getString(1)+"||"+res.getString(2)+"||"+res.getString(3));
+				beanUser.setId(Integer.parseInt(res.getString(0)));
+				beanUser.setEmail(res.getString(1));
+				beanUser.setIsActive(res.getString(2));
+				beanUser.setIdUserService(res.getString(3));
+			} while (res.moveToNext());
+		}
+		return beanUser;
 	}
 	
 	public boolean existIdUserService(String idUser) {

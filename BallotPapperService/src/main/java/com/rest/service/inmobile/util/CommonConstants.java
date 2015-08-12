@@ -66,6 +66,8 @@ public class CommonConstants {
 //		public final static String EMAIL_PORT_GMAIL="587";
 		
 		public final static String SYSTEM_PARAM_GENERAL_EMAIL="EMAIL";
+		public final static String TYPE_OPERATION_CREATE_USER="CREATE_USER";
+		public final static String TYPE_OPERATION_REGISTER_COMPLAINT="REGISTER_COMPLAINT";
 		public final static String SYSTEM_PARAM_EMAIL_FROM="EMAIL_FROM";
 		public final static String SYSTEM_PARAM_PASSWORD_FROM="PASSWORD_FROM";
 		public final static String SYSTEM_PARAM_SUBJECT_CREATION_USER="SUBJECT_CREATION_USER";
@@ -74,7 +76,10 @@ public class CommonConstants {
 		public final static String SYSTEM_PARAM_EMAIL_SMTP_GMAIL="EMAIL_SMTP_GMAIL";
 		public final static String SYSTEM_PARAM_EMAIL_PORT_GMAIL="EMAIL_PORT_GMAIL";
 		public final static String SYSTEM_PARAM_BODY_EMAIL_CREATION_USER="BODY_EMAIL_CREATION_USER";
-		public final static String SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT="BODY_EMAIL_CREATION_USER";
+		public final static String SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT="BODY_EMAIL_COMPLETE_COMPLAINT";
+		public final static String ID_COMPLAINT="${idComplaint}";
+		public final static String ADDRESS="${address}";
+		public final static String NUMBER_PLATE="${numberPlate}";
 	}
 	
 	

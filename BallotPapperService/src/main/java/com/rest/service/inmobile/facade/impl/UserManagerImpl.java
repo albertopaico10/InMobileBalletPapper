@@ -70,7 +70,7 @@ public class UserManagerImpl implements UserManager {
 	}
 	
 	public void buidlEmailCreationUser(String emilTo)throws MessagingException{
-		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL);
+		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_CREATE_USER);
 		beanEmailBean.setToEmail(emilTo);
 		MailUtil.sendEmail(beanEmailBean);
 	}

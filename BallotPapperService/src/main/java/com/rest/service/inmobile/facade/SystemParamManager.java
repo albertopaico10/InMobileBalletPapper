@@ -9,5 +9,5 @@ public interface SystemParamManager {
 
 	public List<SystemParamResponse> listSpecificSystemParam(List<String> listValue);
 	public EmailBean getEmailInformation(List<String> listValue);
-	public EmailBean getEmailInSystemParam(String generalParam);
+	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation);
 }

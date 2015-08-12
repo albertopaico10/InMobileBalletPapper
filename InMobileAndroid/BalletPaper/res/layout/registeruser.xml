@@ -148,6 +148,7 @@
 		        android:text="@string/loadingRegisterUser"
 		        style="@style/lblStyleMessagesProcess"/>
          </LinearLayout>
+         
     </RelativeLayout>
 
 </ScrollView>

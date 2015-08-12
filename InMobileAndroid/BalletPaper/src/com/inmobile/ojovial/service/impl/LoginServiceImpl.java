@@ -84,9 +84,11 @@ public class LoginServiceImpl implements LoginService {
 				System.out.println("codeResponse : "+codeResponse+"************++");
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
 					boolean exitUser=gDbBalletPaper.existIdUserService(String.valueOf(idUser));
+//					Toast.makeText(gcontext, "Existe si o no ===>"+exitUser,Toast.LENGTH_LONG).show();
+					gDbBalletPaper.updateUserDesactive();
 					if(!exitUser){
-						gDbBalletPaper.updateUserDesactive();
 						gDbBalletPaper.insertUser(email, String.valueOf(idUser));
+//						Toast.makeText(gcontext, "Se debio haber grabado en el SQL Lite",Toast.LENGTH_LONG).show();
 					}
 					gDbBalletPaper.updateUserActive(String.valueOf(idUser));
 					Intent i = new Intent(gcontext, PrincipalMainActivity.class);

@@ -28,6 +28,7 @@ import com.rest.service.inmobile.hibernate.bean.User;
 import com.rest.service.inmobile.util.CommonConstants;
 import com.rest.service.inmobile.util.ConvertClass;
 import com.rest.service.inmobile.util.MailUtil;
+import com.rest.service.inmobile.util.UtilMethods;
 
 @Service
 @Transactional
@@ -99,11 +100,20 @@ public class ComplientManagerImpl implements ComplientManager {
 		return imageResponse;
 	}
 	
-	public void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
-		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL);
+	private void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
+		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
+		//--Set Body with final values
+		beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
 		beanEmailBean.setToEmail(emilTo);
 		 
 		MailUtil.sendEmail(beanEmailBean);
+	}
+	
+	private String replaceValuesIntoEmailBody(String emilTo,int idComplaint,String address,String numberPlate){
+		emilTo=UtilMethods.getFinalValuesForEmail(emilTo, CommonConstants.Email.ID_COMPLAINT, String.valueOf(idComplaint));
+		emilTo=UtilMethods.getFinalValuesForEmail(emilTo, CommonConstants.Email.ADDRESS, address);
+		emilTo=UtilMethods.getFinalValuesForEmail(emilTo, CommonConstants.Email.NUMBER_PLATE, numberPlate);
+		return emilTo;
 	}
 
 	public ListComplaintResponse getListComplaintByDistrict(int idUser){

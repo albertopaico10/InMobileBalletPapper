@@ -55,4 +55,15 @@ public class UtilMethodsTest {
 		System.out.println("GSON : "+strValue);
 	}
 	
+	@Test
+	public void replaceTextForEmai(){
+		String newValue=UtilMethods.getFinalValuesForEmail("<html><body><p><b>InMobile Generacion de Denuncia - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su denuncia fue registrada con exito, aqui el detalle : </p><p><b>Id Denuncia : </b>${idComplaint}</p><p><b>Lugar de la Infracción : </b>${address}</p><p><b>Placa del Vehiculo : </b>${numberPlate}</p><p><b>Estados de Denuncia : ABIERTA</b></p><p>Le estaremos informando del proceso de esta denuncia</p><p><b>Gracias</b></p></body></html>;",
+				CommonConstants.Email.ID_COMPLAINT, "20");
+//		String newValue=UtilMethods.getFinalValuesForEmail("HOLA a todo es momento de salir idComplaint",
+//				CommonConstants.Email.ID_COMPLAINT, "20");
+		String newValue2=UtilMethods.getFinalValuesForEmail(newValue,CommonConstants.Email.ADDRESS, "AV. Peru 4097");
+		String newValue3=UtilMethods.getFinalValuesForEmail(newValue2,CommonConstants.Email.NUMBER_PLATE, "AXF-675");
+		System.out.println("FINAL EMAIL : "+newValue3);
+	}
+	
 }

@@ -31,6 +31,7 @@ import com.inmobile.ojovial.R;
 import com.inmobile.ojovial.SuccessRecordActivity;
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
+import com.inmobile.ojovial.bean.UserSqlLiteBean;
 import com.inmobile.ojovial.service.RegisterComplientService;
 import com.inmobile.ojovial.sql.DB_BalletPaper;
 import com.inmobile.ojovial.util.CommonConstants;
@@ -57,8 +58,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	}
 	
 	@Override
-	public void proccesImage(Context context, PhotoBean photoBean,
-			LinearLayout linearLayoutProgress,ProgressBar processBar) {
+	public void proccesImage(Context context, PhotoBean photoBean,LinearLayout linearLayoutProgress,ProgressBar processBar) {
 		gLinearLayoutProgressInformation=linearLayoutProgress;
 		gProgressBarInformation=processBar;
 		gcontext=context;
@@ -201,27 +201,26 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	}
 	
 	private class ProccesAdditionalInformation extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected void onPreExecute() {
-		}
 		@Override
 		protected Void doInBackground(Void... params) {
 			getUserFromDataBaseAndroid();
 			return null;
 		}
-		@Override
-		protected void onPostExecute(Void result) {
-			gLinearLayoutProgressInformation.setVisibility(View.GONE);
-		}
 	}
 	
 	private void getUserFromDataBaseAndroid() {
+		System.out.println("Entre para sacar datos del android");
+		Toast.makeText(gcontext,"Voy a recuperar datos del SQL LITE",Toast.LENGTH_LONG).show();
 		gDbBalletPaper = new DB_BalletPaper(gcontext, "DB_AndroidBalletPaper", null,1);
-		gComplaintBean.setIdUserService(gDbBalletPaper.getIdUserService());
-
+		recoverDataForSendService();
 	}
 	
+	private void recoverDataForSendService() {
+		UserSqlLiteBean beanUserSQLLite=gDbBalletPaper.getRecoverActiveUser();
+		Toast.makeText(gcontext,"Ahora si.....Voy a recuperar datos del SQL LITE",Toast.LENGTH_LONG).show();
+		gComplaintBean.setIdUserService(beanUserSQLLite.getIdUserService());
+	}
+
 	private class SaveInformationDataBaseNew extends AsyncTask<Void, Void, Void> {
 
 		private String Content = "";
@@ -287,8 +286,10 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 					gcontext.startActivity(i);
 				} else {
 					Toast.makeText(gcontext,gcontext.getString(R.string.errorSaveComplaint),Toast.LENGTH_LONG).show();
+					gLinearLayoutProgress.setVisibility(View.GONE);
 				}
 			} catch (Exception e) {
+				gLinearLayoutProgress.setVisibility(View.GONE);
 				Toast.makeText(gcontext,"Hubo un error en la respuesta del Registro de la Denuncia ("+ e.getMessage() + "). Disculpe las molestias.",	Toast.LENGTH_LONG).show();
 			}
 		}

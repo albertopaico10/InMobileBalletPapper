@@ -95,4 +95,8 @@ public class UtilMethods {
 		 }		 
 		 return nameFile+formatFile;
 	}
+	
+	public static String getFinalValuesForEmail(String email,String identifyValue,String finalValue){
+		return email.replace(identifyValue, finalValue);
+	}
 }

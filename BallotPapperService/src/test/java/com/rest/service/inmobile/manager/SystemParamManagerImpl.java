@@ -21,7 +21,7 @@ public class SystemParamManagerImpl {
 	
 	@Test
 	public void getEmailInformation()throws Exception{
-		EmailBean emailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL);
+		EmailBean emailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_CREATE_USER);
 		System.out.println("Information : ");
 		System.out.println("* "+emailBean.getEmailFrom());
 		System.out.println("* "+emailBean.getEmailPort());
@@ -29,5 +29,16 @@ public class SystemParamManagerImpl {
 		System.out.println("* "+emailBean.getEmailTrue());
 		System.out.println("* "+emailBean.getPasswordFrom());
 		System.out.println("* "+emailBean.getSubjectEmail());
+		System.out.println("* "+emailBean.getBodyEmail());
+		
+		EmailBean emailBean2=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
+		System.out.println("Information : ");
+		System.out.println("* "+emailBean2.getEmailFrom());
+		System.out.println("* "+emailBean2.getEmailPort());
+		System.out.println("* "+emailBean2.getEmailSmtp());
+		System.out.println("* "+emailBean2.getEmailTrue());
+		System.out.println("* "+emailBean2.getPasswordFrom());
+		System.out.println("* "+emailBean2.getSubjectEmail());
+		System.out.println("* "+emailBean2.getBodyEmail());
 	}
 }

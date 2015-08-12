@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
+import com.inmobile.ojovial.bean.UserSqlLiteBean;
 import com.inmobile.ojovial.service.RegisterComplientService;
 import com.inmobile.ojovial.service.impl.RegisterComplientServiceImpl;
 import com.inmobile.ojovial.sql.DB_BalletPaper;
@@ -155,10 +156,24 @@ public class RegisterComplientActivity extends ActionBarActivity implements
    		//--Process Photo Image
    		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean,linearLayoutPhoto,processBarPhoto);
    		//--Process Aditional
-   		registerComplientService.processAditional(RegisterComplientActivity.this, complaintBean, dbBalletPaper);
-   		
+//   		registerComplientService.processAditional(RegisterComplientActivity.this, complaintBean, dbBalletPaper);
+   		getUserFromDataBaseAndroid();
    		complaintBean.setPhotoBean(photoBean);
 	}
+	
+	private void getUserFromDataBaseAndroid() {
+		System.out.println("Entre para sacar datos del android");
+		dbBalletPaper = new DB_BalletPaper(RegisterComplientActivity.this, "DB_AndroidBalletPaper", null,1);
+		recoverDataForSendService();
+	}
+	
+	private void recoverDataForSendService() {
+		UserSqlLiteBean beanUserSQLLite=dbBalletPaper.getRecoverActiveUser();
+//		Toast.makeText(RegisterComplientActivity.this,"Ahora si.....Voy a recuperar datos del SQL LITE ==>"+beanUserSQLLite.getIdUserService(),Toast.LENGTH_LONG).show();
+		complaintBean.setIdUserService(beanUserSQLLite.getIdUserService());
+//		Toast.makeText(RegisterComplientActivity.this,"Terminoooo..!!",Toast.LENGTH_LONG).show();
+	}
+
 
 	public void onClickSaveRegister(View v) {
 		// Save information in Service
