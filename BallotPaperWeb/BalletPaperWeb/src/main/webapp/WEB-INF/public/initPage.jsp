@@ -6,8 +6,6 @@
 				<b><spring:message code="init.page.messages.2" /></b>
 				<br>
 				<b><spring:message code="init.page.messages.3" /></b>
-<!-- 				<br> -->
-<%-- 				<b><spring:message code="init.page.messages.4" /></b> --%>
 			</div>
 			<div class="text-right" style="font-size: 25px">
 				<spring:message code="init.page.messages.1" />
@@ -30,7 +28,7 @@
 <section id="contact" style="background-color: EEEEEE;">
 <div class="container">
 	<div class="row" >
-		<div class="col-lg-5 text-left" style="padding-top: 6%;padding-left: 3%;padding-bottom: 3%;" >
+		<div class="col-lg-5 text-left" style="padding-top: 6%;padding-left: 6%;" >
 			<h4 class="section-heading">
 				<p><b><spring:message code="init.page.zone2.question1" /></b></p>
 				<p>
@@ -39,9 +37,9 @@
 			</h4>
 		</div>
 		<div class="col-lg-1 text-center"></div>
-		<div class="col-lg-5 text-left ">
+		<div class="col-lg-5 text-left" style="padding-left: 7%;" >
 			<div class="videoWrapper">
-				<iframe width="400" height="240" src="https://www.youtube.com/embed/ssF4UIvxt7g" frameborder="0" allowfullscreen></iframe>
+				<iframe width="400" height="250" src="https://www.youtube.com/embed/ssF4UIvxt7g" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
@@ -50,11 +48,11 @@
 <section id="contact">
 	<div class="container">
 		<div class="row" >
-			<div class="col-lg-4 col-sm-12 text-center">
+			<div class="col-lg-5 text-left" style="padding-left: 7%">
 					<img src="${pageContext.request.contextPath}/resources/bootstrap/img/auto.jpg" class="img-responsive" alt="Cinque Terre">
 			</div>
 			<div class="col-lg-1 text-center"></div>
-			<div class="col-lg-5 text-left" style="padding-top: 4%;padding-left: 3%;padding-bottom: 3%;" >
+			<div class="col-lg-5 text-left" style="padding-top: 4%;padding-left: 5%;padding-bottom: 3%;" >
 				<h4 class="section-heading">
 					<p><b><spring:message code="init.page.zone3.question1" /></b></p>
 					<p>
@@ -69,7 +67,7 @@
 <section id="contact" style="background-color: EEEEEE;">
 <div class="container">
 	<div class="row" >
-		<div class="col-lg-5 text-left" style="padding-top: 2%;padding-left: 3%;padding-bottom: 3%;" >
+		<div class="col-lg-5 text-left" style="padding-top: 2%;padding-left: 6%;padding-bottom: 3%;" >
 			<h4 class="section-heading">
 				<p><b><spring:message code="init.page.zone4.question1" /></b></p>
 				<p>
@@ -78,7 +76,7 @@
 			</h4>
 		</div>
 		<div class="col-lg-1 text-center"></div>
-		<div class="col-lg-4 col-sm-12 text-center">
+		<div class="col-lg-5 text-left" style="padding-left: 7%">
 				<img src="${pageContext.request.contextPath}/resources/bootstrap/img/analista2.jpg" class="img-responsive" alt="Cinque Terre">
 		</div>
 	</div>

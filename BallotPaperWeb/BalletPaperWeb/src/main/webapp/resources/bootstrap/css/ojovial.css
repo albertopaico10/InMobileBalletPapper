@@ -12,8 +12,9 @@
 }
 .videoWrapper {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
+	padding-bottom: 50.25%; /* 16:9 */
+	padding-top: 2%;
+	padding-left : 7%;
 	height: 0;
 }
 .videoWrapper iframe {
