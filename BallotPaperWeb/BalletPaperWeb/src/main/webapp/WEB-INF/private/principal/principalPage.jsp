@@ -17,11 +17,10 @@
 	
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
-<%--     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/logo-nav.css" rel="stylesheet"></link> --%>
-<%--     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/foot.css" rel="stylesheet"></link> --%>
     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/tableList.css" rel="stylesheet"></link>
     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/carousel.css" rel="stylesheet"></link>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/jquery-ui.css"></link>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/ojovial.css"></link>
 	<title><spring:message code="welcome.titulo.page" /></title>
 
 </head>
