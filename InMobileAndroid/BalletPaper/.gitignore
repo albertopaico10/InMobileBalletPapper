@@ -1,5 +1,6 @@
 /res/
-/bin/
+bin/
+/assets/
 .project
 .classpath
 .settings
