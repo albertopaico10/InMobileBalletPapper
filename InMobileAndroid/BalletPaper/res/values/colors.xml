@@ -11,4 +11,10 @@
     <color name="yellow">#fffaef1c</color>
     <color name="green">#ff54d525</color>
     <color name="blue_sky_dark">#ff1b93b5</color>
+    
+    
+    
+    <color name="primary">#bf0411</color>
+    <color name="primary_dark">#A5030E</color>
+    <color name="actionbar_text">#78C257</color>
 </resources>

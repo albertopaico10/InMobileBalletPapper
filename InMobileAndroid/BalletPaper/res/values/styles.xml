@@ -1,8 +1,9 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light"></style>
 
-    <style name="AppTheme" parent="AppBaseTheme"></style>
+        <!-- <item name="android:background">#DD0009</item> -->
+        
+    
 
 <!--     <style name="lblStyleError" parent="@android:style/Widget.Holo.Light.PopupWindow.ActionMode"> -->
 <!--         <item name="android:textSize">15.0sp</item> -->
@@ -217,4 +218,29 @@
         <item name="android:shadowRadius">0.6</item>
     </style>
 
+    
+    
+    
+    
+    
+    <!-- Styles for the app -->
+    <style name="inptStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dip</item>
+        <item name="android:layout_marginTop">6dip</item>
+		<item name="android:paddingLeft">15dip</item>
+		<item name="android:paddingRight">15dip</item>
+		<item name="android:paddingTop">3dip</item>
+		<item name="android:paddingBottom">5dip</item>
+        <item name="android:background">@drawable/round_corner</item>
+    </style>
+    
+    <style name="btnStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+    </style>
+    
+    
 </resources>

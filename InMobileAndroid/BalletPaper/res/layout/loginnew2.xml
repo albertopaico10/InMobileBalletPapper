@@ -24,7 +24,7 @@
                     android:contentDescription="@string/logoDescription"
                     android:layout_marginBottom="20dip"
                     android:layout_marginTop="4dip"
-                    android:src="@drawable/logo_papeletas" />
+                    android:src="@drawable/logo_ov" />
                 <!-- Logo Ends -->
                
 
