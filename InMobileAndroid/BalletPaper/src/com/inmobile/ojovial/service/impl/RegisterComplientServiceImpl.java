@@ -2,12 +2,16 @@ package com.inmobile.ojovial.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -27,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
 import com.inmobile.ojovial.R;
 import com.inmobile.ojovial.SuccessRecordActivity;
 import com.inmobile.ojovial.bean.ComplaintBean;
@@ -178,7 +183,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b1.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image1 = stream.toByteArray();
-			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
+			gPhotoBean.setFileImage1(image1);
+//			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
 		}
 		gProgressBarInformation.setProgress(50);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto2())) {
@@ -187,7 +193,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image2 = stream.toByteArray();
-			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
+			gPhotoBean.setFileImage2(image2);
+//			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
 		}
 		gProgressBarInformation.setProgress(75);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto3())) {
@@ -196,7 +203,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b3.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image3 = stream.toByteArray();
-			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
+			gPhotoBean.setFileImage3(image3);
+//			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
 		}
 	}
 	
@@ -235,28 +243,27 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		protected Void doInBackground(Void... params) {
 			System.out.println("onLoad!!!");
 			HttpClient httpClient = new DefaultHttpClient();
-			HttpPost post = new HttpPost(
-					CommonConstants.URLService.REGISTER_COMPLAINT);
+			HttpPost post = new HttpPost(CommonConstants.URLService.REGISTER_COMPLAINT);
 			post.setHeader("content-type", "application/json; charset=UTF-8");
-
-			JSONObject dato = new JSONObject();
+			post.setHeader("Accept", "application/json");
+			Map<String, Object> dato = new HashMap<String, Object>();
 			try {
-
+				
 				dato.put(CommonConstants.RequestSaveComplaint.IDUSER_REQUEST_COMPLAINT,Integer.parseInt(gComplaintBean.getIdUserService()));
 				dato.put(CommonConstants.RequestSaveComplaint.LONGITUDE_REQUEST_COMPLAINT,gComplaintBean.getLongitude());
 				dato.put(CommonConstants.RequestSaveComplaint.LATITUDE_REQUEST_COMPLAINT,gComplaintBean.getLatitude());
 				dato.put(CommonConstants.RequestSaveComplaint.FULLADDRESS_REQUEST_COMPLAINT,UtilMethods.encriptValue(gComplaintBean.getAlternativeAddress()));
 				dato.put(CommonConstants.RequestSaveComplaint.COMMENT_ADITIONAL_REQUEST_COMPLAINT,gComplaintBean.getComment());
 				dato.put(CommonConstants.RequestSaveComplaint.NUMBER_PLATE_REQUEST_COMPLAINT,gComplaintBean.getNumberPlate());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_1_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto1());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_2_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto2());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_3_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto3());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_1_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage1());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_2_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage2());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_3_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage3());
 				dato.put(CommonConstants.RequestSaveComplaint.CATEGORY_IMAGE_REQUEST_COMPLAINT,CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE);
 				dato.put(CommonConstants.RequestSaveComplaint.DISTRICT_REQUEST_COMPLAINT,gComplaintBean.getDistrict());
-
-				StringEntity entity = new StringEntity(dato.toString());
-				post.setEntity(entity);
-
+				String json = new GsonBuilder().create().toJson(dato, Map.class);
+				
+				post.setEntity(new StringEntity(json));
+				
 				HttpResponse resp = httpClient.execute(post);
 				String respStr = EntityUtils.toString(resp.getEntity());
 				System.out.println("La respues que viene : " + respStr);
