@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name=".TakePhotoActivity"
+            android:name=".PrincipalMainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterComplientActivity" />
-        <activity android:name=".SuccessRecordActivity" />
-        <activity android:name=".PrincipalMainActivity" />
+        <activity android:name=".TakePhotoActivity" />
         <activity android:name=".RegisterUserActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".WelcomeRegisterActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SuccessRecordActivity" />
+        <activity android:name=".RegisterComplientActivity" />
+        <activity android:name=".WelcomeRegisterActivity" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
