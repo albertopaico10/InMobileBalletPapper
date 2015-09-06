@@ -1,0 +1,8 @@
+/res/
+/appcompat_v7/
+/bin/
+.project
+.classpath
+.settings
+.metadata
+/gen/

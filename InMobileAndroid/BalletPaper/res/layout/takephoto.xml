@@ -18,7 +18,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txtStep1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -26,6 +26,16 @@
                 android:layout_gravity="center"
                 android:text="@string/lblTituloFotos"
                 android:textColor="#000000" />
+            <TextView
+                android:id="@+id/txtDescriptionStep1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:text="@string/lblDescripTituloFotos"
+                android:textColor="#000000" />
+            
         </LinearLayout>
         <!-- Footer Start -->
 

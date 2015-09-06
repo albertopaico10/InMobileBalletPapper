@@ -25,7 +25,8 @@
     <string name="btnRecomendation">Recomendaciones</string>
     <string name="erroremail_pwd">Invalid e-mail or password.</string>
     <string name="next">Siguiente</string>
-    <string name="lblTituloFotos">Paso 1. Tome las fotos necesarias para la denuncia.</string>
+    <string name="lblTituloFotos">Paso 1.</string>
+    <string name="lblDescripTituloFotos">Tome las fotos necesarias para la denuncia.</string>
     <string name="fieldRequired">Campo requerido</string>
     <string name="welcomeMessagesTitle">Registro Exitoso</string>
     <string name="welcomeMessagesBody">Su registro fue éxito. Por favor de click en el boton para loguearse en la aplicación y empezar a registrar sus denuncias.</string>
