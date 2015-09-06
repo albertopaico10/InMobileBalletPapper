@@ -10,8 +10,8 @@
     <string name="email_hint">Correo electrónico</string>
     <string name="logoDescription">Logo Ojo Vial</string>
     <string name="password_hint">Contraseña</string>
-    <string name="sigIn">LOGIN</string>
-    <string name="registration">Crear Cuenta</string>
+    <string name="sigIn">Iniciar sesión</string>
+    <string name="registration">Registrarse</string>
     <string name="forgetPassword">¿Olvidaste tu Contraseña?</string>
     <string name="nameRegister">Nombres</string>
     <string name="lastNameRegister">Apellidos</string>
@@ -20,8 +20,8 @@
     <string name="chkAcceptTerm">Acepto los Términos y Condiciones.</string>
     <string name="btnRegister">Registrarse</string>
     <string name="btnDenounce">Denunciar</string>
-    <string name="btnMyDenounce">Mis Denuncias</string>
-    <string name="btnMyInformation">Mis Datos</string>
+    <string name="btnMyDenounce">Mis denuncias</string>
+    <string name="btnMyInformation">Mis datos</string>
     <string name="btnRecomendation">Recomendaciones</string>
     <string name="erroremail_pwd">Invalid e-mail or password.</string>
     <string name="next">Siguiente</string>
@@ -40,7 +40,7 @@
     <string name="btnRegistrar">Registrar Denuncia</string>
     <string name="successTitle">Denuncia registrada con éxito</string>
     <string name="strBodyMessageSuccess">Su denuncia fue registrado con éxito en la aplicación, le estaremos informando sobre el proceso de la denuncia.</string>
-    <string name="btnStrOtherComplaint">Menú Principal</string>
+    <string name="btnStrOtherComplaint">Menú principal</string>
     <string name="strIdAttention">El id de la atención</string>
     <string name="strConfigGPS">No se ha configurado el GPS. Porfavor hacerlo antes de continuar.</string>
     <string name="errorInGeneral">Ocurrio un error interno por favor revisar.</string>

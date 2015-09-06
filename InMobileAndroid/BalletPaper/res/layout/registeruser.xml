@@ -20,7 +20,7 @@
             <!-- Email Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idRegisterEmail"
                 android:hint="@string/email_hint"
                 android:inputType="textEmailAddress"
@@ -30,7 +30,7 @@
             <!-- Password Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idRegisterPassword"
                 android:hint="@string/password_hint"
                 android:maxLength="10"
@@ -40,7 +40,7 @@
             <!-- Password Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idRegisterPasswordConfirm"
                 android:hint="@string/passwordConfirm_hint"
                 android:maxLength="10"
@@ -50,7 +50,7 @@
             <!-- Name Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idNameUser"
                 android:hint="@string/nameRegister"
                 android:inputType="textEmailAddress"
@@ -60,7 +60,7 @@
             <!-- Last Name Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idLastNameUser"
                 android:hint="@string/lastNameRegister"
                 android:inputType="textEmailAddress"
@@ -70,7 +70,7 @@
             <!-- DNI Label -->
 
             <EditText
-                style="@style/inptStyleOjoVial"
+                style="@style/inptLinedStyleOjoVial"
                 android:id="@id/idDniUser"
                 android:hint="@string/dniRegister"
                 android:inputType="number"
@@ -102,8 +102,10 @@
                 android:id="@id/idBtnRegister"
                 style="@style/btnStyleOjoVial"
                 android:onClick="onClickSaveUser"
-                android:text="@string/btnRegister" />
+                android:text="@string/btnRegister"
+                android:textAllCaps="false" />
         </LinearLayout>
+        
         <LinearLayout
             android:id="@+id/lnLyProgress"
             android:layout_width="match_parent"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="opaque_red">#ffff0000</color>
-    <color name="black">#ff000000</color>
+    
     <color name="gris">#ffbebebe</color>
     <color name="blue_dark">#ff000066</color>
-    <color name="white">#ffffffff</color>
+    
     <color name="gris_dark">#ffa09f9f</color>
     <color name="opaque_red2">#ffcc0000</color>
     <color name="blue_sky">#ff64beeb</color>
@@ -14,7 +14,14 @@
     
     
     
-    <color name="primary">#bf0411</color>
-    <color name="primary_dark">#A5030E</color>
-    <color name="actionbar_text">#78C257</color>
+
+    
+    
+    
+    <!-- Colors for Ojo Vial -->
+    <color name="red_brand">#bf0411</color>
+    <color name="red_dark_brand">#A5030E</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="grey">#d1d1d1</color>
 </resources>
