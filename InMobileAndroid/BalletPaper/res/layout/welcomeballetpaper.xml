@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dip" >
+            android:padding="10dip"
+            android:background="#ffffff" >
 
             <!-- Logo Start -->
 
@@ -61,12 +62,10 @@
 
             <Button
                 android:id="@id/ok_button"
-                style="@style/btnStyleBlackpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                style="@style/btnStyleOjoVial"
                 android:onClick="onOkClick"
-                android:text="@string/sigIn" />
+                android:text="@string/sigIn"
+                android:textAllCaps="false" />
         </LinearLayout>
     </RelativeLayout>
 

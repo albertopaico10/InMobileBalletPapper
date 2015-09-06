@@ -15,7 +15,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:background="#ffffff" >
 
             <TextView
                 android:id="@+id/txtStep1"
@@ -44,7 +45,8 @@
             android:layout_width="fill_parent"
             android:layout_height="90dip"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:background="#ffffff" >
         </LinearLayout>
         <!-- Footer Ends -->
 
@@ -54,17 +56,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
             android:orientation="vertical" 
-             android:padding="10dip">
+            android:padding="10dip"
+            android:background="#ffffff" >
 
             <!-- Image #1 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN1"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:src="@drawable/cameraicon" />
             
             <ImageView
@@ -84,17 +83,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header2"
             android:orientation="vertical" 
-             android:padding="10dip">
+            android:padding="10dip"
+            android:background="#ffffff" >
 
             <!-- Image #2 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN2"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:src="@drawable/cameraicon" />
             
 	            <ImageView
@@ -112,17 +108,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header3"
             android:orientation="vertical"
-            android:padding="10dip" >
+            android:padding="10dip"
+            android:background="#ffffff" >
 
             <!-- Image #3 button -->
 
             <ImageButton
                 android:id="@id/idBtnTakePhotoN3"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:src="@drawable/cameraicon" />
 
              <ImageView
@@ -141,17 +134,17 @@
             android:layout_below="@id/header4"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dip" >
+            android:padding="10dip"
+            android:background="#ffffff" >
 
             <!-- redirect next page button -->
 
             <Button
                 android:id="@id/btnNextPhoto"
-                style="@style/btnStyleBlackpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/next" />
+                android:text="@string/next"
+                style="@style/btnStyleOjoVial"
+                android:textAllCaps="false" />
         </LinearLayout>
     </RelativeLayout>
 

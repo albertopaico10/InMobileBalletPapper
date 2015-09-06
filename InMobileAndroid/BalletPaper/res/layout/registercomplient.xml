@@ -6,8 +6,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gris" >
+        android:layout_height="wrap_content" >
 
         <!-- Header  Starts -->
 
@@ -18,7 +17,8 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="5dip"
-            android:paddingTop="5dip" >
+            android:paddingTop="5dip"
+            android:background="#ffffff" >
 
             <TextView
                 android:id="@+id/textView"
@@ -82,10 +82,7 @@
 
             <EditText
                 android:id="@id/idTxtPlate"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
+                style="@style/inptLinedStyleOjoVial"
                 android:hint="@string/lblNumberPlate"
                 android:singleLine="true" />
 
@@ -124,33 +121,23 @@
 
             <EditText
                 android:id="@id/idTxtFullAddress"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
+                style="@style/inptLinedStyleOjoVial"
                 android:hint="@string/lblInsertDireccion"
                 android:singleLine="true"
                 android:visibility="gone" />
 
             <EditText
                 android:id="@id/idTxtAditionalComment"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                style="@style/inptLinedStyleOjoVial"
                 android:hint="@string/lblAditionalComment"
                 android:inputType="textMultiLine"
-                android:layout_marginBottom="30dip"
-                android:layout_marginTop="6dip"
                 android:maxLength="100" />
 
             <!-- Register button -->
 
             <Button
                 android:id="@id/idBntRegisterComplient"
-                style="@style/btnStyleBlackpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="5dip"
+                style="@style/btnStyleOjoVial"
                 android:onClick="onClickSaveRegister"
                 android:text="@string/btnRegistrar" />
         </LinearLayout>

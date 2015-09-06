@@ -16,7 +16,8 @@
             android:layout_width="fill_parent"
             android:layout_height="90dip"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:background="#ffffff" >
         </LinearLayout>
         <!-- Footer Ends -->
 
@@ -24,49 +25,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dip" >
+            android:padding="10dip"
+            android:background="#ffffff" >
 
+            <!-- Logo Start -->
+
+                 <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/logoDescription"
+                    android:layout_marginBottom="20dip"
+                    android:layout_marginTop="20dip"
+                    android:src="@drawable/logo_ov" />
+            <!-- Logo Ends -->
+            
             <!-- Denounce button -->
             <Button
                 android:id="@id/idBtnDenounce"
-                style="@style/btnStyleBlackpearlBig"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                style="@style/btnStyleOjoVial"
                 android:onClick="onClickRedirectCamera"
-                android:text="@string/btnDenounce" />
+                android:text="@string/btnDenounce"
+                android:textAllCaps="false" />
             
              <!-- My Denounce button -->
             <Button
                 android:id="@id/idBtnMyDenounce"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:onClick="onClickMyDenounce"
-                android:text="@string/btnMyDenounce" />
+                android:text="@string/btnMyDenounce"
+                android:textAllCaps="false" />
             
             
              <!-- My Information button -->
             <Button
                 android:id="@id/idBtnMyInformation"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:onClick="onClickMyInformation"
-                android:text="@string/btnMyInformation" />
+                android:text="@string/btnMyInformation"
+                android:textAllCaps="false" />
             
             
             <!-- Recomendation button -->
             <Button
                 android:id="@id/idBtnRecomendation"
-                style="@style/btnStyleLeadpearl"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                style="@style/btnGreyStyleOjoVial"
                 android:onClick="onClickRecommendation"
-                android:text="@string/btnRecomendation" />
+                android:text="@string/btnRecomendation"
+                android:textAllCaps="false" />
         </LinearLayout>
     </RelativeLayout>
 

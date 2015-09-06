@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical" 
-            android:padding="10dip">
+            android:padding="10dip"
+            android:background="#ffffff">
             
                 <!-- Logo Start -->
 
@@ -23,7 +24,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/logoDescription"
                     android:layout_marginBottom="20dip"
-                    android:layout_marginTop="4dip"
+                    android:layout_marginTop="20dip"
                     android:src="@drawable/logo_ov" />
                 <!-- Logo Ends -->
                
@@ -32,48 +33,36 @@
 
                 <EditText
                     android:id="@id/idLoginEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="2dip"
+                    style="@style/inptLinedStyleOjoVial"
                     android:hint="@string/email_hint"
                     android:inputType="textEmailAddress"
-                    android:maxLength="30"
-                    android:singleLine="true" />
+                    android:maxLength="30" />
 
                 <!-- Password Label -->
 
                 <EditText
                     android:id="@id/idLoginPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="2dip"
+                    style="@style/inptLinedStyleOjoVial"
                     android:hint="@string/password_hint"
                     android:maxLength="10"
-                    android:password="true"
-                    android:singleLine="true" />
+                    android:password="true" />
 
                 <!-- Login button -->
                 <Button
                     android:id="@id/ok_button"
-                    style="@style/btnStyleBlackpearl"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="2dip"
+                    style="@style/btnStyleOjoVial"
                     android:onClick="onOkClick"
-                    android:text="@string/sigIn" />
+                    android:text="@string/sigIn"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@id/link_to_register"
-                    style="@style/btnStyleLeadpearl"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dip"
-                    android:layout_marginTop="2dip"
+                    style="@style/btnStyleOjoVial"
                     android:onClick="onClickRegisterUser"
-                    android:text="@string/registration" />
+                    android:text="@string/registration"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black" />
+                
             <!-- Login Form Ends -->
         </LinearLayout>
         <LinearLayout
