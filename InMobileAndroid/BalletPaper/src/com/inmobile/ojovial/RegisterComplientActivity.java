@@ -2,14 +2,26 @@ package com.inmobile.ojovial;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -18,6 +30,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.DigitalClock;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -25,12 +38,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
 import com.inmobile.ojovial.bean.UserSqlLiteBean;
 import com.inmobile.ojovial.service.RegisterComplientService;
 import com.inmobile.ojovial.service.impl.RegisterComplientServiceImpl;
 import com.inmobile.ojovial.sql.DB_BalletPaper;
+import com.inmobile.ojovial.util.CommonConstants;
 import com.inmobile.ojovial.util.ConvertFormatClass;
 import com.inmobile.ojovial.util.GPSTracker;
 import com.inmobile.ojovial.util.UtilMethods;
@@ -41,19 +56,20 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 	private EditText txtNumberPlate;
 	private EditText txtComment;
-	private EditText txtFullAddress;
-	private TextView lblLatitude;
-	private TextView lblLongitude;
-	private Spinner cboDistrict,cboSpecificAddress;
+//	private EditText txtFullAddress;
+//	private TextView lblLatitude;
+//	private TextView lblLongitude;
+	private TextView lblGPSAddress,lblShowCoordinates;
+	private TextView lblShowHours;
+	private DigitalClock dc;
+//	private Spinner cboDistrict;
 	private LinearLayout linearLayoutForm;
 	private LinearLayout linearLayoutProgress;
-	private ProgressBar processBarPhoto;
-	private LinearLayout linearLayoutPhoto;
 			
 	String urlPhoto1 = "", urlPhoto2 = "", urlPhoto3 = "";
 	private DB_BalletPaper dbBalletPaper;
-	List<String> list= new ArrayList<String>();
-	List<String> listAddress= new ArrayList<String>();
+//	List<String> list= new ArrayList<String>();
+//	List<String> listAddress= new ArrayList<String>();
 	
 	boolean completAddres=false,processImageComplete=false;
 	
@@ -66,16 +82,18 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		setContentView(R.layout.registercomplient);
 		txtComment = (EditText) findViewById(R.id.idTxtAditionalComment);
 		txtNumberPlate = (EditText) findViewById(R.id.idTxtPlate);
-		lblLatitude = (TextView) findViewById(R.id.idLblLatitude);
-		lblLongitude = (TextView) findViewById(R.id.idLblLongitud);
-		txtFullAddress = (EditText) findViewById(R.id.idTxtFullAddress);
-		cboDistrict = (Spinner) findViewById(R.id.cboDistrict);
-		cboSpecificAddress=(Spinner)findViewById(R.id.cboSpecificDistrict);
-		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterComplaint);
+		lblShowCoordinates = (TextView) findViewById(R.id.idLblCoordinates);
+//		lblLatitude = (TextView) findViewById(R.id.idLblLatitude);
+//		lblLongitude = (TextView) findViewById(R.id.idLblLongitud);
+//		txtFullAddress = (EditText) findViewById(R.id.idTxtFullAddress);
+//		cboDistrict = (Spinner) findViewById(R.id.cboDistrict);
+		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyTitleRegisterComplaint);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		
-		linearLayoutPhoto=(LinearLayout)findViewById(R.id.lnLyProgressPhoto);
-		processBarPhoto=(ProgressBar)findViewById(R.id.progressPhoto);
+		lblShowHours = (TextView) findViewById(R.id.idShowHour);
+		lblGPSAddress = (TextView) findViewById(R.id.idGPSAddress);
+		
+		dc = (DigitalClock) findViewById(R.id.digitalClock1);
 		
 		//--Recover values from image
 		Bundle extras = getIntent().getExtras();
@@ -89,74 +107,32 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		
 		//--Get Address
 		getPossitionAndAddres(complaintBean);
+		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
+//		//--Call District
+//		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, 
+//				null, null, complaintBean.getDistrict());
+//		
+//		list.add("Seleccionar Distrito");
+//		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+//   	 	adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//   		cboDistrict.setAdapter(adaptador);
+//   		
+//   		cboDistrict.setOnItemSelectedListener(new OnItemSelectedListener() {
+//			public void onItemSelected(AdapterView<?> parent,android.view.View v, int position, long id) {
+//				complaintBean.setDistrict(parent.getItemAtPosition(position).toString());
+//				cboDistrict.setSelection(position);
+//				if(position>0){
+//					complaintBean.setSelectedDistrict(true);
+//				}
+//			}
+//			public void onNothingSelected(AdapterView<?> parent) {
+//
+//			}
+//		});
 		
-		//--Set Information into Dinamic Combo
-		ArrayAdapter<String> addressArray = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, listAddress);
-		addressArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-   		cboSpecificAddress.setAdapter(addressArray);
-   		final int totalAddres=addressArray.getCount();
-		cboSpecificAddress.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent,android.view.View v, int position, long id) {
-				if(!completAddres&&position==0){
-					txtFullAddress.setVisibility(View.VISIBLE);
-					cboDistrict.setVisibility(View.VISIBLE);
-				}
-				if(totalAddres-1==position&&completAddres){
-					txtFullAddress.setVisibility(View.VISIBLE);
-					cboDistrict.setVisibility(View.VISIBLE);
-				}else if(totalAddres-2==position){
-					//--Update Address
-					listAddress.clear();
-					if(completAddres){
-						getPossitionAndAddres(complaintBean);
-					}
-					else{
-						UtilMethods.alertbox(getString(R.string.titleError),getString(R.string.messagesValidationProccessImage) , RegisterComplientActivity.this,R.drawable.error);
-					}
-					cboSpecificAddress.setSelection(0);
-				}else{				
-					txtFullAddress.setVisibility(View.GONE);
-					cboDistrict.setVisibility(View.GONE);
-					if(completAddres){
-						String[] arrayValueAddress=parent.getItemAtPosition(position).toString().split(",");
-						String valueSpecifiAddres=arrayValueAddress[1];
-						complaintBean.setDistrict(valueSpecifiAddres);
-						complaintBean.setAlternativeAddress(parent.getItemAtPosition(position).toString());
-						complaintBean.setSelectedDistrict(false);
-					}
-					
-				}
-			}
-			public void onNothingSelected(AdapterView<?> parent) {
-
-			}
-		});
-   		
-		//--Call District
-		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, 
-				cboDistrict, list, complaintBean.getDistrict());
-		
-		list.add("Seleccionar Distrito");
-		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-   	 	adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-   		cboDistrict.setAdapter(adaptador);
-   		
-   		cboDistrict.setOnItemSelectedListener(new OnItemSelectedListener() {
-			public void onItemSelected(AdapterView<?> parent,android.view.View v, int position, long id) {
-				complaintBean.setDistrict(parent.getItemAtPosition(position).toString());
-				cboDistrict.setSelection(position);
-				if(position>0){
-					complaintBean.setSelectedDistrict(true);
-				}
-			}
-			public void onNothingSelected(AdapterView<?> parent) {
-
-			}
-		});
    		//--Process Photo Image
-   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean,linearLayoutPhoto,processBarPhoto);
+   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean);
    		//--Process Aditional
-//   		registerComplientService.processAditional(RegisterComplientActivity.this, complaintBean, dbBalletPaper);
    		getUserFromDataBaseAndroid();
    		complaintBean.setPhotoBean(photoBean);
 	}
@@ -174,13 +150,16 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 //		Toast.makeText(RegisterComplientActivity.this,"Terminoooo..!!",Toast.LENGTH_LONG).show();
 	}
 
-
+	public void refreshAddress(View v){
+		getPossitionAndAddres(complaintBean);
+	}
+	
 	public void onClickSaveRegister(View v) {
 		// Save information in Service
 		boolean validateField= RegisterComplientValidation.isValidateRegisterComplient(RegisterComplientActivity.this,
-				txtNumberPlate, txtComment, txtFullAddress, cboDistrict, cboSpecificAddress, photoBean, complaintBean);
+				txtNumberPlate, txtComment, photoBean, complaintBean);
 		//--Set into Complaint Bean
-		complaintBean=ConvertFormatClass.setValueComplainBean(txtNumberPlate, txtComment, txtFullAddress,complaintBean);
+		complaintBean=ConvertFormatClass.setValueComplainBean(txtNumberPlate, txtComment,complaintBean);
 		if (validateField) {
 			UtilMethods.hideKeyboard(this.getCurrentFocus(),RegisterComplientActivity.this);
 			registerComplientService.callServiceRegisterComplaint(RegisterComplientActivity.this, complaintBean,
@@ -242,19 +221,24 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 			double latitude = gps.getLatitude();
 			double longitude = gps.getLongitude();
 
-			lblLatitude.setText(latitude + "");
-			lblLongitude.setText(longitude + "");
+//			lblLatitude.setText(latitude + "");
+//			lblLongitude.setText(longitude + "");
 			complaintBean.setLatitude(String.valueOf(latitude));
 			complaintBean.setLongitude(String.valueOf(longitude));
+			lblShowCoordinates.setText(this.getString(R.string.strLblShowGPS)+String.valueOf(latitude)+" ; "+String.valueOf(longitude)+")");
 			Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
 
 			if (Geocoder.isPresent()) {
 				try {
 					List<Address> addresses = geo.getFromLocation(latitude,	longitude, 1);
 					for(Address beanAddress:addresses){
-						complaintBean.setDistrict(beanAddress.getLocality().toUpperCase());
-						listAddress.add(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
-						complaintBean.setAlternativeAddress(beanAddress.getAddressLine(0));
+//						complaintBean.setDistrict(beanAddress.getLocality().toUpperCase());
+//						listAddress.add(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
+//						complaintBean.setAlternativeAddress(beanAddress.getAddressLine(0));
+						complaintBean.setGpsCompleteAddress(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
+						complaintBean.setGpsAddress(beanAddress.getAddressLine(0));
+						complaintBean.setGpsDistrict(beanAddress.getLocality());
+						complaintBean.setGpsCountry(beanAddress.getCountryName());
 						completAddres=true;
 					}
 					
@@ -262,15 +246,16 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 					Toast.makeText(getApplicationContext(),"Ocurrio un error : " + e.getMessage(),Toast.LENGTH_LONG).show();
 				}
 			}else{
-				completAddres=true;
-				listAddress.add("Sin Dirección");
+				completAddres=false;
+//				listAddress.add("Sin Dirección");
+				complaintBean.setGpsCompleteAddress("Sin Dirección");
 			}
 			
 		} else {
 			gps.showSettingsAlert();
 		}
-		listAddress.add("Actualizar Ubicación");
-		listAddress.add("Agregar otra dirección");
+//		listAddress.add("Actualizar Ubicación");
+//		listAddress.add("Agregar otra dirección");
 	}
 	
 }

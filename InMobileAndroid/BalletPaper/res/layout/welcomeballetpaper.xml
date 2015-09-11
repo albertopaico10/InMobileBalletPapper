@@ -20,12 +20,12 @@
             <!-- Logo Start -->
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="4dip"
                 android:contentDescription="@string/logoDescription"
-                android:src="@drawable/success" />
+                android:src="@drawable/check_android" />
             <!-- Logo Ends -->
 
 
@@ -34,8 +34,6 @@
             <TextView
                 android:id="@+id/lblTitleWelcome"
                 style="@style/lblStyleTitulo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="20dip"
                 android:text="@string/welcomeMessagesTitle" />
@@ -43,23 +41,11 @@
             <TextView
                 android:id="@+id/lblBodyWelcome"
                 style="@style/lblStyleSubTituloLstVw"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dip"
                 android:layout_marginTop="20dip"
                 android:text="@string/welcomeMessagesBody" />
-
-            <TextView
-                android:id="@+id/lblFootWelcome"
-                style="@style/lblStyleTitulo2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dip"
-                android:layout_marginTop="20dip"
-                android:text="@string/welcomeMessagesThankYou" />
-
+          
             <!-- Redirect to login -->
-
             <Button
                 android:id="@id/ok_button"
                 style="@style/btnStyleOjoVial"

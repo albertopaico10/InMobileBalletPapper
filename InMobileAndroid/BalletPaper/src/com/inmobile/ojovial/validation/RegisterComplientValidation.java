@@ -13,25 +13,27 @@ import com.inmobile.ojovial.util.UtilMethods;
 public class RegisterComplientValidation {
 
 	public static boolean isValidateRegisterComplient(Context context,EditText txtNumberPlate,EditText txtComment
-			,EditText txtFullAddress,Spinner cboDistrict,Spinner cboSpecificAddress,PhotoBean photoBean,
-			ComplaintBean complaintBean){
+			,PhotoBean photoBean,ComplaintBean complaintBean){
 		System.out.println("Metofo isValidateRegisterComplient");
 		boolean validateField = true;
 		if(Validation.isNotGetPossitionString(context,complaintBean.getLatitude())&&
 				Validation.isNotGetPossitionString(context,complaintBean.getLongitude())){
-			cboDistrict.setVisibility(View.VISIBLE);
-			txtFullAddress.setVisibility(View.VISIBLE);
+//			cboDistrict.setVisibility(View.VISIBLE);
+//			txtFullAddress.setVisibility(View.VISIBLE);
+			validateField=false;
+			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesGPSNoFound) , context,R.drawable.error);
 		}
 		if(Validation.isEmpty(context, txtNumberPlate)){
 			validateField=false;
 		}
-		else if(Validation.isShowValue(context, txtFullAddress)){
-			validateField=false;
-		}
-		else if(cboDistrict.isShown()&&!complaintBean.isSelectedDistrict()){
-			validateField=false;
-			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesValidationSelectDistrict) , context,R.drawable.error);
-		}else if(!photoBean.isCompleteProcessImage()){
+//		else if(Validation.isShowValue(context, txtFullAddress)){
+//			validateField=false;
+//		}
+//		else if(!complaintBean.isSelectedDistrict()){
+//			validateField=false;
+//			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesValidationSelectDistrict) , context,R.drawable.error);
+//		}
+		else if(!photoBean.isCompleteProcessImage()){
 			validateField=false;
 			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesValidationProccessImage) , context,R.drawable.error);
 		}

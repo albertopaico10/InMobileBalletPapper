@@ -5,7 +5,7 @@ public class CommonConstants {
 	public class URLService {
 //		public static final String URL_SERVICE = "http://198.38.89.205:8080/";
 		public static final String URL_SERVICE = "http://192.168.1.36:8080/";
-//		public static final String URL_SERVICE = "http://10.65.52.45:8080/";
+//		public static final String URL_SERVICE = "http://10.65.52.133:8080/";
 		
 		public static final String SERVICE_NAME = "BallotPapperService";
 		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";
@@ -43,6 +43,8 @@ public class CommonConstants {
 		public static final String FILE_BYTE_3_REQUEST_COMPLAINT = "fileImage3";
 		public static final String CATEGORY_IMAGE_REQUEST_COMPLAINT = "categoryImage";
 		public static final String DISTRICT_REQUEST_COMPLAINT = "district";
+		public static final String ADDRESS_REQUEST_COMPLAINT = "address";
+		public static final String COUNTRY_REQUEST_COMPLAINT = "country";
 		
 	}
 	

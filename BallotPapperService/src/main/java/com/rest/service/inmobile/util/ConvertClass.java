@@ -54,6 +54,8 @@ public class ConvertClass {
 		beanComplient.setNumberPlate(beanRequest.getNumberPlate());
 		beanComplient.setDistrinctName(beanRequest.getDistrict().toUpperCase());
 		beanComplient.setTypeComplaint(0);
+		beanComplient.setAddress(beanRequest.getAddress());
+		beanComplient.setCountry(beanRequest.getCountry());
 		return beanComplient;
 	}
 	

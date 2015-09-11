@@ -25,7 +25,7 @@
     <item name="idPhotoImageViewN2" type="id">false</item>
     <item name="idPhotoImageViewN3" type="id">false</item>
     <item name="btnNextPhoto" type="id">false</item>
-     <item name="idTxtPlate" type="id">false</item>
+    <item name="idTxtPlate" type="id">false</item>
     <item name="idTxtAditionalComment" type="id">false</item>
     <item name="idLblLatitude" type="id">false</item>
     <item name="idLblLongitud" type="id">false</item>
@@ -37,6 +37,12 @@
     <item name="cboSpecificDistrict" type="id">false</item>
     <item name="idRegisterPasswordConfirm" type="id">false</item>
     <item name="progressBarGeneral" type="id">false</item>
-     <item name="progressBar" type="id">false</item>
+    <item name="progressBar" type="id">false</item>
+    <item name="idGPSAddress" type="id">false</item>
+    <item name="idBtnAutomaticAddress" type="id">false</item>
+    <item name="idShowHour" type="id">false</item>
+    <item name="idLblCoordinates" type="id">false</item>
+    <item name="digitalClock1" type="id">false</item>
+    
 
 </resources>

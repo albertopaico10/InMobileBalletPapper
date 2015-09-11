@@ -57,7 +57,7 @@
 
                 <Button
                     android:id="@id/link_to_register"
-                    style="@style/btnStyleOjoVial"
+                    style="@style/btnStyleOjoVialWhite"
                     android:onClick="onClickRegisterUser"
                     android:text="@string/registration"
                     android:textAllCaps="false"

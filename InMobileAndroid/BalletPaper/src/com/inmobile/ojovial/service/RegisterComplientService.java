@@ -14,9 +14,7 @@ import android.widget.Spinner;
 public interface RegisterComplientService {
 
 	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> List,String finalAddress);
-	public void proccesImage(Context context,PhotoBean photoBean
-			,LinearLayout linearLayoutProgress,ProgressBar processBar);
-	public void processAditional(Context context,ComplaintBean complaintBean,DB_BalletPaper dbBalletPaper);
+	public void proccesImage(Context context,PhotoBean photoBean);
 	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean,
 			LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress);
 }

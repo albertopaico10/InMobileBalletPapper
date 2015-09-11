@@ -16,7 +16,7 @@ public class SuccessRecordActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.successrecord);
 		lblIdComplaint=(TextView)findViewById(R.id.idTxtIdCode);
-		String idComplaint="";
+		String idComplaint="ES....";
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			idComplaint = extras.getString("idComplaint");

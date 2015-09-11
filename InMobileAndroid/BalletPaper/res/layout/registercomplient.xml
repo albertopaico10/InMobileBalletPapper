@@ -11,70 +11,34 @@
         <!-- Header  Starts -->
 
         <LinearLayout
-            android:id="@+id/lnlyRegisterComplaint"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dip"
-            android:paddingTop="5dip"
-            android:background="#ffffff" >
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:text="@string/lblTitleStep2Register"
-                android:textColor="#000000" />
-        </LinearLayout>
-        
-        <LinearLayout
-            android:id="@+id/lnLyProgressPhoto"
+            android:id="@+id/lnlyTitleRegisterComplaint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="invisible"
-            android:layout_below="@+id/lnlyRegisterComplaint">
-                
-            <ProgressBar
-				android:id="@+id/progressPhoto"
-				style="?android:attr/progressBarStyleHorizontal"
-				android:layout_width="290dp"
-				android:layout_height="30dp"
-				android:layout_alignParentTop="true"
-				android:layout_centerHorizontal="true"
-				android:progress="0"
-				android:secondaryProgress="0" />
-            
+            android:padding="10dip" >
+
+            <!-- Title and description -->
+
             <TextView
-		        android:id="@+id/txtProcessPhoto"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/loadingProcessPhoto"/>
-         </LinearLayout>
-        <!-- Header Ends -->
+                android:id="@+id/txtStep1"
+                style="@style/lblStyleTitulo"
+                android:layout_marginTop="10dip"
+                android:text="@string/lblTitleStep2Register" />
 
-
-        <!-- Footer Start -->
-
-        <LinearLayout
-            android:id="@+id/footer"
-            android:layout_width="fill_parent"
-            android:layout_height="90dip"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txtDescriptionStep1"
+                style="@style/lblStyleSubTituloLstVw"
+                android:text="@string/lblDescripTituloStep2" />
         </LinearLayout>
-        <!-- Footer Ends -->
 
         <LinearLayout
             android:id="@+id/lnLyComplaintBody"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lnLyProgressPhoto"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lnlyTitleRegisterComplaint"
+            android:background="#ffffff"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="10dip" >
 
@@ -86,52 +50,80 @@
                 android:hint="@string/lblNumberPlate"
                 android:singleLine="true" />
 
-            <TextView
-                android:id="@id/idLblLatitude"
-                style="@style/lnkStyle2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
-                android:visibility="gone" />
+            <Button
+                android:id="@id/link_to_register"
+                style="@style/btnStyleOjoVialWhite2"
+                android:drawableRight="@drawable/refresh_icon"
+                android:gravity="left"
+                android:onClick="refreshAddress"
+                android:text="@string/strLblAutomaticAddress"
+                android:textAllCaps="false"
+                android:textColor="@color/black"/>
 
             <TextView
-                android:id="@id/idLblLongitud"
-                style="@style/lnkStyle2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
-                android:visibility="gone" />
-
-            <Spinner
-                android:id="@id/cboSpecificDistrict"
+                android:id="@id/idGPSAddress"
+                style="@style/lblStyleDetailComplaint"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
                 android:layout_marginTop="2dip" />
 
-            <Spinner
-                android:id="@id/cboDistrict"
+            <TextView
+                android:id="@id/idLblCoordinates"
+                style="@style/lblStyleDetailComplaint"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
-                android:layout_marginTop="2dip"
-                android:visibility="gone" />
+                android:layout_marginTop="2dip" />
 
-            <EditText
-                android:id="@id/idTxtFullAddress"
-                style="@style/inptLinedStyleOjoVial"
-                android:hint="@string/lblInsertDireccion"
-                android:singleLine="true"
-                android:visibility="gone" />
+            <!-- <TextView -->
+            <!-- android:id="@id/idLblLatitude" -->
+            <!-- style="@style/lnkStyle2" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" /> -->
+
+
+            <!-- <TextView -->
+            <!-- android:id="@id/idLblLongitud" -->
+            <!-- style="@style/lnkStyle2" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" /> -->
+
+
+            <!-- <Spinner -->
+            <!-- android:id="@id/cboDistrict" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" -->
+            <!-- android:visibility="gone" /> -->
+
+
+            <!-- <EditText -->
+            <!-- android:id="@id/idTxtFullAddress" -->
+            <!-- style="@style/inptLinedStyleOjoVial" -->
+            <!-- android:hint="@string/lblInsertDireccion" -->
+            <!-- android:singleLine="true" -->
+            <!-- android:visibility="gone" /> -->
 
             <EditText
                 android:id="@id/idTxtAditionalComment"
                 style="@style/inptLinedStyleOjoVial"
                 android:hint="@string/lblAditionalComment"
                 android:inputType="textMultiLine"
-                android:maxLength="100" />
+                android:maxLength="100" 
+                android:paddingTop="20dip"/>
+
+            <DigitalClock
+                android:id="@+id/digitalClock1"
+                style="@style/lblStyleTitulo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="DigitalClock" />
 
             <!-- Register button -->
 
@@ -139,32 +131,34 @@
                 android:id="@id/idBntRegisterComplient"
                 style="@style/btnStyleOjoVial"
                 android:onClick="onClickSaveRegister"
-                android:text="@string/btnRegistrar" />
+                android:text="@string/btnRegistrar"
+                android:textAllCaps="false" />
         </LinearLayout>
-		<LinearLayout
+
+        <LinearLayout
             android:id="@+id/lnLyProgress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#80000000"
             android:gravity="center"
-            android:visibility="invisible"
             android:orientation="vertical"
             android:padding="10dip"
-            android:background="#80000000">
-                
+            android:visibility="invisible" >
+
             <ProgressBar
-				android:id="@id/progressBar"
-				style="?android:attr/progressBarStyleLarge"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerHorizontal="true" />
-            
+                android:id="@id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
             <TextView
-		        android:id="@+id/txtMessages"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/loadingSaveComplaint"
-		        style="@style/lblStyleMessagesProcess"/>
-         </LinearLayout>		
+                android:id="@+id/txtMessages"
+                style="@style/lblStyleMessagesProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loadingSaveComplaint" />
+        </LinearLayout>
     </RelativeLayout>
 
 </ScrollView>
