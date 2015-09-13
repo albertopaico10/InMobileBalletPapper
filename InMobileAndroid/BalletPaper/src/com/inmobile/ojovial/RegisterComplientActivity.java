@@ -107,7 +107,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		
 		//--Get Address
 		getPossitionAndAddres(complaintBean);
-		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
 //		//--Call District
 //		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, 
 //				null, null, complaintBean.getDistrict());
@@ -235,7 +234,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 //						complaintBean.setDistrict(beanAddress.getLocality().toUpperCase());
 //						listAddress.add(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
 //						complaintBean.setAlternativeAddress(beanAddress.getAddressLine(0));
-						complaintBean.setGpsCompleteAddress(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
+						complaintBean.setGpsCompleteAddress(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getSubAdminArea());
 						complaintBean.setGpsAddress(beanAddress.getAddressLine(0));
 						complaintBean.setGpsDistrict(beanAddress.getLocality());
 						complaintBean.setGpsCountry(beanAddress.getCountryName());
@@ -254,6 +253,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		} else {
 			gps.showSettingsAlert();
 		}
+		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
 //		listAddress.add("Actualizar Ubicación");
 //		listAddress.add("Agregar otra dirección");
 	}
