@@ -30,14 +30,14 @@
     <string name="fieldRequired">Campo requerido</string>
     <string name="welcomeMessagesTitle">Registro realizado con éxito</string>
     <string name="welcomeMessagesBody">Inicie sesión y comience a regitrar sus denuncias</string>
-    <string name="welcomeMessagesThankYou">!Gracias por colaborar con Ojo Vial!</string>
-    <string name="emailExit">El correo ya se encuentra registro. Por favor ingrese otro.</string>
+    <string name="welcomeMessagesThankYou">!Gracias por colaborar con Ojo Vial¡</string>
+    <string name="emailExit">El correo ya se encuentra registrado. Por favor ingrese otro.</string>
     <string name="validationFail">El password es incorrecto.</string>
     <string name="watingLogin">Por favor espere estamos validando su cuenta.</string>
     <string name="emailNotExit">El correo no se encuentra registrado en nuestra aplicación. Ingrese en "Crear Cuenta".</string>
     <string name="lblNumberPlate">Ingrese número de placa de vehículo</string>
     <string name="lblAditionalComment">Comentarios Adicionales</string>
-    <string name="lblTitleStep2Register">Paso2.</string>
+    <string name="lblTitleStep2Register">Paso 2.</string>
     <string name="lblDescripTituloStep2">Información complementaria.</string>
     <string name="btnRegistrar">Registrar Denuncia</string>
     <string name="successTitle">Denuncia registrada</string>
@@ -58,7 +58,7 @@
 	<string name="strPhoto1">1..</string>
 	
     <string name="loading">Cargando...</string>
-    <string name="loadingValidationUser">Validando...Por favor espere.</string>
+    <string name="loadingValidationUser">Validando... Por favor espere.</string>
     <string name="loadingRegisterUser">Registrando sus datos...</string>
     <string name="loadingSaveComplaint">Estamos registrando. Por favor espere.</string>
     <string name="loadingProcessPhoto">Procesando Fotos...Por favor espere.</string>
@@ -73,10 +73,10 @@
 	<string name="messagesValidationSelectDistrict">Por favor tiene que Seleccionar un Distrito \n Gracias.</string>
 	<string name="messagesValidationProccessImage">Por favor espere estamos procesando las fotos para adjuntarlas a la denuncia, solo unos segundos más. \n Gracias.</string>
 	<string name="messagesProcessDenounce">Por favor, espere estamos registrando su denuncia.</string>
-	<string name="successTakePhoto">La foto fue tomado con éxito.</string>
+	<string name="successTakePhoto">La foto fue tomada con éxito.</string>
 	<string name="problemTakePhoto">Hubo un problema para guardar la imagen.</string>
 	<string name="strLblAutomaticAddress">Dirección automática</string>
-	<string name="strLblShowGPS">Coordenadas GPS(</string>
+	<string name="strLblShowGPS">Coordenadas GPS (</string>
 	<string name="messagesGPSNoFound">Lo sentimos, no podemos obtener su dirección debe ser un problema de version de Android. \n Disculpe las molestias.</string>
 	
 	

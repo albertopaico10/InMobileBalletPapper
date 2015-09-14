@@ -264,7 +264,6 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 				String codeResponse = jObject.getString("codeResponse");
 				System.out.println("codeResponse : " + codeResponse);
 				int idComplaint = jObject.getInt("idComplient");
-				Toast.makeText(gcontext,"ID de la denuncia : "+idComplaint,Toast.LENGTH_LONG).show();
 				if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
 					Intent i = new Intent(gcontext,SuccessRecordActivity.class);
 					i.putExtra("idComplaint",String.valueOf(idComplaint));
