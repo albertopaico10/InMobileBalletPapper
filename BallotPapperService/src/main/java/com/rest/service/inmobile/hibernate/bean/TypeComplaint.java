@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="tb_TypeComplaint")
+@Table(name="tb_type_complaint")
 public class TypeComplaint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
