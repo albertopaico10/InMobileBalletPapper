@@ -6,6 +6,8 @@ public class ImageRequest {
 	public String hexImage;
 	public int idUser;
 	public int idComplient;
+	private byte[] fileImage;
+	
 	
 	public int idImage;
 	public String rootProject;
@@ -46,5 +48,12 @@ public class ImageRequest {
 	public void setRootProject(String rootProject) {
 		this.rootProject = rootProject;
 	}
+	public byte[] getFileImage() {
+		return fileImage;
+	}
+	public void setFileImage(byte[] fileImage) {
+		this.fileImage = fileImage;
+	}
+	
 	
 }

@@ -11,7 +11,7 @@
 		<put-attribute name="contenidoIzq" value="/WEB-INF/private/principal/leftPage.jsp" />
 		<put-attribute name="contenidoCentro" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoDcho" value="/WEB-INF/common/blank.jsp" />
-		<put-attribute name="pie" value="/WEB-INF/private/principal/footPage.jsp" />
+		<put-attribute name="pie" value="/WEB-INF/common/footPage.jsp" />
 	</definition>
 	
 	<definition name="tiles.index.public"
@@ -20,7 +20,7 @@
 		<put-attribute name="contenidoIzq" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoCentro" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoDcho" value="/WEB-INF/common/blank.jsp" />
-		<put-attribute name="pie" value="/WEB-INF/common/blank.jsp" />
+		<put-attribute name="foot" value="/WEB-INF/common/blank.jsp" />
 	</definition>
 
 	<!-- PRIVADA -->
@@ -46,9 +46,11 @@
 	<definition name="loginPage" extends="tiles.index.public">
 		<put-attribute name="cabecera" value="/WEB-INF/common/blank.jsp" />
 		<put-attribute name="contenidoCentro" value="/WEB-INF/public/loginPage.jsp" />
+		<put-attribute name="foot" value="/WEB-INF/common/blank.jsp" />
 	</definition>
 	<definition name="initPage" extends="tiles.index.public">
 		<put-attribute name="contenidoCentro" value="/WEB-INF/public/initPage.jsp" />
+		<put-attribute name="foot" value="/WEB-INF/common/footPage.jsp" />
 	</definition>
 	
 	

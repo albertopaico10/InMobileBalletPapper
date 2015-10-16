@@ -1,0 +1,26 @@
+.column-center{
+	display: inline-block;
+	width: 33%;
+}
+.column-left{
+	float: left;
+	width: 33%;
+}
+.column-right{
+	float: right;
+	width: 33%;
+}
+.videoWrapper {
+	position: relative;
+	padding-bottom: 50.25%; /* 16:9 */
+	padding-top: 2%;
+	padding-left : 7%;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

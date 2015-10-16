@@ -53,7 +53,9 @@ public class ConvertClass {
 		beanComplient.setLongitude(beanRequest.getLongitude());
 		beanComplient.setNumberPlate(beanRequest.getNumberPlate());
 		beanComplient.setDistrinctName(beanRequest.getDistrict().toUpperCase());
-		beanComplient.setTypeComplaint(0);
+		beanComplient.setTypeComplaint(9999);
+		beanComplient.setAddress(beanRequest.getAddress());
+		beanComplient.setCountry(beanRequest.getCountry());
 		return beanComplient;
 	}
 	

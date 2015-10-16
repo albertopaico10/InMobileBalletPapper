@@ -8,11 +8,13 @@ public class ComplientRequest {
 	public String addressFull;
 	public String commentsAdditional;
 	public String numberPlate;
-	public String hexPhoto1;
-	public String hexPhoto2;
-	public String hexPhoto3;
+	private byte[] fileImage1;
+	private byte[] fileImage2;
+	private byte[] fileImage3;
 	public String categoryImage;
 	public String district;
+	public String address;
+	public String country;
 	
 	public int getIdUser() {
 		return idUser;
@@ -50,24 +52,6 @@ public class ComplientRequest {
 	public void setNumberPlate(String numberPlate) {
 		this.numberPlate = numberPlate;
 	}
-	public String getHexPhoto1() {
-		return hexPhoto1;
-	}
-	public void setHexPhoto1(String hexPhoto1) {
-		this.hexPhoto1 = hexPhoto1;
-	}
-	public String getHexPhoto2() {
-		return hexPhoto2;
-	}
-	public void setHexPhoto2(String hexPhoto2) {
-		this.hexPhoto2 = hexPhoto2;
-	}
-	public String getHexPhoto3() {
-		return hexPhoto3;
-	}
-	public void setHexPhoto3(String hexPhoto3) {
-		this.hexPhoto3 = hexPhoto3;
-	}
 	public String getCategoryImage() {
 		return categoryImage;
 	}
@@ -79,5 +63,35 @@ public class ComplientRequest {
 	}
 	public void setDistrict(String district) {
 		this.district = district;
+	}
+	public byte[] getFileImage1() {
+		return fileImage1;
+	}
+	public void setFileImage1(byte[] fileImage1) {
+		this.fileImage1 = fileImage1;
+	}
+	public byte[] getFileImage2() {
+		return fileImage2;
+	}
+	public void setFileImage2(byte[] fileImage2) {
+		this.fileImage2 = fileImage2;
+	}
+	public byte[] getFileImage3() {
+		return fileImage3;
+	}
+	public void setFileImage3(byte[] fileImage3) {
+		this.fileImage3 = fileImage3;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
 	}
 }

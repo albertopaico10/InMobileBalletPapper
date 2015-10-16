@@ -2,12 +2,16 @@ package com.inmobile.ojovial.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -27,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
 import com.inmobile.ojovial.R;
 import com.inmobile.ojovial.SuccessRecordActivity;
 import com.inmobile.ojovial.bean.ComplaintBean;
@@ -42,37 +47,28 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	public static Context gcontext=null;
 	public PhotoBean gPhotoBean=null;
 	public ComplaintBean gComplaintBean;
-	public DB_BalletPaper gDbBalletPaper;
 	Spinner gCboDistrict;
 	List<String> gList= new ArrayList<String>();
 	String gFinalAddress="";
 	public LinearLayout gLinearLayoutForm,gLinearLayoutProgress,gLinearLayoutProgressInformation;
-	public ProgressBar gProgressBarInformation;
+
 	@Override
 	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> list,String finalAddress) {
 		gFinalAddress=finalAddress;
 		gcontext=context;
-		gCboDistrict=cboDistrict;
-		gList=list;
+//		gCboDistrict=cboDistrict;
+//		gList=list;
 		new getListDistrict().execute();
 	}
 	
 	@Override
-	public void proccesImage(Context context, PhotoBean photoBean,LinearLayout linearLayoutProgress,ProgressBar processBar) {
-		gLinearLayoutProgressInformation=linearLayoutProgress;
-		gProgressBarInformation=processBar;
+	public void proccesImage(Context context, PhotoBean photoBean) {
 		gcontext=context;
 		gPhotoBean=photoBean;
 		new ProcessImage().execute();
 	}
 	
 	@Override
-	public void processAditional(Context context,ComplaintBean complaintBean,DB_BalletPaper dbBalletPaper) {
-		gComplaintBean=complaintBean;
-		gDbBalletPaper=dbBalletPaper;
-		new ProccesAdditionalInformation().execute();
-	}
-	
 	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean
 			,LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress){
 		gcontext=context;
@@ -121,18 +117,18 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
             	 System.out.println("2");
             	 int lengthJsonArr = jsonMainNode.length();  
             	 System.out.println("3---"+lengthJsonArr);
-            	 for(int i=0; i < lengthJsonArr; i++) {
-            		 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-            		 String id       = jsonChildNode.optString("id").toString();
-                     String name     = jsonChildNode.optString("name").toString();
-                     gList.add(name);
-                 }
-            	 int position=gList.indexOf(gFinalAddress);
-            	 if(position==-1){
-            		 gCboDistrict.setSelection(0);	
-            	 }else{
-            		 gCboDistrict.setSelection(position);	 
-            	 }
+//            	 for(int i=0; i < lengthJsonArr; i++) {
+//            		 JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+//            		 String id       = jsonChildNode.optString("id").toString();
+//                     String name     = jsonChildNode.optString("name").toString();
+//                     gList.add(name);
+//                 }
+//            	 int position=gList.indexOf(gFinalAddress);
+//            	 if(position==-1){
+//            		 gCboDistrict.setSelection(0);	
+//            	 }else{
+//            		 gCboDistrict.setSelection(position);	 
+//            	 }
             	 
 			} catch (Exception e) {
 				Toast.makeText(gcontext,"Hubo un error en la respuesta de los ditritos("+ e.getMessage() + "). Disculpe las molestias.",Toast.LENGTH_LONG).show();
@@ -146,8 +142,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 
 		@Override
 		protected void onPreExecute() {
-			gLinearLayoutProgressInformation.setVisibility(View.VISIBLE);
-			gProgressBarInformation.setProgress(10);
+
 		}
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -160,10 +155,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		}
 		@Override
 		protected void onPostExecute(Void result) {
-			gProgressBarInformation.setProgress(100);
 			gPhotoBean.setCompleteProcessImage(true);
-			Toast.makeText(gcontext,"Se completo el proceso de tratamiento de las fotos. \n Gracias", Toast.LENGTH_LONG).show();
-			gLinearLayoutProgressInformation.setVisibility(View.GONE);
 		}
 		
 	}
@@ -171,63 +163,53 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 	private void processImage() throws Exception {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 5;
-		gProgressBarInformation.setProgress(25);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto1())) {
 			Uri startDir=Uri.parse(gPhotoBean.getUrlPhoto1());
 			Bitmap b1 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b1.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image1 = stream.toByteArray();
-			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
+			gPhotoBean.setFileImage1(image1);
+//			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
 		}
-		gProgressBarInformation.setProgress(50);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto2())) {
 			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto2());
 			final Bitmap b2 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image2 = stream.toByteArray();
-			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
+			gPhotoBean.setFileImage2(image2);
+//			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
 		}
-		gProgressBarInformation.setProgress(75);
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto3())) {
 			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto3());
 			final Bitmap b3 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			b3.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 			byte[] image3 = stream.toByteArray();
-			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
+			gPhotoBean.setFileImage3(image3);
+//			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
 		}
 	}
 	
-	private class ProccesAdditionalInformation extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... params) {
-			getUserFromDataBaseAndroid();
-			return null;
-		}
-	}
-	
-	private void getUserFromDataBaseAndroid() {
-		System.out.println("Entre para sacar datos del android");
-		Toast.makeText(gcontext,"Voy a recuperar datos del SQL LITE",Toast.LENGTH_LONG).show();
-		gDbBalletPaper = new DB_BalletPaper(gcontext, "DB_AndroidBalletPaper", null,1);
-		recoverDataForSendService();
-	}
-	
-	private void recoverDataForSendService() {
-		UserSqlLiteBean beanUserSQLLite=gDbBalletPaper.getRecoverActiveUser();
-		Toast.makeText(gcontext,"Ahora si.....Voy a recuperar datos del SQL LITE",Toast.LENGTH_LONG).show();
-		gComplaintBean.setIdUserService(beanUserSQLLite.getIdUserService());
-	}
-
 	private class SaveInformationDataBaseNew extends AsyncTask<Void, Void, Void> {
 
 		private String Content = "";
 
 		@Override
 		protected void onPreExecute() {
+//			Toast.makeText(gcontext,"DATOS: \n idUser : "+Integer.parseInt(gComplaintBean.getIdUserService())
+//					+"\n Longitud : "+gComplaintBean.getLongitude()
+//					+"\n Latitude : "+gComplaintBean.getLatitude()
+//					+"\n Address : "+UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress())+"**"+gComplaintBean.getGpsCompleteAddress()
+//					+"\n Comentarios : "+gComplaintBean.getComment()
+//					+"\n Numero de Placa : "+gComplaintBean.getNumberPlate()
+//					+"\n Categoria de Foto"+CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE
+//					+"\n Distrito : "+gComplaintBean.getGpsDistrict()
+//					+"\n Direccion : "+gComplaintBean.getGpsAddress()
+//					+"\n Pais : "+gComplaintBean.getGpsCountry(), Toast.LENGTH_LONG).show();
 			gLinearLayoutProgress.setVisibility(View.VISIBLE);
+			System.out.println("Post PRE");
 		}
 
 		@SuppressWarnings("deprecation")
@@ -235,28 +217,30 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		protected Void doInBackground(Void... params) {
 			System.out.println("onLoad!!!");
 			HttpClient httpClient = new DefaultHttpClient();
-			HttpPost post = new HttpPost(
-					CommonConstants.URLService.REGISTER_COMPLAINT);
+			HttpPost post = new HttpPost(CommonConstants.URLService.REGISTER_COMPLAINT);
 			post.setHeader("content-type", "application/json; charset=UTF-8");
-
-			JSONObject dato = new JSONObject();
+			post.setHeader("Accept", "application/json");
+			Map<String, Object> dato = new HashMap<String, Object>();
+			System.out.println("antes de mapear datos");
 			try {
-
 				dato.put(CommonConstants.RequestSaveComplaint.IDUSER_REQUEST_COMPLAINT,Integer.parseInt(gComplaintBean.getIdUserService()));
 				dato.put(CommonConstants.RequestSaveComplaint.LONGITUDE_REQUEST_COMPLAINT,gComplaintBean.getLongitude());
 				dato.put(CommonConstants.RequestSaveComplaint.LATITUDE_REQUEST_COMPLAINT,gComplaintBean.getLatitude());
-				dato.put(CommonConstants.RequestSaveComplaint.FULLADDRESS_REQUEST_COMPLAINT,UtilMethods.encriptValue(gComplaintBean.getAlternativeAddress()));
+				dato.put(CommonConstants.RequestSaveComplaint.FULLADDRESS_REQUEST_COMPLAINT,UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress()));
 				dato.put(CommonConstants.RequestSaveComplaint.COMMENT_ADITIONAL_REQUEST_COMPLAINT,gComplaintBean.getComment());
 				dato.put(CommonConstants.RequestSaveComplaint.NUMBER_PLATE_REQUEST_COMPLAINT,gComplaintBean.getNumberPlate());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_1_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto1());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_2_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto2());
-				dato.put(CommonConstants.RequestSaveComplaint.HEX_PHOTO_3_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getHexPhoto3());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_1_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage1());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_2_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage2());
+				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_3_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage3());
 				dato.put(CommonConstants.RequestSaveComplaint.CATEGORY_IMAGE_REQUEST_COMPLAINT,CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE);
-				dato.put(CommonConstants.RequestSaveComplaint.DISTRICT_REQUEST_COMPLAINT,gComplaintBean.getDistrict());
-
-				StringEntity entity = new StringEntity(dato.toString());
-				post.setEntity(entity);
-
+				dato.put(CommonConstants.RequestSaveComplaint.DISTRICT_REQUEST_COMPLAINT,gComplaintBean.getGpsDistrict());
+				dato.put(CommonConstants.RequestSaveComplaint.ADDRESS_REQUEST_COMPLAINT,gComplaintBean.getGpsAddress());
+				dato.put(CommonConstants.RequestSaveComplaint.COUNTRY_REQUEST_COMPLAINT,"Peru");
+				
+				String json = new GsonBuilder().create().toJson(dato, Map.class);
+				
+				post.setEntity(new StringEntity(json));
+				System.out.println("Antes de mandar al servicio...=)");
 				HttpResponse resp = httpClient.execute(post);
 				String respStr = EntityUtils.toString(resp.getEntity());
 				System.out.println("La respues que viene : " + respStr);
@@ -282,7 +266,7 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 				int idComplaint = jObject.getInt("idComplient");
 				if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
 					Intent i = new Intent(gcontext,SuccessRecordActivity.class);
-					i.putExtra("idComplaint",gcontext.getString(R.string.strMessagesCodeResponse) + " "+ idComplaint);
+					i.putExtra("idComplaint",String.valueOf(idComplaint));
 					gcontext.startActivity(i);
 				} else {
 					Toast.makeText(gcontext,gcontext.getString(R.string.errorSaveComplaint),Toast.LENGTH_LONG).show();

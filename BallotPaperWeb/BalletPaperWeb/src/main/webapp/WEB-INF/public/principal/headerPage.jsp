@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/common/taglib.jsp"%>
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -9,13 +10,13 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand page-scroll" href="#page-top"><img
-				src="${pageContext.request.contextPath}/resources/bootstrap/img/Logo-para-web.png"></img></a>
+				src="${pageContext.request.contextPath}/resources/bootstrap/img/logo-OV.png"></img></a>
 		</div>
 
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="page-scroll" href="${pageContext.request.contextPath}/showLogin.htm">Login</a>
+				<li><a class="page-scroll" href="${pageContext.request.contextPath}/showLogin.htm"><spring:message code="header.login"/></a>
 				</li>
 				<!-- <li>
                         <a class="page-scroll" href="#services">Services</a>

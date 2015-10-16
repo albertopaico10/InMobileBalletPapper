@@ -8,6 +8,9 @@ public class PhotoBean {
 	public String hexPhoto1;
 	public String hexPhoto2;
 	public String hexPhoto3;
+	public byte[] fileImage1;
+	public byte[] fileImage2;
+	public byte[] fileImage3;
 	public boolean isCompleteProcessImage;
 	
 	public String getUrlPhoto1() {
@@ -51,5 +54,23 @@ public class PhotoBean {
 	}
 	public void setCompleteProcessImage(boolean isCompleteProcessImage) {
 		this.isCompleteProcessImage = isCompleteProcessImage;
+	}
+	public byte[] getFileImage1() {
+		return fileImage1;
+	}
+	public void setFileImage1(byte[] fileImage1) {
+		this.fileImage1 = fileImage1;
+	}
+	public byte[] getFileImage2() {
+		return fileImage2;
+	}
+	public void setFileImage2(byte[] fileImage2) {
+		this.fileImage2 = fileImage2;
+	}
+	public byte[] getFileImage3() {
+		return fileImage3;
+	}
+	public void setFileImage3(byte[] fileImage3) {
+		this.fileImage3 = fileImage3;
 	}
 }

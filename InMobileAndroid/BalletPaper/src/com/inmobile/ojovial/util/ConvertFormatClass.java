@@ -40,12 +40,11 @@ public class ConvertFormatClass {
 		return photoBean;
 	}
 	
-	public static ComplaintBean setValueComplainBean(EditText txtNumberPlate,EditText txtComment,
-			EditText txtFullAddress,ComplaintBean complainBean){
+	public static ComplaintBean setValueComplainBean(EditText txtNumberPlate,EditText txtComment,ComplaintBean complainBean){
 		complainBean.setNumberPlate(txtNumberPlate.getText().toString());
-		if(complainBean.isSelectedDistrict()){
-			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
-		}
+//		if(complainBean.isSelectedDistrict()){
+//			complainBean.setAlternativeAddress(txtFullAddress.getText().toString());
+//		}
 		complainBean.setComment(txtComment.getText().toString());
 		return complainBean;
 	}

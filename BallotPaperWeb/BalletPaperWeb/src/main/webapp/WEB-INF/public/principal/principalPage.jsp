@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/init/creative.css" type="text/css"></link>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/init/bootstrap.min.css" type="text/css"></link>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" type="text/css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/jquery-ui.css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/bootstrap/css/ojovial.css"></link>
 </head>
 <body>
 
@@ -35,12 +37,20 @@
 		<tiles:insertAttribute name="contenidoDcho" />
 	</div>
 	<div>
-		<tiles:insertAttribute name="pie" />
+		<tiles:insertAttribute name="foot" />
 	</div>
 	
+	<script src="http://code.jquery.com/jquery.js"></script>
 	
-
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/init/jquery.easing.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/init/jquery.fittext.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/init/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/init/creative.js"></script>
 	
-
+	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>	
+<%-- 	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/jquery-ui.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/tablesList.js"></script> --%>
+<%-- 	<script src="${pageContext.request.contextPath}/resources/bootstrap/js/jquery.searchable.js"></script> --%>
+	
 </body>
 </html>

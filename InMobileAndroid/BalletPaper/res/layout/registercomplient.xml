@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- Header  Starts -->
+
+        <LinearLayout
+            android:id="@+id/lnlyTitleRegisterComplaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <!-- Title and description -->
+
+            <TextView
+                android:id="@+id/txtStep1"
+                style="@style/lblStyleTitulo"
+                android:layout_marginTop="10dip"
+                android:text="@string/lblTitleStep2Register" />
+
+            <TextView
+                android:id="@+id/txtDescriptionStep1"
+                style="@style/lblStyleSubTituloLstVw"
+                android:text="@string/lblDescripTituloStep2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnLyComplaintBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lnlyTitleRegisterComplaint"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <!-- plate Number Label -->
+
+            <EditText
+                android:id="@id/idTxtPlate"
+                style="@style/inptLinedStyleOjoVial"
+                android:hint="@string/lblNumberPlate"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@id/link_to_register"
+                style="@style/btnStyleOjoVialWhite2"
+                android:drawableRight="@drawable/refresh_icon"
+                android:gravity="left"
+                android:onClick="refreshAddress"
+                android:text="@string/strLblAutomaticAddress"
+                android:textAllCaps="false"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@id/idGPSAddress"
+                style="@style/lblStyleDetailComplaint"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="2dip" />
+
+            <TextView
+                android:id="@id/idLblCoordinates"
+                style="@style/lblStyleDetailComplaint"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="2dip" />
+
+            <!-- <TextView -->
+            <!-- android:id="@id/idLblLatitude" -->
+            <!-- style="@style/lnkStyle2" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" /> -->
+
+
+            <!-- <TextView -->
+            <!-- android:id="@id/idLblLongitud" -->
+            <!-- style="@style/lnkStyle2" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" /> -->
+
+
+            <!-- <Spinner -->
+            <!-- android:id="@id/cboDistrict" -->
+            <!-- android:layout_width="fill_parent" -->
+            <!-- android:layout_height="wrap_content" -->
+            <!-- android:layout_marginBottom="10dip" -->
+            <!-- android:layout_marginTop="2dip" -->
+            <!-- android:visibility="gone" /> -->
+
+
+            <!-- <EditText -->
+            <!-- android:id="@id/idTxtFullAddress" -->
+            <!-- style="@style/inptLinedStyleOjoVial" -->
+            <!-- android:hint="@string/lblInsertDireccion" -->
+            <!-- android:singleLine="true" -->
+            <!-- android:visibility="gone" /> -->
+
+            <EditText
+                android:id="@id/idTxtAditionalComment"
+                style="@style/inptLinedStyleOjoVial"
+                android:hint="@string/lblAditionalComment"
+                android:inputType="textMultiLine"
+                android:maxLength="100" 
+                android:paddingTop="20dip"/>
+
+            <DigitalClock
+                android:id="@+id/digitalClock1"
+                style="@style/lblStyleTitulo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="DigitalClock" />
+
+            <!-- Register button -->
+
+            <Button
+                android:id="@id/idBntRegisterComplient"
+                style="@style/btnStyleOjoVial"
+                android:onClick="onClickSaveRegister"
+                android:text="@string/btnRegistrar"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnLyProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:visibility="invisible" >
+
+            <ProgressBar
+                android:id="@id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/txtMessages"
+                style="@style/lblStyleMessagesProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loadingSaveComplaint" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

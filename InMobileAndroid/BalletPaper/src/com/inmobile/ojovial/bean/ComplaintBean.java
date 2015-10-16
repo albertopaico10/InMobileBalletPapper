@@ -11,6 +11,11 @@ public class ComplaintBean {
 	public String alternativeAddress;
 	public String comment;
 	public String numberPlate;
+	public String gpsAddress;
+	public String gpsDistrict;
+	public String gpsCountry;
+	public String gpsCompleteAddress;
+	
 	
 	public String getLatitude() {
 		return latitude;
@@ -65,5 +70,29 @@ public class ComplaintBean {
 	}
 	public void setNumberPlate(String numberPlate) {
 		this.numberPlate = numberPlate;
+	}
+	public String getGpsAddress() {
+		return gpsAddress;
+	}
+	public void setGpsAddress(String gpsAddress) {
+		this.gpsAddress = gpsAddress;
+	}
+	public String getGpsDistrict() {
+		return gpsDistrict;
+	}
+	public void setGpsDistrict(String gpsDistrict) {
+		this.gpsDistrict = gpsDistrict;
+	}
+	public String getGpsCountry() {
+		return gpsCountry;
+	}
+	public void setGpsCountry(String gpsCountry) {
+		this.gpsCountry = gpsCountry;
+	}
+	public String getGpsCompleteAddress() {
+		return gpsCompleteAddress;
+	}
+	public void setGpsCompleteAddress(String gpsCompleteAddress) {
+		this.gpsCompleteAddress = gpsCompleteAddress;
 	}
 }

@@ -64,14 +64,23 @@ public class ComplientManagerImpl implements ComplientManager {
 			beanComplient.setStatus(1);
 			int idComplient=complientHibernate.saveComplient(beanComplient);
 			
-			if(beanRequest.getHexPhoto1()!=null&&!beanRequest.getHexPhoto1().isEmpty()){
-				saveImageInDatase(beanRequest.getCategoryImage()+"_1",beanRequest.getHexPhoto1(),beanRequest.getIdUser(),idComplient);
+			if(beanRequest.getFileImage1()!=null){
+				System.out.println("*** Image 1 ");
+				saveImageInDatase(beanRequest.getCategoryImage()+"_1",beanRequest.getIdUser(),beanRequest.getFileImage1(),idComplient);
+			}else{
+				System.out.println("*** No hay Image 1 ");
 			}
-			if(beanRequest.getHexPhoto2()!=null&&!beanRequest.getHexPhoto2().isEmpty()){
-				saveImageInDatase(beanRequest.getCategoryImage()+"_2",beanRequest.getHexPhoto2(),beanRequest.getIdUser(),idComplient);
+			if(beanRequest.getFileImage2()!=null){
+				System.out.println("*** Image 2 ");
+				saveImageInDatase(beanRequest.getCategoryImage()+"_2",beanRequest.getIdUser(),beanRequest.getFileImage2(),idComplient);
+			}else{
+				System.out.println("*** No hay Image 2 ");
 			}
-			if(beanRequest.getHexPhoto3()!=null&&!beanRequest.getHexPhoto3().isEmpty()){
-				saveImageInDatase(beanRequest.getCategoryImage()+"_3",beanRequest.getHexPhoto3(),beanRequest.getIdUser(),idComplient);
+			if(beanRequest.getFileImage3()!=null){
+				System.out.println("*** Image 3 ");
+				saveImageInDatase(beanRequest.getCategoryImage()+"_3",beanRequest.getIdUser(),beanRequest.getFileImage3(),idComplient);
+			}else{
+				System.out.println("*** No hay Image 3 ");
 			}
 			beanResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_COMPLAINT);
 			beanResponse.setMessageResponse("Se grabó la primera parte de la denuncia con exito");
@@ -90,12 +99,13 @@ public class ComplientManagerImpl implements ComplientManager {
 		return beanResponse;
 	}
 	
-	public ImageResponse saveImageInDatase(String category,String hexImage,int idUser,int idComplaint)throws Exception{
+	public ImageResponse saveImageInDatase(String category,int idUser,byte[] file,int idComplaint)throws Exception{
 		ImageRequest imageRequest=new ImageRequest();
 		imageRequest.setCategoryImage(category);
-		imageRequest.setHexImage(hexImage);
+		imageRequest.setHexImage("");
 		imageRequest.setIdUser(idUser);
 		imageRequest.setIdComplient(idComplaint);
+		imageRequest.setFileImage(file);
 		ImageResponse imageResponse=imageManager.saveImage(imageRequest);
 		return imageResponse;
 	}
