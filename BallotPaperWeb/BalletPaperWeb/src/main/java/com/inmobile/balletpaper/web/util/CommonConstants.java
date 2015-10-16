@@ -18,8 +18,8 @@ public class CommonConstants {
 	}
 
 	public class URLService {
-//		public static final String URL_IP_SERVER = "http://198.38.89.205:8080/";
-		public static final String URL_IP_SERVER = "http://localhost:8080/";
+		public static final String URL_IP_SERVER = "http://162.248.54.10/";
+//		public static final String URL_IP_SERVER = "http://localhost:8080/";
 		public static final String URL_SERVICE_PROJECT = "BallotPapperService";
 		public static final String URL_VALIDATION_USER = URL_IP_SERVER+URL_SERVICE_PROJECT+"/rest/user/validation";
 		public static final String URL_LIST_COMPLAINT_BY_USER = URL_IP_SERVER+URL_SERVICE_PROJECT+"/rest/list/complaintbyuser/";
