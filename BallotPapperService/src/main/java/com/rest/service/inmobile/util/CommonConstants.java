@@ -68,7 +68,8 @@ public class CommonConstants {
 		public final static String SYSTEM_PARAM_GENERAL_EMAIL="EMAIL";
 		public final static String TYPE_OPERATION_CREATE_USER="CREATE_USER";
 		public final static String TYPE_OPERATION_REGISTER_COMPLAINT="REGISTER_COMPLAINT";
-		public final static String SYSTEM_PARAM_EMAIL_FROM="EMAIL_FROM";
+		public final static String SYSTEM_PARAM_EMAIL_FROM_COMPLAINT="EMAIL_FROM_COMPLAINT";
+		public final static String SYSTEM_PARAM_EMAIL_FROM_REGISTER="EMAIL_FROM_REGISTER";
 		public final static String SYSTEM_PARAM_PASSWORD_FROM="PASSWORD_FROM";
 		public final static String SYSTEM_PARAM_SUBJECT_CREATION_USER="SUBJECT_CREATION_USER";
 		public final static String SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT="SUBJECT_COMPLETE_COMPLAINT";

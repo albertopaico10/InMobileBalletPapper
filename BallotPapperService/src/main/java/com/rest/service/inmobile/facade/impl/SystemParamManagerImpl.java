@@ -36,8 +36,10 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		EmailBean beanEmail=new EmailBean();
 		List<SystemParam> listSystemParam=systemParamHibernate.listsSpecificSystemParam(listValue);
 		for(SystemParam beanSystemParam:listSystemParam){
-			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM.equals(beanSystemParam.getValueParam())){
+			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT.equals(beanSystemParam.getValueParam())){
 				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_REGISTER.equals(beanSystemParam.getValueParam())){
+				beanEmail.setEmailPort(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_PORT_GMAIL.equals(beanSystemParam.getValueParam())){
 				beanEmail.setEmailPort(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_SMTP_GMAIL.equals(beanSystemParam.getValueParam())){
@@ -61,8 +63,10 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		EmailBean beanEmail=new EmailBean();
 		List<SystemParam> listSystemParam=systemParamHibernate.listsByParam(generalParam);
 		for(SystemParam beanSystemParam:listSystemParam){
-			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM.equals(beanSystemParam.getNameParam())){
+			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_REGISTER.equals(beanSystemParam.getNameParam())){
+				beanEmail.setEmailPort(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_PORT_GMAIL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailPort(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_SMTP_GMAIL.equals(beanSystemParam.getNameParam())){
