@@ -1,11 +1,11 @@
 /*Create Data Base*/
-CREATE DATABASE db_BalletPaperInMobile;
+CREATE DATABASE db_ojovial;
 /*usar base de datos*/
-USE db_BalletPaperInMobile;
+USE db_ojovial;
 #SET SQL_SAFE_UPDATES = 0;
 #SET SQL_SAFE_UPDATES = 0;
 
-CREATE TABLE tb_User(
+CREATE TABLE tb_user(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, /*Id de Usuario*/
 	email VARCHAR(60),
 	passwordUser VARCHAR(60),
@@ -21,10 +21,10 @@ CREATE TABLE tb_User(
 	user_created INT,
 	user_updated INT
 );
-insert into tb_User(id,email,passwordUser,typeUser,namesUser,lastNameUser,status,recordingDevice,nameDistrict)
+insert into tb_user(id,email,passwordUser,typeUser,namesUser,lastNameUser,status,recordingDevice,nameDistrict)
 values(0,'admin@user.com','3132333435363738',99,'Adminsitrador','De Todo',1,'DATA_BASE','');
 
-CREATE TABLE tb_Request_Response(
+CREATE TABLE tb_request_response(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	typeOperation VARCHAR(100),
 	idUser INT,
@@ -35,7 +35,7 @@ CREATE TABLE tb_Request_Response(
 	user_created INT
 );
 
-CREATE TABLE tb_Complient(
+CREATE TABLE tb_complaint_registration(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	idUser int,
 	status int,
@@ -46,27 +46,29 @@ CREATE TABLE tb_Complient(
 	number_plate varchar(20),
 	distrinctName varchar(50),
 	typeComplaint int,
+	address varchar(100),
+	country varchar(100),
 	date_created TIMESTAMP DEFAULT NOW(),
 	user_created INT
 );
 
-ALTER TABLE tb_Complient
+ALTER TABLE tb_complaint_registration
 ADD FOREIGN KEY (idUser)
-REFERENCES tb_User(id);
+REFERENCES tb_user(id);
 
 /*Table Image*/
-CREATE TABLE tb_Image(
+CREATE TABLE tb_image(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	categoryImage VARCHAR(200),
 	img LONGBLOB NOT NULL,
 	status int,
 	date_created TIMESTAMP DEFAULT NOW(),
-	date_updated TIMESTAMP DEFAULT NOW(),
+	date_updated TIMESTAMP,
 	user_created INT,
 	user_updated INT
 );
 
-CREATE TABLE tb_Complaint_Image(
+CREATE TABLE tb_complaint_image(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	idComplaint int,
 	idUser int,
@@ -75,15 +77,15 @@ CREATE TABLE tb_Complaint_Image(
 	user_created INT
 );
 
-ALTER TABLE tb_Complaint_Image
+ALTER TABLE tb_complaint_image
 ADD FOREIGN KEY (idComplaint)
-REFERENCES tb_Complient(id);
+REFERENCES tb_complaint_registration(id);
 
-ALTER TABLE tb_Complaint_Image
+ALTER TABLE tb_complaint_image
 ADD FOREIGN KEY (idImage)
-REFERENCES tb_Image(id);
+REFERENCES tb_image(id);
 
-CREATE TABLE tb_TypeComplaint(
+CREATE TABLE tb_type_complaint(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	categoryComplaint VARCHAR(200),
 	status int,
@@ -91,11 +93,11 @@ CREATE TABLE tb_TypeComplaint(
 	user_created INT
 );
 
-insert into tb_TypeComplaint (id,categoryComplaint,status,user_created) values(0,'Sin Asignacion',1,1);
+insert into tb_type_complaint (id,categoryComplaint,status,user_created) values(0,'Sin Asignacion',1,1);
 
-ALTER TABLE tb_Complient
+ALTER TABLE tb_complaint_registration
 ADD FOREIGN KEY (typeComplaint)
-REFERENCES tb_TypeComplaint(id);
+REFERENCES tb_type_complaint(id);
 
 CREATE TABLE tb_country(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -141,15 +143,3 @@ CREATE TABLE tb_system_param(
 	status int,
 	date_created TIMESTAMP DEFAULT NOW()
 );
-
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_FROM','Email for send mail','ojovial@inmobile.pe',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','PASSWORD_FROM','Password for send mail','ojo1234viale',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','SUBJECT_CREATION_USER','Subject Creation User for send mail','InMobile - Creation User',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','SUBJECT_COMPLETE_COMPLAINT','Sbject Complete Complaint for send mail','InMobile - Registro Denuncia',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_TRUE','Configuration Email ','true',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_SMTP_GMAIL','Configuration Value for Send Email SMTP','smtp.gmail.com',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_PORT_GMAIL','Configuration Value for Send Email PORT','587',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_CREATION_USER','Texto para enviar en el correo','<html><body><p><b>InMobile Bienvenido - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su cuenta ha sido creada con exito</p><p><b>Gracias</b></p></body></html>',1);
-insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','BODY_EMAIL_COMPLETE_COMPLAINT','Texto para enviar en el correo de Denuncia Registrada','<html><body><p><b>InMobile Generacion de Denuncia - Test Email</b></p><br/><p>Estimo Usario:</p><br/><p>Se le agradece haber elegido la aplicación</p><p>Su denuncia fue registrada con exito, aqui el detalle : </p><p><b>Id Denuncia : </b>+idComplaint+</p><p><b>Lugar de la Infracción : </b>+address+</p><p><b>Placa del Vehiculo : </b>+numberPlate+</p><p><b>Estados de Denuncia : ABIERTA</b></p><p>Le estaremos informando del proceso de esta denuncia</p><p><b>Gracias</b></p></body></html>;',1);
-
-select * from tb_system_param where generalParam='EMAIL';
