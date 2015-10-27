@@ -3,7 +3,7 @@
 	<div class="container" >
 		<div class="row" style="padding-top: 30px;" >
 				<div class="col-lg-5 text-left" style="padding-top: 9%;padding-left:6%;" >
-					<p class="section-heading"><spring:message code="init.page.foot.contact" /> : <a href="mailto:ojovial@inmobile.pe">ojovial@inmobile.pe</a> </p>
+					<p class="section-heading"><spring:message code="init.page.foot.contact" /> : <a href="mailto:contacto@ojovial.com ">contacto@ojovial.com</a> </p>
 				</div>
 				<div class="col-lg-1 text-center"></div>
 				<div class="col-lg-4 text-left" style="padding-left:6%;">

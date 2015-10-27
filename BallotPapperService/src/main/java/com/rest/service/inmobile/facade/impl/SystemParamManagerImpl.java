@@ -32,48 +32,52 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		return listSystemParamResponse;
 	}
 
-	public EmailBean getEmailInformation(List<String> listValue) {
+	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation) {
 		EmailBean beanEmail=new EmailBean();
-		List<SystemParam> listSystemParam=systemParamHibernate.listsSpecificSystemParam(listValue);
+		List<SystemParam> listSystemParam=systemParamHibernate.listsByParam(generalParam);
 		for(SystemParam beanSystemParam:listSystemParam){
-			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT.equals(beanSystemParam.getValueParam())){
+			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_REGISTER.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_CREATION_USER.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
+				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_TRANSPORT_PROTOCOL_OJOVIAL.equals(beanSystemParam.getNameParam())){
+				beanEmail.setTransportProtocol(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_PORT_OJOVIAL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailPort(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_PORT_GMAIL.equals(beanSystemParam.getValueParam())){
-				beanEmail.setEmailPort(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_SMTP_GMAIL.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_SMTP_OJOVIAL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailSmtp(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_TRUE.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_TRUE.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailTrue(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_PASSWORD_FROM.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_PASSWORD_FROM.equals(beanSystemParam.getNameParam())){
 				beanEmail.setPasswordFrom(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setSubjectEmail(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_CREATION_USER.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_CREATION_USER.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
 				beanEmail.setSubjectEmail(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_CREATION_USER.equals(beanSystemParam.getValueParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_CREATION_USER.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
+				beanEmail.setBodyEmail(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setBodyEmail(beanSystemParam.getValueParam());
 			}
 		}
 		return beanEmail;
 	}
 	
-	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation) {
+	public EmailBean getEmailInSystemParamGmail(String generalParam,String typeOperation) {
 		EmailBean beanEmail=new EmailBean();
 		List<SystemParam> listSystemParam=systemParamHibernate.listsByParam(generalParam);
 		for(SystemParam beanSystemParam:listSystemParam){
-			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT.equals(beanSystemParam.getNameParam())){
+			if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_COMPLAINT_GMAIL.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_REGISTER.equals(beanSystemParam.getNameParam())){
-				beanEmail.setEmailPort(beanSystemParam.getValueParam());
+			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_FROM_CREATION_USER_GMAIL.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_CREATE_USER.equals(typeOperation)){
+				beanEmail.setEmailFrom(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_PORT_GMAIL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailPort(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_SMTP_GMAIL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailSmtp(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_EMAIL_TRUE.equals(beanSystemParam.getNameParam())){
 				beanEmail.setEmailTrue(beanSystemParam.getValueParam());
-			}else if(CommonConstants.Email.SYSTEM_PARAM_PASSWORD_FROM.equals(beanSystemParam.getNameParam())){
+			}else if(CommonConstants.Email.SYSTEM_PARAM_PASSWORD_FROM_GMAIL.equals(beanSystemParam.getNameParam())){
 				beanEmail.setPasswordFrom(beanSystemParam.getValueParam());
 			}else if(CommonConstants.Email.SYSTEM_PARAM_SUBJECT_COMPLETE_COMPLAINT.equals(beanSystemParam.getNameParam())&&CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT.equals(typeOperation)){
 				beanEmail.setSubjectEmail(beanSystemParam.getValueParam());

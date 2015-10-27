@@ -9,6 +9,7 @@ public class EmailBean {
 	private String emailPort;
 	private String bodyEmail;
 	private String toEmail;
+	private String transportProtocol;
 	
 	public String getEmailFrom() {
 		return emailFrom;
@@ -57,5 +58,11 @@ public class EmailBean {
 	}
 	public void setToEmail(String toEmail) {
 		this.toEmail = toEmail;
+	}
+	public String getTransportProtocol() {
+		return transportProtocol;
+	}
+	public void setTransportProtocol(String transportProtocol) {
+		this.transportProtocol = transportProtocol;
 	}
 }
