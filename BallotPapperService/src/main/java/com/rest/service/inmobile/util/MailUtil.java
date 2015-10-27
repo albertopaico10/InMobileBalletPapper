@@ -40,7 +40,16 @@ public class MailUtil {
         mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(beanEmail.getToEmail()));
         //mimeMessage.addRecipients(Message.RecipientType.BCC, new InternetAddress[] { new InternetAddress("albertopaico10@gmail.com") });
         mimeMessage.setSubject(beanEmail.getSubjectEmail());
-        mimeMessage.setText(beanEmail.getBodyEmail());
+        
+        BodyPart texto = new MimeBodyPart();
+        texto.setContent(beanEmail.getBodyEmail(),"text/html; charset=utf-8");
+        MimeMultipart multiParte = new MimeMultipart("related");
+        multiParte.addBodyPart(texto);
+        
+        mimeMessage.setContent(multiParte);
+        
+        
+//        mimeMessage.setText(beanEmail.getBodyEmail());
         System.out.println("enviando.............");
         // Lo enviamos.
         Transport t = session.getTransport(beanEmail.getTransportProtocol());
@@ -75,13 +84,12 @@ public class MailUtil {
 
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(beanEmail.getEmailFrom()));
-		message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(beanEmail.getToEmail()));
+		message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(beanEmail.getToEmail()));
 		message.setSubject(beanEmail.getSubjectEmail());
 
 		// Create the message body part
 		BodyPart messageBodyPart = new MimeBodyPart();
-		messageBodyPart.setContent(beanEmail.getBodyEmail(), "text/html");
+		messageBodyPart.setContent(beanEmail.getBodyEmail(), "text/html; charset=utf-8");
 		// Create a multipart message for attachment
 		Multipart multipart = new MimeMultipart();
 		// Set text message part
