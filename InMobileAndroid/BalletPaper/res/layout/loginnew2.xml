@@ -59,7 +59,7 @@
                     android:id="@id/link_to_register"
                     style="@style/btnStyleOjoVialWhite"
                     android:onClick="onClickRegisterUser"
-                    android:text="@string/registration"
+                    android:text="@string/btnRegister"
                     android:textAllCaps="false"
                     android:textColor="@color/black" />
                 
@@ -71,8 +71,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:visibility="invisible"
-            android:orientation="vertical"
-            android:padding="10dip"
+            android:orientation="horizontal"
+            android:padding="40dip"
             android:background="#80000000">
                 
             <ProgressBar

@@ -1,12 +1,304 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- API 14 theme customizations can go here. -->
+
+        <!-- <item name="android:background">#DD0009</item> -->
+        
+    
+
+<!--     <style name="lblStyleError" parent="@android:style/Widget.Holo.Light.PopupWindow.ActionMode"> -->
+<!--         <item name="android:textSize">15.0sp</item> -->
+<!--         <item name="android:textStyle">italic</item> -->
+<!--         <item name="android:textColor">@color/opaque_red</item> -->
+<!--         <item name="android:layout_width">fill_parent</item> -->
+<!--         <item name="android:layout_height">wrap_content</item> -->
+<!--     </style> -->
+
+	<style name="btnStyleBlackpearl" parent="@android:style/Widget.Button">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+	<style name="btnStyleBlackpearlBig" parent="@android:style/Widget.Button">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">50.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+	<style name="btnStyleYellowpearl" parent="@android:style/Widget.Button">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_yellow_pearl</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
     </style>
 
+	<style name="btnStyleYellowpearlBig" parent="@android:style/Widget.Button">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_yellow_pearl</item>
+        <item name="android:padding">50.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+	<style name="btnStyleLeadpearl" parent="@android:style/Widget.Button">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_lead_pearl</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+    
+	<style name="btnStyleLeadpearl_TakePhoto" parent="@android:style/Widget.Button">
+        <item name="android:scaleType">fitStart</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/custom_btn_lead_pearl</item>
+        <item name="android:padding">5.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+	
+	<style name="lnkStyle1" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#0F1C60</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="lnkStyle2" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#0F1C60</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    
+    <style name="lblStyleMessagesProcess" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
+    <style name="lblStyleTitulo" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
+    <style name="lblStyleTituloWBold" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+	
+    <style name="lblStyleSubTituloLstVw" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="lblStyleDetailComplaint" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/gris</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+    
+     <style name="lblStyleTitulo2" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">11.0sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
+	<!-- OLD -->
+	
+
+   
+
+    
+
+    <style name="lblStyleTituloLstVw" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    
+
+    
+
+    <style name="btnStyleBlackpearl2" parent="@android:style/Widget.Button">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">10.0dip</item>
+        <item name="android:layout_width">100.0dip</item>
+        <item name="android:layout_height">40.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+
+    <style name="btnStyleBlackpearl3" parent="@android:style/Widget.Button">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">10.0dip</item>
+        <item name="android:layout_width">100.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+
+    <style name="btnStyleBlackpearl4" parent="@android:style/Widget.Button">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:gravity">top</item>
+        <item name="android:background">@drawable/custom_btn_black_pearl</item>
+        <item name="android:padding">10.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">35.0dip</item>
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">1.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">0.6</item>
+    </style>
+
+    
+    
+    
+    
+    
+    <!-- Styles for Ojo Vial -->
+    <style name="inptStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dip</item>
+        <item name="android:layout_marginTop">6dip</item>
+		<item name="android:paddingLeft">15dip</item>
+		<item name="android:paddingRight">15dip</item>
+		<item name="android:paddingTop">3dip</item>
+		<item name="android:paddingBottom">5dip</item>
+        <item name="android:background">@drawable/round_corner</item>
+    </style>
+    
+    <style name="btnStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:background">@drawable/round_corner</item>
+        <item name="android:paddingTop">20dip</item>
+		<item name="android:paddingBottom">20dip</item>
+		<item name="android:textSize">20.0sp</item>
+    </style>
+    
+    <style name="btnStyleOjoVialWhite">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:background">@drawable/round_corner_white</item>
+        <item name="android:paddingTop">20dip</item>
+		<item name="android:paddingBottom">20dip</item>
+		<item name="android:textSize">20.0sp</item>
+    </style>
+    
+    <style name="btnStyleOjoVialWhite2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:textColor">#ff0000</item>
+        <item name="android:background">@drawable/round_corner_white</item>
+        <item name="android:paddingTop">15dip</item>
+		<item name="android:paddingBottom">15dip</item>
+		<item name="android:textSize">17.0sp</item>
+    </style>
+    
+    <style name="btnGreyStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dip</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@color/grey</item>
+        <item name="android:paddingTop">20dip</item>
+		<item name="android:paddingBottom">20dip</item>
+		<item name="android:textSize">20.0sp</item>
+    </style>
+    
+    <style name="inptLinedStyleOjoVial">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">6dip</item>
+        <item name="android:layout_marginTop">6dip</item>
+		<item name="android:paddingLeft">5dip</item>
+		<item name="android:paddingRight">5dip</item>
+		<item name="android:singleLine">true</item>
+    </style>
+    
 </resources>

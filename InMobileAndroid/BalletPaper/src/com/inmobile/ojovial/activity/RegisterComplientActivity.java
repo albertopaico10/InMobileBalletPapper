@@ -1,4 +1,4 @@
-package com.inmobile.ojovial;
+package com.inmobile.ojovial.activity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +39,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.R.id;
+import com.inmobile.ojovial.R.layout;
+import com.inmobile.ojovial.R.menu;
+import com.inmobile.ojovial.R.string;
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
 import com.inmobile.ojovial.bean.UserSqlLiteBean;
@@ -130,7 +135,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 //		});
 		
    		//--Process Photo Image
-   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean);
+//   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean);
+   		new ProcessImage().execute();
    		//--Process Aditional
    		getUserFromDataBaseAndroid();
    		complaintBean.setPhotoBean(photoBean);
@@ -153,17 +159,113 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		getPossitionAndAddres(complaintBean);
 	}
 	
+	private void setTouchModeLoginFalse(){
+		txtNumberPlate.setFocusableInTouchMode(false);
+		txtComment.setFocusableInTouchMode(false);
+	}
+	
+	private void setTouchModeLoginTrue(){
+		txtNumberPlate.setFocusableInTouchMode(true);
+		txtComment.setFocusableInTouchMode(true);
+	}
+	
+	private void methodError(String messages){
+		linearLayoutForm.setVisibility(View.VISIBLE);
+		linearLayoutProgress.setVisibility(View.GONE);
+		Toast.makeText(RegisterComplientActivity.this,messages,Toast.LENGTH_LONG).show();
+		setTouchModeLoginTrue();
+	}
+	
 	public void onClickSaveRegister(View v) {
 		// Save information in Service
 		boolean validateField= RegisterComplientValidation.isValidateRegisterComplient(RegisterComplientActivity.this,
 				txtNumberPlate, txtComment, photoBean, complaintBean);
-		//--Set into Complaint Bean
-		complaintBean=ConvertFormatClass.setValueComplainBean(txtNumberPlate, txtComment,complaintBean);
 		if (validateField) {
+			//--Set into Complaint Bean
+			complaintBean=ConvertFormatClass.setValueComplainBean(txtNumberPlate, txtComment,complaintBean);
+			//--Hide keyboard
 			UtilMethods.hideKeyboard(this.getCurrentFocus(),RegisterComplientActivity.this);
-			registerComplientService.callServiceRegisterComplaint(RegisterComplientActivity.this, complaintBean,
-					linearLayoutForm,linearLayoutProgress);
+			//--Call Register
+			setTouchModeLoginFalse();
+			new SaveInformationDataBaseNew().execute();
 		}
+	}
+	
+	private class SaveInformationDataBaseNew extends AsyncTask<Void, Void, Void> {
+
+		private String Content = "";
+
+		@Override
+		protected void onPreExecute() {
+//			Toast.makeText(gcontext,"DATOS: \n idUser : "+Integer.parseInt(gComplaintBean.getIdUserService())
+//					+"\n Longitud : "+gComplaintBean.getLongitude()
+//					+"\n Latitude : "+gComplaintBean.getLatitude()
+//					+"\n Address : "+UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress())+"**"+gComplaintBean.getGpsCompleteAddress()
+//					+"\n Comentarios : "+gComplaintBean.getComment()
+//					+"\n Numero de Placa : "+gComplaintBean.getNumberPlate()
+//					+"\n Categoria de Foto"+CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE
+//					+"\n Distrito : "+gComplaintBean.getGpsDistrict()
+//					+"\n Direccion : "+gComplaintBean.getGpsAddress()
+//					+"\n Pais : "+gComplaintBean.getGpsCountry(), Toast.LENGTH_LONG).show();
+			linearLayoutProgress.setVisibility(View.VISIBLE);
+			System.out.println("Post PRE");
+		}
+
+		@SuppressWarnings("deprecation")
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				Content=registerComplientService.callServiceRegister(complaintBean);
+			} catch (Exception e) {
+				methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+
+			JSONObject jObject = null;
+
+			try {
+				jObject = new JSONObject(Content);
+				String codeResponse = jObject.getString("codeResponse");
+				System.out.println("codeResponse : " + codeResponse);
+				int idComplaint = jObject.getInt("idComplient");
+				if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
+					Intent i = new Intent(RegisterComplientActivity.this,SuccessRecordActivity.class);
+					i.putExtra(CommonConstants.GenericValues.IDCOMPLIENT,String.valueOf(idComplaint));
+					startActivity(i);
+				} else {
+					methodError(getString(R.string.errorSaveComplaint));
+				}
+			} catch (Exception e) {
+				methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
+			}
+		}
+
+	}
+
+	private class ProcessImage extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected void onPreExecute() {
+
+		}
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				registerComplientService.processImage();
+			} catch (Exception e) {
+				Toast.makeText(RegisterComplientActivity.this,"Error convirtiendo archivos a hexadecimal : "+ e.getMessage(), Toast.LENGTH_LONG).show();
+			}
+			return null;
+		}
+		@Override
+		protected void onPostExecute(Void result) {
+			photoBean.setCompleteProcessImage(true);
+		}
+		
 	}
 
 	@Override
@@ -188,7 +290,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	@Override
 	public void onLocationChanged(Location location) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -206,7 +307,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@SuppressLint("NewApi")
@@ -220,8 +320,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 			double latitude = gps.getLatitude();
 			double longitude = gps.getLongitude();
 
-//			lblLatitude.setText(latitude + "");
-//			lblLongitude.setText(longitude + "");
 			complaintBean.setLatitude(String.valueOf(latitude));
 			complaintBean.setLongitude(String.valueOf(longitude));
 			lblShowCoordinates.setText(this.getString(R.string.strLblShowGPS)+String.valueOf(latitude)+" ; "+String.valueOf(longitude)+")");
@@ -231,22 +329,17 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 				try {
 					List<Address> addresses = geo.getFromLocation(latitude,	longitude, 1);
 					for(Address beanAddress:addresses){
-//						complaintBean.setDistrict(beanAddress.getLocality().toUpperCase());
-//						listAddress.add(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getCountryName());
-//						complaintBean.setAlternativeAddress(beanAddress.getAddressLine(0));
 						complaintBean.setGpsCompleteAddress(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getSubAdminArea());
 						complaintBean.setGpsAddress(beanAddress.getAddressLine(0));
 						complaintBean.setGpsDistrict(beanAddress.getLocality());
 						complaintBean.setGpsCountry(beanAddress.getCountryName());
 						completAddres=true;
 					}
-					
 				} catch (IOException e) {
 					Toast.makeText(getApplicationContext(),"Ocurrio un error : " + e.getMessage(),Toast.LENGTH_LONG).show();
 				}
 			}else{
 				completAddres=false;
-//				listAddress.add("Sin Dirección");
 				complaintBean.setGpsCompleteAddress("Sin Dirección");
 			}
 			
@@ -254,8 +347,5 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 			gps.showSettingsAlert();
 		}
 		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
-//		listAddress.add("Actualizar Ubicación");
-//		listAddress.add("Agregar otra dirección");
 	}
-	
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="link_to_register" type="id">false</item>
+    <item name="link_forget_password" type="id">false</item>
+    <item name="idNameUser" type="id">false</item>
+    <item name="idLastNameUser" type="id">false</item>
+    <item name="idDniUser" type="id">false</item>
+    <item name="idChkAdult" type="id">false</item>
+    <item name="idChkAcceptTerm" type="id">false</item>
+    <item name="idBtnRegister" type="id">false</item>
+    <item name="idBtnDenounce" type="id">false</item>
+    <item name="idBtnMyDenounce" type="id">false</item>
+    <item name="idBtnMyInformation" type="id">false</item>
+    <item name="idBtnRecomendation" type="id">false</item>
+    <item name="idBtnTakePhotoN1" type="id">false</item>
+    <item name="idBtnTakePhotoN2" type="id">false</item>
+    <item name="idBtnTakePhotoN3" type="id">false</item>
+    <item name="idRegisterPassword" type="id">false</item>
+    <item name="idRegisterEmail" type="id">false</item>
+    <item name="idLoginPassword" type="id">false</item>
+    <item name="idLoginEmail" type="id">false</item>
+    <item name="ok_button" type="id">false</item>
+    <item name="idPhotoImageViewN1" type="id">false</item>
+    <item name="idPhotoImageViewN2" type="id">false</item>
+    <item name="idPhotoImageViewN3" type="id">false</item>
+    <item name="btnNextPhoto" type="id">false</item>
+    <item name="idTxtPlate" type="id">false</item>
+    <item name="idTxtAditionalComment" type="id">false</item>
+    <item name="idLblLatitude" type="id">false</item>
+    <item name="idLblLongitud" type="id">false</item>
+    <item name="idTxtFullAddress" type="id">false</item>
+    <item name="idBntRegisterComplient" type="id">false</item>
+    <item name="idTxtIdCode" type="id">false</item>
+    <item name="idLblDistrict" type="id">false</item>
+    <item name="cboDistrict" type="id">false</item>
+    <item name="cboSpecificDistrict" type="id">false</item>
+    <item name="idRegisterPasswordConfirm" type="id">false</item>
+    <item name="progressBarGeneral" type="id">false</item>
+    <item name="progressBar" type="id">false</item>
+    <item name="idGPSAddress" type="id">false</item>
+    <item name="idBtnAutomaticAddress" type="id">false</item>
+    <item name="idShowHour" type="id">false</item>
+    <item name="idLblCoordinates" type="id">false</item>
+    <item name="digitalClock1" type="id">false</item>
+    
+
+</resources>

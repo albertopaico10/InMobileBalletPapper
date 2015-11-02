@@ -4,8 +4,8 @@ public class CommonConstants {
 
 	public class URLService {
 //		public static final String URL_SERVICE = "http://162.248.54.10/";
-		public static final String URL_SERVICE = "http://192.168.1.37:8080/";
-//		public static final String URL_SERVICE = "http://10.65.52.133:8080/";
+//		public static final String URL_SERVICE = "http://192.168.1.39:8080/";
+		public static final String URL_SERVICE = "http://10.65.52.148:8080/";
 		
 		public static final String SERVICE_NAME = "BallotPapperService";
 		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";
@@ -19,13 +19,13 @@ public class CommonConstants {
 	public class GenericValues{
 		public static final String MOBILE_RECORD = "MOBILE";
 		public static final String CATEGORY_UPLOAD_IMAGE = "PHOTO_UPLOAD";
+		public static final String IDCOMPLIENT = "idComplient";
 	}
 	
 	public class RequestUploadImage{
 		public static final String CATEGORYIMAGE_REQUEST_IMAGE = "categoryImage";
 		public static final String HEXIMAGE_REQUEST_IMAGE = "hexImage";
 		public static final String IDUSER_REQUEST_IMAGE = "idUser";
-		public static final String IDCOMPLIENT_REQUEST_IMAGE = "idComplient";
 	}
 	
 	public class RequestSaveComplaint{

@@ -1,4 +1,4 @@
-package com.inmobile.ojovial;
+package com.inmobile.ojovial.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.R.drawable;
+import com.inmobile.ojovial.R.id;
+import com.inmobile.ojovial.R.layout;
+import com.inmobile.ojovial.R.menu;
+import com.inmobile.ojovial.R.string;
 import com.inmobile.ojovial.util.GPSTracker;
 import com.inmobile.ojovial.util.UtilMethods;
 

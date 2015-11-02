@@ -1,40 +1,29 @@
-package com.inmobile.ojovial;
+package com.inmobile.ojovial.activity;
 
-import android.content.Intent;
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.R.id;
+import com.inmobile.ojovial.R.layout;
+import com.inmobile.ojovial.R.menu;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-public class SuccessRecordActivity extends ActionBarActivity {
-	
-	private TextView lblIdComplaint;
-	
+public class MainActivity extends ActionBarActivity {
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.successrecord);
-		lblIdComplaint=(TextView)findViewById(R.id.idTxtIdCode);
-		String idComplaint="ES....";
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			idComplaint = extras.getString("idComplaint");
-		}
-		lblIdComplaint.setText(idComplaint);
+		setContentView(R.layout.activity_main);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	public void onMakeOtherComplaint(View v) {
-		Intent i = new Intent(SuccessRecordActivity.this, PrincipalMainActivity.class);
-		startActivity(i);
-	}
-	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

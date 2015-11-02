@@ -1,8 +1,14 @@
-package com.inmobile.ojovial;
+package com.inmobile.ojovial.activity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.R.id;
+import com.inmobile.ojovial.R.layout;
+import com.inmobile.ojovial.R.menu;
+import com.inmobile.ojovial.R.string;
 
 import android.content.Context;
 import android.content.Intent;

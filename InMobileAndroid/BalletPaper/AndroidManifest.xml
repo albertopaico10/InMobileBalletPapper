@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/CustomActionBarTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name="com.inmobile.ojovial.activity.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PrincipalMainActivity" />
-        <activity android:name=".RegisterUserActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".WelcomeRegisterActivity" />
-        <activity android:name=".SuccessRecordActivity" />
-        <activity android:name=".RegisterComplientActivity" />
-        <activity android:name=".TakePhotoActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.PrincipalMainActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.RegisterUserActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.MainActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.WelcomeRegisterActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.SuccessRecordActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.RegisterComplientActivity" />
+        <activity android:name="com.inmobile.ojovial.activity.TakePhotoActivity" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

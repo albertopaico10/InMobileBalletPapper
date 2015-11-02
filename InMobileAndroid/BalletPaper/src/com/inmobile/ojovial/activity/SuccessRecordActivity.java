@@ -1,4 +1,10 @@
-package com.inmobile.ojovial;
+package com.inmobile.ojovial.activity;
+
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.R.id;
+import com.inmobile.ojovial.R.layout;
+import com.inmobile.ojovial.R.menu;
+import com.inmobile.ojovial.util.CommonConstants;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,17 +12,22 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-public class WelcomeRegisterActivity extends ActionBarActivity {
-	@Override
+public class SuccessRecordActivity extends ActionBarActivity {
+	
+	private TextView lblIdComplaint;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.welcomeballetpaper);
-	}
-	
-	public void onOkClick(View v) {
-		Intent i = new Intent(this, LoginActivity.class);
-		startActivity(i);
+		setContentView(R.layout.successrecord);
+		lblIdComplaint=(TextView)findViewById(R.id.idTxtIdCode);
+		String idComplaint="ES....";
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			idComplaint = extras.getString(CommonConstants.GenericValues.IDCOMPLIENT);
+		}
+		lblIdComplaint.setText(idComplaint);
 	}
 	
 	@Override
@@ -25,6 +36,11 @@ public class WelcomeRegisterActivity extends ActionBarActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	public void onMakeOtherComplaint(View v) {
+		Intent i = new Intent(SuccessRecordActivity.this, PrincipalMainActivity.class);
+		startActivity(i);
+	}
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

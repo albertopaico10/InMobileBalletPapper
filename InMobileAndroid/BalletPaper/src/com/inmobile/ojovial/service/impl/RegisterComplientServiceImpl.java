@@ -33,7 +33,8 @@ import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 import com.inmobile.ojovial.R;
-import com.inmobile.ojovial.SuccessRecordActivity;
+import com.inmobile.ojovial.activity.RegisterComplientActivity;
+import com.inmobile.ojovial.activity.SuccessRecordActivity;
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
 import com.inmobile.ojovial.bean.UserSqlLiteBean;
@@ -61,21 +62,62 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		new getListDistrict().execute();
 	}
 	
-	@Override
-	public void proccesImage(Context context, PhotoBean photoBean) {
-		gcontext=context;
-		gPhotoBean=photoBean;
-		new ProcessImage().execute();
-	}
+//	@Override
+//	public void proccesImage(Context context, PhotoBean photoBean) {
+//		gcontext=context;
+//		gPhotoBean=photoBean;
+//		new ProcessImage().execute();
+//	}
 	
-	@Override
-	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean
-			,LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress){
-		gcontext=context;
-		gComplaintBean=complaintBean;
-		gLinearLayoutForm=linearLayoutRegisterComplaint;
-		gLinearLayoutProgress=linearLayoutProgress;
-		new SaveInformationDataBaseNew().execute();
+//	@Override
+//	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean
+//			,LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress){
+//		gcontext=context;
+//		gComplaintBean=complaintBean;
+//		gLinearLayoutForm=linearLayoutRegisterComplaint;
+//		gLinearLayoutProgress=linearLayoutProgress;
+//		new SaveInformationDataBaseNew().execute();
+//	}
+	
+	public String callServiceRegister(ComplaintBean complaintBean)throws Exception{
+		System.out.println("onLoad!!!");
+		String respStr="";
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost(CommonConstants.URLService.REGISTER_COMPLAINT);
+		post.setHeader("content-type", "application/json; charset=UTF-8");
+		post.setHeader("Accept", "application/json");
+		Map<String, Object> dato = new HashMap<String, Object>();
+		System.out.println("antes de mapear datos");
+//		try {
+		dato.put(CommonConstants.RequestSaveComplaint.IDUSER_REQUEST_COMPLAINT,Integer.parseInt(complaintBean.getIdUserService()));
+		dato.put(CommonConstants.RequestSaveComplaint.LONGITUDE_REQUEST_COMPLAINT,complaintBean.getLongitude());
+		dato.put(CommonConstants.RequestSaveComplaint.LATITUDE_REQUEST_COMPLAINT,complaintBean.getLatitude());
+		dato.put(CommonConstants.RequestSaveComplaint.FULLADDRESS_REQUEST_COMPLAINT,UtilMethods.encriptValue(complaintBean.getGpsCompleteAddress()));
+		dato.put(CommonConstants.RequestSaveComplaint.COMMENT_ADITIONAL_REQUEST_COMPLAINT,complaintBean.getComment());
+		dato.put(CommonConstants.RequestSaveComplaint.NUMBER_PLATE_REQUEST_COMPLAINT,complaintBean.getNumberPlate());
+		dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_1_REQUEST_COMPLAINT,complaintBean.getPhotoBean().getFileImage1());
+		dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_2_REQUEST_COMPLAINT,complaintBean.getPhotoBean().getFileImage2());
+		dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_3_REQUEST_COMPLAINT,complaintBean.getPhotoBean().getFileImage3());
+		dato.put(CommonConstants.RequestSaveComplaint.CATEGORY_IMAGE_REQUEST_COMPLAINT,CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE);
+		dato.put(CommonConstants.RequestSaveComplaint.DISTRICT_REQUEST_COMPLAINT,complaintBean.getGpsDistrict());
+		dato.put(CommonConstants.RequestSaveComplaint.ADDRESS_REQUEST_COMPLAINT,complaintBean.getGpsAddress());
+		dato.put(CommonConstants.RequestSaveComplaint.COUNTRY_REQUEST_COMPLAINT,"Peru");
+			
+		String json = new GsonBuilder().create().toJson(dato, Map.class);
+			
+		post.setEntity(new StringEntity(json));
+		System.out.println("Antes de mandar al servicio...=)");
+		HttpResponse resp = httpClient.execute(post);
+		respStr = EntityUtils.toString(resp.getEntity());
+		System.out.println("La respues que viene : " + respStr);
+//		Content = respStr;
+//		} catch (Exception e) {
+//			linearLayoutForm.setVisibility(View.VISIBLE);
+//			linearLayoutProgress.setVisibility(View.GONE);
+//			Toast.makeText(RegisterComplientActivity.this,"Hubo un error en el proceso de Registro de Denuncia ("+ e.getMessage()+ "). \nDisculpe las molestias.",
+//					Toast.LENGTH_LONG).show();
+//		}
+		return respStr;
 	}
 	
 	private class getListDistrict extends AsyncTask<Void, Integer, Void> {
@@ -137,30 +179,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 
 
 	}
-	
-	private class ProcessImage extends AsyncTask<Void, Void, Void> {
 
-		@Override
-		protected void onPreExecute() {
-
-		}
-		@Override
-		protected Void doInBackground(Void... params) {
-			try {
-				processImage();
-			} catch (Exception e) {
-				Toast.makeText(gcontext,"Error convirtiendo archivos a hexadecimal : "+ e.getMessage(), Toast.LENGTH_LONG).show();
-			}
-			return null;
-		}
-		@Override
-		protected void onPostExecute(Void result) {
-			gPhotoBean.setCompleteProcessImage(true);
-		}
-		
-	}
-	
-	private void processImage() throws Exception {
+	public void processImage() throws Exception {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 5;
 		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto1())) {
@@ -191,94 +211,5 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 //			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
 		}
 	}
-	
-	private class SaveInformationDataBaseNew extends AsyncTask<Void, Void, Void> {
-
-		private String Content = "";
-
-		@Override
-		protected void onPreExecute() {
-//			Toast.makeText(gcontext,"DATOS: \n idUser : "+Integer.parseInt(gComplaintBean.getIdUserService())
-//					+"\n Longitud : "+gComplaintBean.getLongitude()
-//					+"\n Latitude : "+gComplaintBean.getLatitude()
-//					+"\n Address : "+UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress())+"**"+gComplaintBean.getGpsCompleteAddress()
-//					+"\n Comentarios : "+gComplaintBean.getComment()
-//					+"\n Numero de Placa : "+gComplaintBean.getNumberPlate()
-//					+"\n Categoria de Foto"+CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE
-//					+"\n Distrito : "+gComplaintBean.getGpsDistrict()
-//					+"\n Direccion : "+gComplaintBean.getGpsAddress()
-//					+"\n Pais : "+gComplaintBean.getGpsCountry(), Toast.LENGTH_LONG).show();
-			gLinearLayoutProgress.setVisibility(View.VISIBLE);
-			System.out.println("Post PRE");
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		protected Void doInBackground(Void... params) {
-			System.out.println("onLoad!!!");
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpPost post = new HttpPost(CommonConstants.URLService.REGISTER_COMPLAINT);
-			post.setHeader("content-type", "application/json; charset=UTF-8");
-			post.setHeader("Accept", "application/json");
-			Map<String, Object> dato = new HashMap<String, Object>();
-			System.out.println("antes de mapear datos");
-			try {
-				dato.put(CommonConstants.RequestSaveComplaint.IDUSER_REQUEST_COMPLAINT,Integer.parseInt(gComplaintBean.getIdUserService()));
-				dato.put(CommonConstants.RequestSaveComplaint.LONGITUDE_REQUEST_COMPLAINT,gComplaintBean.getLongitude());
-				dato.put(CommonConstants.RequestSaveComplaint.LATITUDE_REQUEST_COMPLAINT,gComplaintBean.getLatitude());
-				dato.put(CommonConstants.RequestSaveComplaint.FULLADDRESS_REQUEST_COMPLAINT,UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress()));
-				dato.put(CommonConstants.RequestSaveComplaint.COMMENT_ADITIONAL_REQUEST_COMPLAINT,gComplaintBean.getComment());
-				dato.put(CommonConstants.RequestSaveComplaint.NUMBER_PLATE_REQUEST_COMPLAINT,gComplaintBean.getNumberPlate());
-				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_1_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage1());
-				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_2_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage2());
-				dato.put(CommonConstants.RequestSaveComplaint.FILE_BYTE_3_REQUEST_COMPLAINT,gComplaintBean.getPhotoBean().getFileImage3());
-				dato.put(CommonConstants.RequestSaveComplaint.CATEGORY_IMAGE_REQUEST_COMPLAINT,CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE);
-				dato.put(CommonConstants.RequestSaveComplaint.DISTRICT_REQUEST_COMPLAINT,gComplaintBean.getGpsDistrict());
-				dato.put(CommonConstants.RequestSaveComplaint.ADDRESS_REQUEST_COMPLAINT,gComplaintBean.getGpsAddress());
-				dato.put(CommonConstants.RequestSaveComplaint.COUNTRY_REQUEST_COMPLAINT,"Peru");
-				
-				String json = new GsonBuilder().create().toJson(dato, Map.class);
-				
-				post.setEntity(new StringEntity(json));
-				System.out.println("Antes de mandar al servicio...=)");
-				HttpResponse resp = httpClient.execute(post);
-				String respStr = EntityUtils.toString(resp.getEntity());
-				System.out.println("La respues que viene : " + respStr);
-				Content = respStr;
-			} catch (Exception e) {
-				gLinearLayoutForm.setVisibility(View.VISIBLE);
-				gLinearLayoutProgress.setVisibility(View.GONE);
-				Toast.makeText(gcontext,"Hubo un error en el proceso de Registro de Denuncia ("+ e.getMessage()+ "). \nDisculpe las molestias.",
-						Toast.LENGTH_LONG).show();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-
-			JSONObject jObject = null;
-
-			try {
-				jObject = new JSONObject(Content);
-				String codeResponse = jObject.getString("codeResponse");
-				System.out.println("codeResponse : " + codeResponse);
-				int idComplaint = jObject.getInt("idComplient");
-				if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
-					Intent i = new Intent(gcontext,SuccessRecordActivity.class);
-					i.putExtra("idComplaint",String.valueOf(idComplaint));
-					gcontext.startActivity(i);
-				} else {
-					Toast.makeText(gcontext,gcontext.getString(R.string.errorSaveComplaint),Toast.LENGTH_LONG).show();
-					gLinearLayoutProgress.setVisibility(View.GONE);
-				}
-			} catch (Exception e) {
-				gLinearLayoutProgress.setVisibility(View.GONE);
-				Toast.makeText(gcontext,"Hubo un error en la respuesta del Registro de la Denuncia ("+ e.getMessage() + "). Disculpe las molestias.",	Toast.LENGTH_LONG).show();
-			}
-		}
-
-	}
-
 	
 }
