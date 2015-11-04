@@ -8,6 +8,7 @@ import android.widget.Spinner;
 import com.inmobile.ojovial.R;
 import com.inmobile.ojovial.bean.ComplaintBean;
 import com.inmobile.ojovial.bean.PhotoBean;
+import com.inmobile.ojovial.util.CommonConstants;
 import com.inmobile.ojovial.util.UtilMethods;
 
 public class RegisterComplientValidation {
@@ -21,7 +22,7 @@ public class RegisterComplientValidation {
 //			cboDistrict.setVisibility(View.VISIBLE);
 //			txtFullAddress.setVisibility(View.VISIBLE);
 			validateField=false;
-			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesGPSNoFound) , context,R.drawable.error);
+			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesGPSNoFound) , context,R.drawable.error,CommonConstants.GenericValues.DIALOG_ALERT);
 		}
 		if(Validation.isEmpty(context, txtNumberPlate)){
 			validateField=false;
@@ -35,7 +36,7 @@ public class RegisterComplientValidation {
 //		}
 		else if(!photoBean.isCompleteProcessImage()){
 			validateField=false;
-			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesValidationProccessImage) , context,R.drawable.error);
+			UtilMethods.alertbox(context.getString(R.string.titleError),context.getString(R.string.messagesValidationProccessImage) , context,R.drawable.error,CommonConstants.GenericValues.DIALOG_ALERT);
 		}
 		return validateField;
 	}

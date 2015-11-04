@@ -101,6 +101,17 @@ public class DB_BalletPaper extends SQLiteOpenHelper {
 		return exist;
 	}
 	
+	public boolean existUserLoginToApplication() {
+		boolean exist=false;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor res = db.rawQuery("select * from USER where isActive='Y'", null);
+		if(res.moveToFirst()){
+			exist=true;
+		}
+		db.close();
+		return exist;
+	}
+	
 	public int cantidadRegistros(){
 		String selectQuery = "SELECT * FROM USER";
         SQLiteDatabase db = this.getReadableDatabase();

@@ -18,13 +18,21 @@ public class LoginServiceImpl implements LoginService {
 
 	DB_BalletPaper gDbBalletPaper;
 
-	public void sucessLogin(String idUser,String email)throws Exception{
+	public void sucessLogin(String idUser,String email,DB_BalletPaper balletPaper)throws Exception{
+		gDbBalletPaper=balletPaper;
+		System.out.println("SQL - Lite : "+idUser+"***"+email);
 		boolean exitUser=gDbBalletPaper.existIdUserService(idUser);
+		System.out.println("Este valor es : "+exitUser);
 		gDbBalletPaper.updateUserDesactive();
-		if(exitUser){
+		System.out.println("Actualizo");
+		if(!exitUser){
+			System.out.println("Entro si es true");
 			gDbBalletPaper.insertUser(email, idUser);
+			System.out.println("Ya inserto...!!!");
 		}
+		System.out.println("Antes de actualizar por idUser : "+idUser);
 		gDbBalletPaper.updateUserActive(idUser);
+		System.out.println("Termino");
 	}
 	
 	public String callService(LoginBean loginBean)throws Exception{

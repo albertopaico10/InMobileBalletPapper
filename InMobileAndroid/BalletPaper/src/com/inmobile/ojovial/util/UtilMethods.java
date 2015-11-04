@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -13,15 +15,24 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
+import com.inmobile.ojovial.R;
+import com.inmobile.ojovial.activity.PrincipalMainActivity;
+import com.inmobile.ojovial.activity.TakePhotoActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 public class UtilMethods {
+	static Context gActivity;
+	
 	public static String bytesToHexString(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
 		for (byte b : bytes) {
@@ -71,30 +82,21 @@ public class UtilMethods {
 		return valueEncript;
 	}
 	
-	public static void alertbox(String title, String message,Activity activiy, int idIcon) {
-	    final AlertDialog alertDialog = new AlertDialog.Builder(activiy).create();
+	public static void alertbox(String title, String message,Context activity, int idIcon,String valueDialog) {
+		final Context activityTemp=activity;
+	    final AlertDialog alertDialog = new AlertDialog.Builder(activityTemp).create();
 	    alertDialog.setTitle(title);
 	    alertDialog.setMessage(message);
 	    alertDialog.setIcon(idIcon);
-	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+	    if(valueDialog.equals(CommonConstants.GenericValues.DIALOG_ALERT)){
+	    	alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 	          public void onClick(DialogInterface dialog, int which) {
 	              alertDialog.cancel();      
 	        } });
+	    }
 	    alertDialog.show();
 	 }
-	
-	public static void alertbox(String title, String message,Context activiy, int idIcon) {
-	    final AlertDialog alertDialog = new AlertDialog.Builder(activiy).create();
-	    alertDialog.setTitle(title);
-	    alertDialog.setMessage(message);
-	    alertDialog.setIcon(idIcon);
-	    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-	          public void onClick(DialogInterface dialog, int which) {
-	              alertDialog.cancel();      
-	        } });
-	    alertDialog.show();
-	 }
-	
+
 	public static void hideKeyboard(View v,Context c) {   
 	    // Check if no view has focus:
 	    View view = v;
@@ -104,5 +106,36 @@ public class UtilMethods {
 	    }
 	}
 	
-
+	
+	public static Handler disconnectHandler = new Handler(){
+		public void handleMessage(Message msg){
+		}
+	};
+	
+	private static Runnable disconnectCallBack = new Runnable() {
+		@Override
+		public void run() {
+			final AlertDialog alertDialog = new AlertDialog.Builder(gActivity).create();
+		    alertDialog.setTitle(gActivity.getString(R.string.titleAdvertencia));
+		    alertDialog.setMessage(gActivity.getString(R.string.noActivity));
+		    alertDialog.setIcon(R.drawable.advertencia);
+		    alertDialog.setButton("VOLVER", new DialogInterface.OnClickListener() {
+		          public void onClick(DialogInterface dialog, int which) {
+		        	Intent i = new Intent(gActivity, PrincipalMainActivity.class);
+		        	gActivity.startActivity(i);
+		          } 
+		    });
+		    alertDialog.show();
+		}
+	};
+	
+	public static void resetDisconnectTimer(Context activity){
+		gActivity=activity;
+		disconnectHandler.removeCallbacks(disconnectCallBack);
+		disconnectHandler.postDelayed(disconnectCallBack, 5000);
+	}
+	
+	public static void stopDisconnectTimer(){
+		disconnectHandler.removeCallbacks(disconnectCallBack);
+	}
 }

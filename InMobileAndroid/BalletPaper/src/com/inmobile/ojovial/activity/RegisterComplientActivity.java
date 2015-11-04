@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -135,7 +137,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 //		});
 		
    		//--Process Photo Image
-//   		registerComplientService.proccesImage(RegisterComplientActivity.this, photoBean);
    		new ProcessImage().execute();
    		//--Process Aditional
    		getUserFromDataBaseAndroid();
@@ -160,8 +161,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	}
 	
 	private void setTouchModeLoginFalse(){
-		txtNumberPlate.setFocusableInTouchMode(false);
-		txtComment.setFocusableInTouchMode(false);
+		txtNumberPlate.setFocusable(false);
+		txtComment.setFocusable(false);
 	}
 	
 	private void setTouchModeLoginTrue(){
@@ -309,6 +310,11 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void onBackPressed(){
+		Toast.makeText(getApplicationContext(),getString(R.string.notBackStep),Toast.LENGTH_LONG).show();
+	}
+	
 	@SuppressLint("NewApi")
 	public void getPossitionAndAddres(ComplaintBean complaintBean) {
 		// create class object
@@ -348,4 +354,26 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		}
 		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
 	}
+	
+	
+	
+//	public void executeTimer(){
+//		System.out.println("executeTimer");
+//		Timer myTimer=new Timer();
+//		myTimer.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				UtilMethods.alertbox(getString(R.string.titleAdvertencia),
+//						getString(R.string.messagesOptionOnlyForWeb),
+//						RegisterComplientActivity.this, R.drawable.advertencia);
+//				Intent i = new Intent(RegisterComplientActivity.this, PrincipalMainActivity.class);
+//				startActivity(i);
+//			}
+//		}, 420000);
+//	}
+//	
+//	@Override
+//	public void onUserInteraction(){
+//		executeTimer();
+//	}
 }

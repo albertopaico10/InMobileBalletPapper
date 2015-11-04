@@ -20,6 +20,9 @@ public class CommonConstants {
 		public static final String MOBILE_RECORD = "MOBILE";
 		public static final String CATEGORY_UPLOAD_IMAGE = "PHOTO_UPLOAD";
 		public static final String IDCOMPLIENT = "idComplient";
+		public static final String IDUSERSERVICE = "idUserService";
+		public static final String DIALOG_CLOSE_SESSION = "dialogSession";
+		public static final String DIALOG_ALERT = "dialogAlert";
 	}
 	
 	public class RequestUploadImage{

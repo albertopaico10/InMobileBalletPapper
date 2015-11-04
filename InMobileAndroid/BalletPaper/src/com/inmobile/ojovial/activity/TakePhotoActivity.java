@@ -3,14 +3,21 @@ package com.inmobile.ojovial.activity;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.inmobile.ojovial.R;
 import com.inmobile.ojovial.R.id;
 import com.inmobile.ojovial.R.layout;
 import com.inmobile.ojovial.R.menu;
 import com.inmobile.ojovial.R.string;
+import com.inmobile.ojovial.sql.DB_BalletPaper;
+import com.inmobile.ojovial.util.CommonConstants;
+import com.inmobile.ojovial.util.UtilMethods;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,15 +45,16 @@ public class TakePhotoActivity extends ActionBarActivity {
 	ImageButton btnPhotoPicture3;
 	ImageView imgPhotoPicture3;
 	Button btnNextPage;
+	DB_BalletPaper dbBalletPaper;
 	Uri fileUri = null;
 	String rootFileImageN1 = "", rootFileImageN2 = "", rootFileImageN3 = "";
-	
 	File path=null;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.takephoto);
+		
 		btnPhotoPicture1 = (ImageButton) findViewById(R.id.idBtnTakePhotoN1);
 		imgPhotoPicture1 = (ImageView) findViewById(R.id.idPhotoImageViewN1);
 		btnPhotoPicture2 = (ImageButton) findViewById(R.id.idBtnTakePhotoN2);
@@ -55,7 +63,9 @@ public class TakePhotoActivity extends ActionBarActivity {
 		imgPhotoPicture3 = (ImageView) findViewById(R.id.idPhotoImageViewN3);
 		btnNextPage=(Button) findViewById(R.id.btnNextPhoto);
 		
-		 path = Environment.getExternalStorageDirectory();
+		createAndroidDatase();
+		
+		path = Environment.getExternalStorageDirectory();
 		
 		if (savedInstanceState != null) {
 			// Restore value of members from saved state
@@ -245,7 +255,11 @@ public class TakePhotoActivity extends ActionBarActivity {
 	    path = Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
 	    return path;
 	}
-	 
+
+	private void createAndroidDatase() {
+		dbBalletPaper = new DB_BalletPaper(this, "DB_AndroidBalletPaper", null, 1);
+	}
+	
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -284,5 +298,25 @@ public class TakePhotoActivity extends ActionBarActivity {
 		}
 		return validate;
 	}
+	
+	@Override
+	public void onUserInteraction(){
+		System.out.println("Hizo Click en la aplicación");
+		UtilMethods.resetDisconnectTimer(TakePhotoActivity.this);
+	}
+	
+	public void onResume(){
+		super.onResume();
+		System.out.println("No Hay actividad *** onResume");
+		UtilMethods.resetDisconnectTimer(TakePhotoActivity.this);
+	}
+	
+	public void onStop(){
+		super.onStop();
+		System.out.println("No Hay actividad *** onStop");
+		UtilMethods.stopDisconnectTimer();
+		
+	}
+	
 
 }

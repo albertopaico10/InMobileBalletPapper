@@ -3,6 +3,7 @@
 
     <!-- Generic Application Values -->
     <string name="action_settings">Configuración</string>
+    <string name="closeSession">Cerrar Sesión</string>
     <string name="hello_world">Hello world!</string>
     <string name="lblPrueba">Hola Mundo de Alberto Paico</string>
     <string name="hello">Hello World!</string>
@@ -77,9 +78,12 @@
     <string name="emailFormat">Formato de Correo Incorrecto</string>
     <string name="loading">Cargando...</string>
     <string name="titleAdvertencia">Advertencia</string>
-    <string name="messagesOptionOnlyForWeb">Actualmente solo se encuentra disponible desde la web.\nPor favor ingresar desde un navegador a \nwww.ojovial.com</string>
+    <string name="messagesOptionOnlyForWeb">Actualmente solo se encuentra disponible desde la web.\nPor favor ingresar desde un navegador a : \n\n  http://www.ojovial.com</string>
 	<string name="errorUser">Hubo un error en el proceso de Registro de Usuario (</string>
     <string name="errorRegistrationComplaint">Hubo un error en el proceso de Registro de Denuncia (</string>
     <string name="sorryMessages">).\n Disculpe las molestias.</string>
+    <string name="notBackStep">No puede volver al paso #1. \n Disculpe las molestias.</string>
+    <string name="notBackStepGeneral">No puede volver al paso anterior. \n Disculpe las molestias.</string>
+    <string name="noActivity">Se cerró la sesión por no haber realizado ninguna actividad en la aplicación. \n Gracias.</string>
     
 </resources>

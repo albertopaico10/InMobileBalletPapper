@@ -104,14 +104,14 @@ public class RegisterUserActivity extends ActionBarActivity {
 	}
 
 	private void setTouchModeLoginFalse(){
-		registerName.setFocusableInTouchMode(false);
-		registerLastName.setFocusableInTouchMode(false);
-		registerEmail.setFocusableInTouchMode(false);
-		registerpassword.setFocusableInTouchMode(false);
-		registerpasswordConfirm.setFocusableInTouchMode(false);
-		registerDni.setFocusableInTouchMode(false);
-		registerAceptTermin.setFocusableInTouchMode(false);
-		registerAdult.setFocusableInTouchMode(false);
+		registerName.setFocusable(false);
+		registerLastName.setFocusable(false);
+		registerEmail.setFocusable(false);
+		registerpassword.setFocusable(false);
+		registerpasswordConfirm.setFocusable(false);
+		registerDni.setFocusable(false);
+		registerAceptTermin.setFocusable(false);
+		registerAdult.setFocusable(false);
 	}
 
 	private void setTouchModeLoginTrue(){

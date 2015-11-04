@@ -44,6 +44,10 @@ public class LoginActivity extends ActionBarActivity{
 		passwordLogin=(EditText)findViewById(R.id.idLoginPassword);
 		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
 		createAndroidDatase();
+		if(dbBalletPaper.existUserLoginToApplication()){
+			Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
+			startActivity(i);
+		}
 	}
 	
 	private void createAndroidDatase() {
@@ -85,8 +89,8 @@ public class LoginActivity extends ActionBarActivity{
 	}
 	
 	private void setTouchModeLoginFalse(){
-		emailLogin.setFocusableInTouchMode(false);
-		passwordLogin.setFocusableInTouchMode(false);
+		emailLogin.setFocusable(false);
+		passwordLogin.setFocusable(false);
 	}
 	
 	private void setTouchModeLoginTrue(){
@@ -130,12 +134,12 @@ public class LoginActivity extends ActionBarActivity{
 				System.out.println("codeResponse : "+codeResponse+"************++");
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
 					try {
-						loginService.sucessLogin(String.valueOf(idUser), email);	
+						loginService.sucessLogin(String.valueOf(idUser), email,dbBalletPaper);	
+						Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
+						startActivity(i);
 					} catch (Exception e) {
 						methodError(getString(R.string.errorInGeneral));
 					}
-					Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
-					startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){
 					methodError(getString(R.string.validationFail));
 				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_NOT_EXIST.equals(codeResponse)){

@@ -8,6 +8,6 @@ import com.inmobile.ojovial.bean.LoginBean;
 import com.inmobile.ojovial.sql.DB_BalletPaper;
 
 public interface LoginService {
-	public void sucessLogin(String idUser,String email)throws Exception;
+	public void sucessLogin(String idUser,String email,DB_BalletPaper balletPaper)throws Exception;
 	public String callService(LoginBean loginBean)throws Exception;
 }
