@@ -45,40 +45,6 @@ import com.inmobile.ojovial.util.UtilMethods;
 
 public class RegisterComplientServiceImpl implements RegisterComplientService {
 
-	public static Context gcontext=null;
-	public PhotoBean gPhotoBean=null;
-	public ComplaintBean gComplaintBean;
-	Spinner gCboDistrict;
-	List<String> gList= new ArrayList<String>();
-	String gFinalAddress="";
-	public LinearLayout gLinearLayoutForm,gLinearLayoutProgress,gLinearLayoutProgressInformation;
-
-	@Override
-	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> list,String finalAddress) {
-		gFinalAddress=finalAddress;
-		gcontext=context;
-//		gCboDistrict=cboDistrict;
-//		gList=list;
-		new getListDistrict().execute();
-	}
-	
-//	@Override
-//	public void proccesImage(Context context, PhotoBean photoBean) {
-//		gcontext=context;
-//		gPhotoBean=photoBean;
-//		new ProcessImage().execute();
-//	}
-	
-//	@Override
-//	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean
-//			,LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress){
-//		gcontext=context;
-//		gComplaintBean=complaintBean;
-//		gLinearLayoutForm=linearLayoutRegisterComplaint;
-//		gLinearLayoutProgress=linearLayoutProgress;
-//		new SaveInformationDataBaseNew().execute();
-//	}
-	
 	public String callServiceRegister(ComplaintBean complaintBean)throws Exception{
 		System.out.println("onLoad!!!");
 		String respStr="";
@@ -173,43 +139,12 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 //            	 }
             	 
 			} catch (Exception e) {
-				Toast.makeText(gcontext,"Hubo un error en la respuesta de los ditritos("+ e.getMessage() + "). Disculpe las molestias.",Toast.LENGTH_LONG).show();
+//				Toast.makeText(gcontext,"Hubo un error en la respuesta de los ditritos("+ e.getMessage() + "). Disculpe las molestias.",Toast.LENGTH_LONG).show();
 			}
 		}
 
 
 	}
 
-	public void processImage() throws Exception {
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 5;
-		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto1())) {
-			Uri startDir=Uri.parse(gPhotoBean.getUrlPhoto1());
-			Bitmap b1 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			b1.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] image1 = stream.toByteArray();
-			gPhotoBean.setFileImage1(image1);
-//			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
-		}
-		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto2())) {
-			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto2());
-			final Bitmap b2 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			b2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] image2 = stream.toByteArray();
-			gPhotoBean.setFileImage2(image2);
-//			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
-		}
-		if (!TextUtils.isEmpty(gPhotoBean.getUrlPhoto3())) {
-			Uri startDir = Uri.parse(gPhotoBean.getUrlPhoto3());
-			final Bitmap b3 = BitmapFactory.decodeStream(gcontext.getContentResolver().openInputStream(startDir), null, options);
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			b3.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-			byte[] image3 = stream.toByteArray();
-			gPhotoBean.setFileImage3(image3);
-//			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
-		}
-	}
 	
 }

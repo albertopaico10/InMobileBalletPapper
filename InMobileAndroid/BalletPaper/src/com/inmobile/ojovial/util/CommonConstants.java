@@ -5,7 +5,7 @@ public class CommonConstants {
 	public class URLService {
 //		public static final String URL_SERVICE = "http://162.248.54.10/";
 //		public static final String URL_SERVICE = "http://192.168.1.39:8080/";
-		public static final String URL_SERVICE = "http://10.65.52.148:8080/";
+		public static final String URL_SERVICE = "http://10.65.52.235:8080/";
 		
 		public static final String SERVICE_NAME = "BallotPapperService";
 		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";
@@ -23,6 +23,7 @@ public class CommonConstants {
 		public static final String IDUSERSERVICE = "idUserService";
 		public static final String DIALOG_CLOSE_SESSION = "dialogSession";
 		public static final String DIALOG_ALERT = "dialogAlert";
+		public static final int NUMBER_MINITUES_SESSION = 420000;
 	}
 	
 	public class RequestUploadImage{

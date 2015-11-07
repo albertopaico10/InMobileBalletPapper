@@ -5,6 +5,7 @@ import com.inmobile.ojovial.R.id;
 import com.inmobile.ojovial.R.layout;
 import com.inmobile.ojovial.R.menu;
 import com.inmobile.ojovial.util.CommonConstants;
+import com.inmobile.ojovial.util.UtilMethods;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,5 +59,24 @@ public class SuccessRecordActivity extends ActionBarActivity {
 	@Override
 	public void onBackPressed(){
 		Toast.makeText(getApplicationContext(),getString(R.string.notBackStepGeneral),Toast.LENGTH_LONG).show();
+	}
+	
+	@Override
+	public void onUserInteraction(){
+		System.out.println("Hizo Click en la aplicación");
+		UtilMethods.resetDisconnectTimer(SuccessRecordActivity.this);
+	}
+	
+	public void onResume(){
+		super.onResume();
+		System.out.println("No Hay actividad *** onResume");
+		UtilMethods.resetDisconnectTimer(SuccessRecordActivity.this);
+	}
+	
+	public void onStop(){
+		super.onStop();
+		System.out.println("No Hay actividad *** onStop");
+		UtilMethods.stopDisconnectTimer();
+		
 	}
 }

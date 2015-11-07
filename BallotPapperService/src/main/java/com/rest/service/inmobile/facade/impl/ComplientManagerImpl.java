@@ -111,12 +111,21 @@ public class ComplientManagerImpl implements ComplientManager {
 	}
 	
 	private void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
-		EmailBean beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
-		//--Set Body with final values
-		beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
-		beanEmailBean.setToEmail(emilTo);
-		 
-		MailUtil.sendEmail(beanEmailBean);
+		EmailBean beanEmailBean=null;
+		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)){
+			beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
+			//--Set Body with final values
+			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
+			beanEmailBean.setToEmail(emilTo);
+			MailUtil.sendEmail2(beanEmailBean);
+		}else{
+			beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
+			//--Set Body with final values
+			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
+			beanEmailBean.setToEmail(emilTo);
+			MailUtil.sendEmail(beanEmailBean);
+		}
+		
 	}
 	
 	private String replaceValuesIntoEmailBody(String emilTo,int idComplaint,String address,String numberPlate){

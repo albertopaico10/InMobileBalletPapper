@@ -132,7 +132,7 @@ public class UtilMethods {
 	public static void resetDisconnectTimer(Context activity){
 		gActivity=activity;
 		disconnectHandler.removeCallbacks(disconnectCallBack);
-		disconnectHandler.postDelayed(disconnectCallBack, 5000);
+		disconnectHandler.postDelayed(disconnectCallBack, CommonConstants.GenericValues.NUMBER_MINITUES_SESSION);
 	}
 	
 	public static void stopDisconnectTimer(){

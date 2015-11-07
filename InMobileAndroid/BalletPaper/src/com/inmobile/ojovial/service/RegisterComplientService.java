@@ -13,10 +13,10 @@ import android.widget.Spinner;
 
 public interface RegisterComplientService {
 
-	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> List,String finalAddress);
+//	public void callServiceAllDistrict(Context context,Spinner cboDistrict,List<String> List,String finalAddress);
 //	public void proccesImage(Context context,PhotoBean photoBean);
 //	public void callServiceRegisterComplaint(Context context,ComplaintBean complaintBean,
 //			LinearLayout linearLayoutRegisterComplaint,LinearLayout linearLayoutProgress);
-	public void processImage() throws Exception;
+//	public void processImage(PhotoBean photoBean) throws Exception;
 	public String callServiceRegister(ComplaintBean complaintBean)throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.inmobile.ojovial.activity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +20,17 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,20 +68,14 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 	private EditText txtNumberPlate;
 	private EditText txtComment;
-//	private EditText txtFullAddress;
-//	private TextView lblLatitude;
-//	private TextView lblLongitude;
 	private TextView lblGPSAddress,lblShowCoordinates;
 	private TextView lblShowHours;
 	private DigitalClock dc;
-//	private Spinner cboDistrict;
 	private LinearLayout linearLayoutForm;
 	private LinearLayout linearLayoutProgress;
 			
 	String urlPhoto1 = "", urlPhoto2 = "", urlPhoto3 = "";
 	private DB_BalletPaper dbBalletPaper;
-//	List<String> list= new ArrayList<String>();
-//	List<String> listAddress= new ArrayList<String>();
 	
 	boolean completAddres=false,processImageComplete=false;
 	
@@ -90,10 +89,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		txtComment = (EditText) findViewById(R.id.idTxtAditionalComment);
 		txtNumberPlate = (EditText) findViewById(R.id.idTxtPlate);
 		lblShowCoordinates = (TextView) findViewById(R.id.idLblCoordinates);
-//		lblLatitude = (TextView) findViewById(R.id.idLblLatitude);
-//		lblLongitude = (TextView) findViewById(R.id.idLblLongitud);
-//		txtFullAddress = (EditText) findViewById(R.id.idTxtFullAddress);
-//		cboDistrict = (Spinner) findViewById(R.id.cboDistrict);
 		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyTitleRegisterComplaint);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		
@@ -114,28 +109,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		
 		//--Get Address
 		getPossitionAndAddres(complaintBean);
-//		//--Call District
-//		registerComplientService.callServiceAllDistrict(RegisterComplientActivity.this, 
-//				null, null, complaintBean.getDistrict());
-//		
-//		list.add("Seleccionar Distrito");
-//		ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
-//   	 	adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//   		cboDistrict.setAdapter(adaptador);
-//   		
-//   		cboDistrict.setOnItemSelectedListener(new OnItemSelectedListener() {
-//			public void onItemSelected(AdapterView<?> parent,android.view.View v, int position, long id) {
-//				complaintBean.setDistrict(parent.getItemAtPosition(position).toString());
-//				cboDistrict.setSelection(position);
-//				if(position>0){
-//					complaintBean.setSelectedDistrict(true);
-//				}
-//			}
-//			public void onNothingSelected(AdapterView<?> parent) {
-//
-//			}
-//		});
-		
    		//--Process Photo Image
    		new ProcessImage().execute();
    		//--Process Aditional
@@ -151,9 +124,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	
 	private void recoverDataForSendService() {
 		UserSqlLiteBean beanUserSQLLite=dbBalletPaper.getRecoverActiveUser();
-//		Toast.makeText(RegisterComplientActivity.this,"Ahora si.....Voy a recuperar datos del SQL LITE ==>"+beanUserSQLLite.getIdUserService(),Toast.LENGTH_LONG).show();
 		complaintBean.setIdUserService(beanUserSQLLite.getIdUserService());
-//		Toast.makeText(RegisterComplientActivity.this,"Terminoooo..!!",Toast.LENGTH_LONG).show();
 	}
 
 	public void refreshAddress(View v){
@@ -198,18 +169,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 		@Override
 		protected void onPreExecute() {
-//			Toast.makeText(gcontext,"DATOS: \n idUser : "+Integer.parseInt(gComplaintBean.getIdUserService())
-//					+"\n Longitud : "+gComplaintBean.getLongitude()
-//					+"\n Latitude : "+gComplaintBean.getLatitude()
-//					+"\n Address : "+UtilMethods.encriptValue(gComplaintBean.getGpsCompleteAddress())+"**"+gComplaintBean.getGpsCompleteAddress()
-//					+"\n Comentarios : "+gComplaintBean.getComment()
-//					+"\n Numero de Placa : "+gComplaintBean.getNumberPlate()
-//					+"\n Categoria de Foto"+CommonConstants.GenericValues.CATEGORY_UPLOAD_IMAGE
-//					+"\n Distrito : "+gComplaintBean.getGpsDistrict()
-//					+"\n Direccion : "+gComplaintBean.getGpsAddress()
-//					+"\n Pais : "+gComplaintBean.getGpsCountry(), Toast.LENGTH_LONG).show();
 			linearLayoutProgress.setVisibility(View.VISIBLE);
-			System.out.println("Post PRE");
 		}
 
 		@SuppressWarnings("deprecation")
@@ -256,7 +216,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
-				registerComplientService.processImage();
+				processImage(photoBean);
 			} catch (Exception e) {
 				Toast.makeText(RegisterComplientActivity.this,"Error convirtiendo archivos a hexadecimal : "+ e.getMessage(), Toast.LENGTH_LONG).show();
 			}
@@ -278,9 +238,6 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -290,24 +247,18 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 	@Override
 	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -355,25 +306,55 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		lblGPSAddress.setText(complaintBean.getGpsCompleteAddress());
 	}
 	
+	public void processImage(PhotoBean photoBean) throws Exception {
+		System.out.println("Entre a processar imagenes");
+		System.out.println("Valor : "+photoBean.getUrlPhoto1());
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inSampleSize = 5;
+		if (!TextUtils.isEmpty(photoBean.getUrlPhoto1())) {
+			Uri startDir=Uri.parse(photoBean.getUrlPhoto1());
+			Bitmap b1 = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(startDir), null, options);
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			b1.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] image1 = stream.toByteArray();
+			photoBean.setFileImage1(image1);
+//			gPhotoBean.setHexPhoto1(UtilMethods.bytesToHexString(image1));
+		}
+		if (!TextUtils.isEmpty(photoBean.getUrlPhoto2())) {
+			Uri startDir = Uri.parse(photoBean.getUrlPhoto2());
+			final Bitmap b2 = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(startDir), null, options);
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			b2.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] image2 = stream.toByteArray();
+			photoBean.setFileImage2(image2);
+//			gPhotoBean.setHexPhoto2(UtilMethods.bytesToHexString(image2));
+		}
+		if (!TextUtils.isEmpty(photoBean.getUrlPhoto3())) {
+			Uri startDir = Uri.parse(photoBean.getUrlPhoto3());
+			final Bitmap b3 = BitmapFactory.decodeStream(this.getContentResolver().openInputStream(startDir), null, options);
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			b3.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+			byte[] image3 = stream.toByteArray();
+			photoBean.setFileImage3(image3);
+//			gPhotoBean.setHexPhoto3(UtilMethods.bytesToHexString(image3));
+		}
+	}
 	
+	@Override
+	public void onUserInteraction(){
+		System.out.println("Hizo Click en la aplicación");
+		UtilMethods.resetDisconnectTimer(RegisterComplientActivity.this);
+	}
 	
-//	public void executeTimer(){
-//		System.out.println("executeTimer");
-//		Timer myTimer=new Timer();
-//		myTimer.schedule(new TimerTask() {
-//			@Override
-//			public void run() {
-//				UtilMethods.alertbox(getString(R.string.titleAdvertencia),
-//						getString(R.string.messagesOptionOnlyForWeb),
-//						RegisterComplientActivity.this, R.drawable.advertencia);
-//				Intent i = new Intent(RegisterComplientActivity.this, PrincipalMainActivity.class);
-//				startActivity(i);
-//			}
-//		}, 420000);
-//	}
-//	
-//	@Override
-//	public void onUserInteraction(){
-//		executeTimer();
-//	}
+	public void onResume(){
+		super.onResume();
+		System.out.println("No Hay actividad *** onResume");
+		UtilMethods.resetDisconnectTimer(RegisterComplientActivity.this);
+	}
+	
+	public void onStop(){
+		super.onStop();
+		System.out.println("No Hay actividad *** onStop");
+		UtilMethods.stopDisconnectTimer();
+	}
 }
