@@ -50,8 +50,8 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		String respStr="";
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost post = new HttpPost(CommonConstants.URLService.REGISTER_COMPLAINT);
-		post.setHeader("content-type", "application/json; charset=UTF-8");
-		post.setHeader("Accept", "application/json");
+//		post.setHeader("content-type", "application/json; charset=UTF-8");
+//		post.setHeader("Accept", "application/json");
 		Map<String, Object> dato = new HashMap<String, Object>();
 		System.out.println("antes de mapear datos");
 //		try {
@@ -70,8 +70,11 @@ public class RegisterComplientServiceImpl implements RegisterComplientService {
 		dato.put(CommonConstants.RequestSaveComplaint.COUNTRY_REQUEST_COMPLAINT,"Peru");
 			
 		String json = new GsonBuilder().create().toJson(dato, Map.class);
-			
-		post.setEntity(new StringEntity(json));
+//		post.setEntity(new StringEntity(json));
+		StringEntity entity = new StringEntity(json,"UTF-8");
+		post.setEntity(entity);
+		post.setHeader("Accept", "application/json");
+		post.setHeader("Content-Type", "application/json; charset=UTF-8");
 		System.out.println("Antes de mandar al servicio...=)");
 		HttpResponse resp = httpClient.execute(post);
 		respStr = EntityUtils.toString(resp.getEntity());

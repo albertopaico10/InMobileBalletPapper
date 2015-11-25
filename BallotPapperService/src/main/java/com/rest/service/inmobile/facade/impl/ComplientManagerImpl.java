@@ -112,8 +112,8 @@ public class ComplientManagerImpl implements ComplientManager {
 	
 	private void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
 		EmailBean beanEmailBean=null;
-		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)){
-			beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
+		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)||emilTo.endsWith(CommonConstants.Email.OUTLOOK_DOMAIN)){
+			beanEmailBean=systemParamManager.getEmailInSystemParamGmail(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
 			//--Set Body with final values
 			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
 			beanEmailBean.setToEmail(emilTo);
@@ -134,7 +134,7 @@ public class ComplientManagerImpl implements ComplientManager {
 		emilTo=UtilMethods.getFinalValuesForEmail(emilTo, CommonConstants.Email.NUMBER_PLATE, numberPlate);
 		return emilTo;
 	}
-
+	
 	public ListComplaintResponse getListComplaintByDistrict(int idUser){
 		ListComplaintResponse beanListComplaintResponse=new ListComplaintResponse();
 		RequestResponse valueReqResp = (RequestResponse) reqRespManager.saveOrUpdate(idUser,

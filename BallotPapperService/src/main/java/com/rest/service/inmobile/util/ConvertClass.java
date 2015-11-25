@@ -39,8 +39,8 @@ public class ConvertClass {
 		Image beanImage=new Image();
 		beanImage.setCategoryImage(beanImageRequest.getCategoryImage());
 		//--Get bytes
-		byte[] imageByte=UtilMethods.hexStringToByteArray(beanImageRequest.getHexImage());
-		beanImage.setImg(imageByte);
+//		byte[] imageByte=UtilMethods.hexStringToByteArray(beanImageRequest.getHexImage());
+		beanImage.setImg(beanImageRequest.getFileImage());
 		return beanImage;
 	}
 	

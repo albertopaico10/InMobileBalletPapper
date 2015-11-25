@@ -138,4 +138,12 @@ public class UtilMethods {
 	public static void stopDisconnectTimer(){
 		disconnectHandler.removeCallbacks(disconnectCallBack);
 	}
+	
+	public static boolean isEmpety(String text){
+		boolean result=false;
+		if(text==null||"".equals(text)||"null".equals(text)){
+			result=true;
+		}
+		return result;
+	}
 }

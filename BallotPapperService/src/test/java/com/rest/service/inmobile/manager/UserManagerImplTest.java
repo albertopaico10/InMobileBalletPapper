@@ -20,6 +20,6 @@ public class UserManagerImplTest {
 	
 	@Test
 	public void buidlEmailCreationUser()throws Exception{
-		userManager.buidlEmailCreationUser("alberto_j10@hotmail.com");
+		userManager.buidlEmailCreationUser("albertopaico10@gmail.com","Paico, Alberto");
 	}
 }

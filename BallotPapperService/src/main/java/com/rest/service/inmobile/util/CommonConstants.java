@@ -85,9 +85,11 @@ public class CommonConstants {
 		public final static String SYSTEM_PARAM_BODY_EMAIL_COMPLETE_COMPLAINT="BODY_EMAIL_COMPLETE_COMPLAINT";
 		public final static String SYSTEM_PARAM_TRANSPORT_PROTOCOL_OJOVIAL="TRANSPORT_PROTOCOL_OJOVIAL";
 		public final static String ID_COMPLAINT="${idComplaint}";
+		public final static String COMPLETE_NAME="${completeName}";
 		public final static String ADDRESS="${address}";
 		public final static String NUMBER_PLATE="${numberPlate}";
 		public final static String HOTMAIL_DOMAIN="@hotmail.com";
+		public final static String OUTLOOK_DOMAIN="@outlook.com";
 	}
 	
 	

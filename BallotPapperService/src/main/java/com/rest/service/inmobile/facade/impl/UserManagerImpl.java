@@ -21,6 +21,7 @@ import com.rest.service.inmobile.hibernate.bean.User;
 import com.rest.service.inmobile.util.CommonConstants;
 import com.rest.service.inmobile.util.ConvertClass;
 import com.rest.service.inmobile.util.MailUtil;
+import com.rest.service.inmobile.util.UtilMethods;
 
 
 @Service
@@ -49,7 +50,7 @@ public class UserManagerImpl implements UserManager {
 				idUser=userHibernate.saveUserResponseId(userDataBase);
 				beanUserResponse.setIdUser(idUser);
 				//--Send Email
-				buidlEmailCreationUser(beanRequest.getEmail());
+				buidlEmailCreationUser(beanRequest.getEmail(),beanRequest.getLastNameUser()+", "+beanRequest.getNamesUser());
 				//--Build Response for web service client
 				beanUserResponse.setCodeResponse(CommonConstants.CodeResponse.CODE_RESPONSE_SUCCESS_USER);
 				beanUserResponse.setMessagesResponse("The user was created successfully.");
@@ -69,14 +70,16 @@ public class UserManagerImpl implements UserManager {
 		return beanUserResponse;
 	}
 	
-	public void buidlEmailCreationUser(String emilTo)throws MessagingException{
+	public void buidlEmailCreationUser(String emilTo,String completeName)throws MessagingException{
 		EmailBean beanEmailBean=null;
-		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)){
+		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)||emilTo.endsWith(CommonConstants.Email.OUTLOOK_DOMAIN)){
 			beanEmailBean=systemParamManager.getEmailInSystemParamGmail(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_CREATE_USER);
+			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBodyUser(beanEmailBean.getBodyEmail(), completeName));
 			beanEmailBean.setToEmail(emilTo);
 			MailUtil.sendEmail2(beanEmailBean);
 		}else{
 			beanEmailBean=systemParamManager.getEmailInSystemParam(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_CREATE_USER);
+			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBodyUser(beanEmailBean.getBodyEmail(), completeName));
 			beanEmailBean.setToEmail(emilTo);
 			MailUtil.sendEmail(beanEmailBean);
 		}
@@ -119,6 +122,11 @@ public class UserManagerImpl implements UserManager {
 				CommonConstants.TypeOperationReqResp.OPERATION_CREATE_USER, userBeanResponse.getIdUser(),
 				valueReqResp.getId());
 		return userBeanResponse;
+	}
+	
+	private String replaceValuesIntoEmailBodyUser(String emilTo,String completeName){
+		emilTo=UtilMethods.getFinalValuesForEmail(emilTo, CommonConstants.Email.COMPLETE_NAME, String.valueOf(completeName));
+		return emilTo;
 	}
 
 }

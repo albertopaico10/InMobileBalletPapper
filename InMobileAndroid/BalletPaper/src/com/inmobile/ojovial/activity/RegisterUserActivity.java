@@ -163,7 +163,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 				int idUserService = jObject.getInt("idUser");
 				System.out.println("codeResponse : "+codeResponse);
 				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_USER.equals(codeResponse)){
-					registerUserService.sucessUserRegister(registerUserBean.getRegisterEmail(), String.valueOf(idUserService));
+					registerUserService.sucessUserRegister(registerUserBean.getRegisterEmail(), String.valueOf(idUserService),dbBalletPaper);
 					Intent i = new Intent(RegisterUserActivity.this, WelcomeRegisterActivity.class);
 					startActivity(i);
 				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_EXIST.equals(codeResponse)){

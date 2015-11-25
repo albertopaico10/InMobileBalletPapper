@@ -12,5 +12,5 @@ public interface UserManager {
 	
 	public UserResponse saveUserInformation(UserRequest beanRequest);
 	public UserResponse validateUser(UserRequest userRequest);
-	public void buidlEmailCreationUser(String emilTo)throws MessagingException;
+	public void buidlEmailCreationUser(String emilTo,String completeName)throws MessagingException;
 }

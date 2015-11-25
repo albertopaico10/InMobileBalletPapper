@@ -152,4 +152,9 @@ public class LoginActivity extends ActionBarActivity{
 			linearLayoutProgress.setVisibility(View.GONE);	
 		}
 	}
+	
+	@Override
+	public void onBackPressed(){
+		Toast.makeText(getApplicationContext(),getString(R.string.notBackStepGeneral),Toast.LENGTH_LONG).show();
+	}
 }

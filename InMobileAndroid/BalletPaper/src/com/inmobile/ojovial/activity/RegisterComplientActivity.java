@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.test.UiThreadTest;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -286,7 +287,10 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 				try {
 					List<Address> addresses = geo.getFromLocation(latitude,	longitude, 1);
 					for(Address beanAddress:addresses){
-						complaintBean.setGpsCompleteAddress(beanAddress.getAddressLine(0)+", "+ beanAddress.getLocality()+", "+beanAddress.getSubAdminArea());
+						String deparment=UtilMethods.isEmpety(beanAddress.getSubAdminArea())?"":", "+beanAddress.getSubAdminArea();
+						String district=UtilMethods.isEmpety(beanAddress.getLocality())?"":", "+beanAddress.getLocality();
+						String completeAddress=beanAddress.getAddressLine(0)+district+deparment;
+						complaintBean.setGpsCompleteAddress(completeAddress);
 						complaintBean.setGpsAddress(beanAddress.getAddressLine(0));
 						complaintBean.setGpsDistrict(beanAddress.getLocality());
 						complaintBean.setGpsCountry(beanAddress.getCountryName());

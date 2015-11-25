@@ -2,6 +2,7 @@ package com.inmobile.ojovial.service.impl;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -16,17 +17,15 @@ import com.inmobile.ojovial.util.UtilMethods;
 
 public class RegisterUserServiceImpl implements RegisterUserService {
 
-	DB_BalletPaper gDbBalletPaper;
-	
-	public void sucessUserRegister(String email,String idUserService){
-		gDbBalletPaper.insertUser(email, idUserService);
+	public void sucessUserRegister(String email,String idUserService,DB_BalletPaper dbBalletPaper){
+		
+		dbBalletPaper.insertUser(email, idUserService);
 	}
 	
 	public String callRegisterUserService(RegisterUserBean registerUserBean)throws Exception{
 		String respStr="";
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost post = new HttpPost(CommonConstants.URLService.CREATE_USER);
-		post.setHeader("content-type", "application/json; charset=UTF-8");
 		// Construimos el objeto cliente en formato JSON
 		JSONObject dato = new JSONObject();
 		dato.put(CommonConstants.RequestValueUser.EMAIL_REQUEST_USER, registerUserBean.getRegisterEmail());
@@ -37,8 +36,11 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 		dato.put(CommonConstants.RequestValueUser.DNIUSER_REQUEST_USER, registerUserBean.getRegisterDni());
 		dato.put(CommonConstants.RequestValueUser.RECORDINGDEVICE_REQUEST_USER, registerUserBean.getTypeRecording());
 		
-		StringEntity entity = new StringEntity(dato.toString());
+		StringEntity entity = new StringEntity(dato.toString(),"UTF-8");
 		post.setEntity(entity);
+		post.setHeader("Accept", "*/*");
+		post.setHeader("Content-Type", "application/json");
+		
 		
 		HttpResponse resp = httpClient.execute(post);
 		respStr = EntityUtils.toString(resp.getEntity());
