@@ -46,7 +46,7 @@
     <!-- Registration User Success -->
     <string name="welcomeMessagesTitle">Registro realizado con éxito</string>
     <string name="welcomeMessagesBody">Inicie sesión y comience a regitrar sus denuncias</string>
-    <string name="welcomeMessagesThankYou">!Gracias por colaborar con Ojo Vial¡</string>
+    <string name="welcomeMessagesThankYou">¡Gracias por colaborar con Ojo Vial!</string>
 
     <!-- Register Complaint -->
     <string name="lblNumberPlate">Ingrese número de placa de vehículo</string>
@@ -69,6 +69,7 @@
     <string name="strBodyMessageSuccess">El identificador de tu denuncia es :</string>
     <string name="btnStrOtherComplaint">Menú principal</string>
     <string name="strLblAutomaticAddress">Dirección automática</string>
+    <string name="commingSoon">Próximamente tu colaboración será recompensada</string>
 
     <!-- Common Label -->
     <string name="btnRegister">Registrarse</string>
