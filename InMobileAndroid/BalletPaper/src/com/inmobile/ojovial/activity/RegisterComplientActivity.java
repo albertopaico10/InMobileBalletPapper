@@ -285,16 +285,25 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 			if (Geocoder.isPresent()) {
 				try {
-					List<Address> addresses = geo.getFromLocation(latitude,	longitude, 1);
+					List<Address> addresses = geo.getFromLocation(latitude,	longitude, 2);
+					boolean isFirst=true;
+					String completeAddress="",partialAddress="";
 					for(Address beanAddress:addresses){
-						String deparment=UtilMethods.isEmpety(beanAddress.getSubAdminArea())?"":", "+beanAddress.getSubAdminArea();
-						String district=UtilMethods.isEmpety(beanAddress.getLocality())?"":", "+beanAddress.getLocality();
-						String completeAddress=beanAddress.getAddressLine(0)+district+deparment;
-						complaintBean.setGpsCompleteAddress(completeAddress);
-						complaintBean.setGpsAddress(beanAddress.getAddressLine(0));
-						complaintBean.setGpsDistrict(beanAddress.getLocality());
-						complaintBean.setGpsCountry(beanAddress.getCountryName());
-						completAddres=true;
+						if(isFirst){
+							partialAddress=beanAddress.getAddressLine(0);
+							isFirst=false;
+						}
+						if(!UtilMethods.isEmpety(beanAddress.getSubAdminArea())){
+							String deparment=UtilMethods.isEmpety(beanAddress.getSubAdminArea())?"":", "+beanAddress.getSubAdminArea();
+							String district=UtilMethods.isEmpety(beanAddress.getLocality())?"":", "+beanAddress.getLocality();
+							completeAddress=partialAddress+district+deparment;
+							complaintBean.setGpsCompleteAddress(completeAddress);
+							complaintBean.setGpsAddress(partialAddress);
+							complaintBean.setGpsDistrict(district);
+							complaintBean.setGpsCountry(beanAddress.getCountryName());
+							completAddres=true;
+							break;
+						}
 					}
 				} catch (IOException e) {
 					Toast.makeText(getApplicationContext(),"Ocurrio un error : " + e.getMessage(),Toast.LENGTH_LONG).show();

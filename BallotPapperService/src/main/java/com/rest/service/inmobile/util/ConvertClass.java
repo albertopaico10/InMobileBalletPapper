@@ -127,11 +127,11 @@ public class ConvertClass {
 		return beanResponseComplaint;
 	}
 	
-	public static ImageResponse convertImageToImageResponse(Image beanImage,String rootFile)throws Exception{
+	public static ImageResponse convertImageToImageResponse(Image beanImage,String rootFile,String specificFile)throws Exception{
 		ImageResponse beanImageResponse=new ImageResponse();
 		beanImageResponse.setIdImage(beanImage.getId());
 		beanImageResponse.setRootImage(UtilMethods.saveFileInServer(beanImage.getImg(),
-				beanImage.getId()+"_"+beanImage.getCategoryImage(),CommonConstants.ImageParameter.FORMAT_JPG,rootFile));
+				beanImage.getId()+"_"+beanImage.getCategoryImage(),CommonConstants.ImageParameter.FORMAT_JPG,rootFile,specificFile));
 		beanImageResponse.setNameFileImage(beanImage.getId()+"_"+beanImage.getCategoryImage()+CommonConstants.ImageParameter.FORMAT_JPG);
 		return beanImageResponse;
 	}

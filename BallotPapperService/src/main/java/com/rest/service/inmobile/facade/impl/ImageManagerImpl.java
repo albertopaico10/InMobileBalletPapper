@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.rest.service.inmobile.bean.image.ImageRequest;
 import com.rest.service.inmobile.bean.image.ImageResponse;
 import com.rest.service.inmobile.bean.image.ListImageResponse;
+import com.rest.service.inmobile.bean.systemparam.SystemParamResponse;
 import com.rest.service.inmobile.facade.ImageManager;
 import com.rest.service.inmobile.facade.ReqRespManager;
+import com.rest.service.inmobile.facade.SystemParamManager;
 import com.rest.service.inmobile.hibernate.ComplaintImageHibernate;
 import com.rest.service.inmobile.hibernate.ImageHibernate;
 import com.rest.service.inmobile.hibernate.bean.Complaint;
@@ -33,6 +35,9 @@ public class ImageManagerImpl implements ImageManager {
 	
 	@Autowired
 	private ComplaintImageHibernate complaintImageHibernate;
+	
+	@Autowired
+	private SystemParamManager systemParamManager;
 
 	public ImageResponse saveImage(ImageRequest beanRequest) {
 		ImageResponse beanResponse = new ImageResponse();
@@ -67,9 +72,10 @@ public class ImageManagerImpl implements ImageManager {
 			List<ImageResponse> listImageResponse=new ArrayList<ImageResponse>();
 			int totalImage=0;
 			List<ComplaintImage> listComplaintImage=complaintImageHibernate.getListImage(beanRequest.getIdComplient());
+			SystemParamResponse beanSystemParamResponse=systemParamManager.getSpecificSystemParam(CommonConstants.SystemParam.SYSTEM_PARAM_DOWNLOAD_FILE);
 			for(ComplaintImage beanComplaintImage:listComplaintImage){
 				Image beanImage=imageHibernate.getImage(beanComplaintImage.getIdImage());
-				ImageResponse beanImageResponse=ConvertClass.convertImageToImageResponse(beanImage,beanRequest.getRootProject());
+				ImageResponse beanImageResponse=ConvertClass.convertImageToImageResponse(beanImage,beanRequest.getRootProject(),beanSystemParamResponse.getValueParam());
 				listImageResponse.add(beanImageResponse);
 			}
 			totalImage=listImageResponse.size();

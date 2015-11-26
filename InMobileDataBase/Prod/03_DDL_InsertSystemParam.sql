@@ -15,4 +15,6 @@ insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,statu
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','EMAIL_FROM_CREATION_USER_GMAIL','Email for send mail specific creation user - GMAIL','ojovial@inmobile.pe',1);
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('EMAIL','PASSWORD_FROM_GMAIL','Password for send mail','ojo1234vial',1);
 
+
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('DOWNLOAD','DOWNLOAD_FILE','Root for send image','download',1);
 select * from tb_system_param where generalParam='EMAIL';
