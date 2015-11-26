@@ -43,6 +43,7 @@
     <item name="idShowHour" type="id">false</item>
     <item name="idLblCoordinates" type="id">false</item>
     <item name="digitalClock1" type="id">false</item>
+    <item name="idRefreshAddress" type="id">false</item>
     
 
 </resources>

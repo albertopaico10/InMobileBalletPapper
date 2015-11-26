@@ -38,6 +38,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DigitalClock;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -74,6 +75,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	private DigitalClock dc;
 	private LinearLayout linearLayoutForm;
 	private LinearLayout linearLayoutProgress;
+	private Button btnRegisterComplaint;
+	private Button btnRefreshAddress;
 			
 	String urlPhoto1 = "", urlPhoto2 = "", urlPhoto3 = "";
 	private DB_BalletPaper dbBalletPaper;
@@ -95,6 +98,9 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		
 		lblShowHours = (TextView) findViewById(R.id.idShowHour);
 		lblGPSAddress = (TextView) findViewById(R.id.idGPSAddress);
+		
+		btnRegisterComplaint=(Button)findViewById(R.id.idBntRegisterComplient);
+		btnRefreshAddress=(Button)findViewById(R.id.idRefreshAddress);
 		
 		dc = (DigitalClock) findViewById(R.id.digitalClock1);
 		
@@ -135,11 +141,15 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	private void setTouchModeLoginFalse(){
 		txtNumberPlate.setFocusable(false);
 		txtComment.setFocusable(false);
+		btnRegisterComplaint.setEnabled(false);
+		btnRefreshAddress.setEnabled(false);
 	}
 	
 	private void setTouchModeLoginTrue(){
 		txtNumberPlate.setFocusableInTouchMode(true);
 		txtComment.setFocusableInTouchMode(true);
+		btnRegisterComplaint.setEnabled(true);
+		btnRefreshAddress.setEnabled(true);
 	}
 	
 	private void methodError(String messages){

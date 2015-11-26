@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,10 +29,12 @@ public class LoginActivity extends ActionBarActivity{
 
 	private EditText emailLogin;
 	private EditText passwordLogin;
-	private TextView txtLnkRegisterUser;
+//	private TextView txtLnkRegisterUser;
 	private DB_BalletPaper dbBalletPaper;
 	private LinearLayout linearLayoutForm;
 	private LinearLayout linearLayoutProgress;
+	private Button btnLogin;
+	private Button btnRegister;
 	LoginService loginService=new LoginServiceImpl();
 	LoginBean loginBean=new LoginBean();
 	@Override
@@ -42,7 +45,9 @@ public class LoginActivity extends ActionBarActivity{
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		emailLogin=(EditText)findViewById(R.id.idLoginEmail);
 		passwordLogin=(EditText)findViewById(R.id.idLoginPassword);
-		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
+//		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
+		btnLogin=(Button)findViewById(R.id.ok_button);
+		btnRegister=(Button)findViewById(R.id.link_to_register);
 		createAndroidDatase();
 		if(dbBalletPaper.existUserLoginToApplication()){
 			Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
@@ -55,6 +60,7 @@ public class LoginActivity extends ActionBarActivity{
 	}
 	
 	public void onOkClick(View v){
+		
 		boolean validateField=LoginValidation.isValidateLoginFields(LoginActivity.this,emailLogin,passwordLogin);
 		loginBean=ConvertFormatClass.setValuesLoginBean(emailLogin,passwordLogin);
 		if(validateField){
@@ -91,11 +97,16 @@ public class LoginActivity extends ActionBarActivity{
 	private void setTouchModeLoginFalse(){
 		emailLogin.setFocusable(false);
 		passwordLogin.setFocusable(false);
+		btnLogin.setEnabled(false);
+		btnRegister.setEnabled(false);
+		
 	}
 	
 	private void setTouchModeLoginTrue(){
 		emailLogin.setFocusableInTouchMode(true);
 		passwordLogin.setFocusableInTouchMode(true);
+		btnLogin.setEnabled(true);
+		btnRegister.setEnabled(true);
 	}
 	
 	private void methodError(String messages){
@@ -158,3 +169,4 @@ public class LoginActivity extends ActionBarActivity{
 		Toast.makeText(getApplicationContext(),getString(R.string.notBackStepGeneral),Toast.LENGTH_LONG).show();
 	}
 }
+
