@@ -114,4 +114,8 @@ public class CommonConstants {
 		public static final String FORMAT_PNG="png";
 	}
 	
+	public class SystemParam{
+		public final static String SYSTEM_PARAM_DOWNLOAD_FILE="DOWNLOAD_FILE";
+	}
+	
 }

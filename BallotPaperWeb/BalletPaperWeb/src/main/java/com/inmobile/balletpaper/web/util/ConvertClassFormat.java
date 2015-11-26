@@ -45,7 +45,7 @@ public class ConvertClassFormat {
 			ImageDTO beanImageDTO=new ImageDTO();
 			beanImageDTO.setId(beanImageResponse.getIdImage());
 			beanImageDTO.setNameFile(beanImageResponse.getNameFileImage());
-			beanImageDTO.setRootFile(CommonConstants.ImageValues.NAME_IMAGE_FILE+"/"+beanImageResponse.getRootImage());
+			beanImageDTO.setRootFile(beanImageResponse.getRootImage());
 			listImageDTO.add(beanImageDTO);
 		}
 		return listImageDTO;
@@ -54,7 +54,7 @@ public class ConvertClassFormat {
 	public static ImageRequest convertWebToServiceImage(int idComplaint,String root){
 		ImageRequest beanImage=new ImageRequest();
 		beanImage.setIdComplient(idComplaint);
-		beanImage.setRootProject(root+CommonConstants.ImageValues.NAME_IMAGE_FILE);
+		beanImage.setRootProject(root);
 		return beanImage;
 	}
 	

@@ -31,6 +31,19 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		}
 		return listSystemParamResponse;
 	}
+	
+	public SystemParamResponse getSpecificSystemParam(String nameParam){
+		SystemParamResponse beanSystemParamResponse=new SystemParamResponse();
+		List<SystemParam> listSystemParam=systemParamHibernate.listsByNameParam(nameParam);
+		for(SystemParam beanSystemParam:listSystemParam){
+			beanSystemParamResponse.setId(beanSystemParam.getId());
+			beanSystemParamResponse.setNameParam(beanSystemParam.getNameParam());
+			beanSystemParamResponse.setReasonParam(beanSystemParam.getReasonParam());
+			beanSystemParamResponse.setStatus(beanSystemParam.getStatus());
+			beanSystemParamResponse.setValueParam(beanSystemParam.getValueParam());
+		}
+		return beanSystemParamResponse;
+	}
 
 	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation) {
 		EmailBean beanEmail=new EmailBean();

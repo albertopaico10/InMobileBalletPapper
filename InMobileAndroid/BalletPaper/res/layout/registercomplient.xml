@@ -51,7 +51,7 @@
                 android:singleLine="true" />
 
             <Button
-                android:id="@id/link_to_register"
+                android:id="@id/idRefreshAddress"
                 style="@style/btnStyleOjoVialWhite2"
                 android:drawableRight="@drawable/refresh_icon"
                 android:gravity="left"

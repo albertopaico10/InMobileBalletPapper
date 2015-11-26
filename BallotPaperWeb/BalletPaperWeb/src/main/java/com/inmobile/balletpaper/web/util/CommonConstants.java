@@ -42,7 +42,7 @@ public class CommonConstants {
 	}
 	
 	public class ImageValues{
-		public final static String NAME_IMAGE_FILE="/download";
+		public final static String NAME_IMAGE_FILE="download";
 	}
 	
 }

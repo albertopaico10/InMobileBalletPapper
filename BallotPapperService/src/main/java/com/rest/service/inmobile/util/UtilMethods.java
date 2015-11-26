@@ -79,9 +79,9 @@ public class UtilMethods {
 		return strStatus;
 	}
 	
-	public static String saveFileInServer(byte[] imgByte,String nameFile,String formatFile,String rootFile)throws Exception{
+	public static String saveFileInServer(byte[] imgByte,String nameFile,String formatFile,String rootFile,String specificFolder)throws Exception{
 		BufferedImage bfi = null;
-		rootFile=rootFile+"/"+nameFile+formatFile;
+		rootFile=rootFile+"/"+specificFolder+"/"+nameFile+formatFile;
 		File directory=new File(rootFile);
 		 if (!directory.exists()) {
 			 bfi = ImageIO.read(new ByteArrayInputStream(imgByte));
@@ -93,7 +93,7 @@ public class UtilMethods {
 			 }
 			 bfi.flush();
 		 }		 
-		 return nameFile+formatFile;
+		 return specificFolder+"/"+nameFile+formatFile;
 	}
 	
 	public static String getFinalValuesForEmail(String email,String identifyValue,String finalValue){

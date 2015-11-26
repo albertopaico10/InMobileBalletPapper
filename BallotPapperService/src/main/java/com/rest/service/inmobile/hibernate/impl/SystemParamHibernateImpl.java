@@ -46,5 +46,15 @@ public class SystemParamHibernateImpl implements SystemParamHibernate {
 		return listSystemParamResult;
 	}
 	
+	public List<SystemParam> listsByNameParam(String nameParam) {
+		String query="from SystemParam where nameParam='"+nameParam+"'";
+		System.out.println("query : "+query);
+		Session session=sessionfactory.openSession();
+		List<SystemParam> listSystemParamResult=session.createQuery(query).list();
+		System.out.println("Cantidad de filas : "+listSystemParamResult.size());
+		session.close();
+		return listSystemParamResult;
+	}
+	
 	
 }

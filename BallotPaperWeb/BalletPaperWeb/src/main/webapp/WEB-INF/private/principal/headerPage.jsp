@@ -11,7 +11,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand page-scroll" href="#page-top"><img
-				src="${pageContext.request.contextPath}/resources/bootstrap/img/Logo-para-web.png"></img></a>
+				src="${pageContext.request.contextPath}/resources/bootstrap/img/logo-OV.png"></img></a>
 		</div>
 
 		<div class="collapse navbar-collapse"
