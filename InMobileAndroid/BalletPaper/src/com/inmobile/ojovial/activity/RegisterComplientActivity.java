@@ -89,7 +89,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.registercomplient);
+		setContentView(R.layout.view_register_complient);
 		txtComment = (EditText) findViewById(R.id.idTxtAditionalComment);
 		txtNumberPlate = (EditText) findViewById(R.id.idTxtPlate);
 		lblShowCoordinates = (TextView) findViewById(R.id.idLblCoordinates);
@@ -188,6 +188,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		protected Void doInBackground(Void... params) {
 			try {
 				Content=registerComplientService.callServiceRegister(complaintBean);
+//				Content="{'idComplient':60,'codeResponse':'SUCCESS_COMPLAINT','messageResponse':'Se grabó la primera parte de la denuncia con exito'}";
 			} catch (Exception e) {
 				methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
 			}

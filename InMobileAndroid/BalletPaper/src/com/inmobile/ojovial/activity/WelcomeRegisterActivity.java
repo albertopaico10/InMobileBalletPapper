@@ -17,7 +17,7 @@ public class WelcomeRegisterActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.welcomeballetpaper);
+		setContentView(R.layout.view_welcome_user);
 	}
 	
 	public void onOkClick(View v) {

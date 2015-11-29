@@ -40,7 +40,7 @@ public class LoginActivity extends ActionBarActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.loginnew2);
+		setContentView(R.layout.view_login);
 		linearLayoutForm=(LinearLayout)findViewById(R.id.lnLyFormLogin);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		emailLogin=(EditText)findViewById(R.id.idLoginEmail);
@@ -159,7 +159,7 @@ public class LoginActivity extends ActionBarActivity{
 			} catch (Exception e) {
 				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 			}
-			linearLayoutForm.setVisibility(View.VISIBLE);
+//			linearLayoutForm.setVisibility(View.VISIBLE);
 			linearLayoutProgress.setVisibility(View.GONE);	
 		}
 	}

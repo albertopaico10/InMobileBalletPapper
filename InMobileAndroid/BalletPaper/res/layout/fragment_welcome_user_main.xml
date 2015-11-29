@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+    <!-- Logo Start -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="4dip"
+        android:contentDescription="@string/logoDescription"
+        android:src="@drawable/check_android" />
+    <!-- Logo Ends -->
+
+
+    <!-- Mensaje de extito -->
+
+    <TextView
+        android:id="@+id/lblTitleWelcome"
+        style="@style/lblStyleTitulo"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/welcomeMessagesTitle" />
+
+    <TextView
+        android:id="@+id/lblBodyWelcome"
+        style="@style/lblStyleSubTituloLstVw"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:text="@string/welcomeMessagesBody" />
+
+    <!-- Redirect to login -->
+
+    <Button
+        android:id="@id/ok_button"
+        style="@style/btnStyleOjoVial"
+        android:onClick="onOkClick"
+        android:text="@string/sigIn"
+        android:textAllCaps="false" />
+
+</LinearLayout>

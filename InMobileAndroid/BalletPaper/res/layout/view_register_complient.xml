@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <!-- Header  Starts -->
+
+        <fragment
+            android:id="@+id/idRegisterComplaintMainFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.inmobile.ojovial.fragment.RegisterComplaintMainFragment" />
+
+        <LinearLayout
+            android:id="@+id/lnLyProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:visibility="invisible" >
+
+            <ProgressBar
+                android:id="@id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/txtMessages"
+                style="@style/lblStyleMessagesProcess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loadingSaveComplaint" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

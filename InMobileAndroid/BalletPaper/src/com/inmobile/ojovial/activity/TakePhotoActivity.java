@@ -35,6 +35,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class TakePhotoActivity extends ActionBarActivity {
@@ -49,11 +50,11 @@ public class TakePhotoActivity extends ActionBarActivity {
 	Uri fileUri = null;
 	String rootFileImageN1 = "", rootFileImageN2 = "", rootFileImageN3 = "";
 	File path=null;
-	
+	private LinearLayout linearLayoutProgress;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.takephoto);
+		setContentView(R.layout.view_take_photo);
 		
 		btnPhotoPicture1 = (ImageButton) findViewById(R.id.idBtnTakePhotoN1);
 		imgPhotoPicture1 = (ImageView) findViewById(R.id.idPhotoImageViewN1);
@@ -62,6 +63,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 		btnPhotoPicture3 = (ImageButton) findViewById(R.id.idBtnTakePhotoN3);
 		imgPhotoPicture3 = (ImageView) findViewById(R.id.idPhotoImageViewN3);
 		btnNextPage=(Button) findViewById(R.id.btnNextPhoto);
+		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		
 		createAndroidDatase();
 		
@@ -134,6 +136,7 @@ public class TakePhotoActivity extends ActionBarActivity {
 		btnNextPage.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				linearLayoutProgress.setVisibility(View.VISIBLE);
 				onNextPage();
 			}
 		});

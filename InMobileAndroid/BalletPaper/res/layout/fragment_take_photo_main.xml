@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/LinerTakePhoto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+    <TextView
+        android:id="@+id/txtStep1"
+        style="@style/lblStyleTitulo"
+        android:layout_marginTop="10dip"
+        android:text="@string/lblTituloFotos" />
+
+    <TextView
+        android:id="@+id/txtDescriptionStep1"
+        style="@style/lblStyleSubTituloLstVw"
+        android:text="@string/lblDescripTituloFotos" />
+
+    <ImageButton
+        android:id="@id/idBtnTakePhotoN1"
+        style="@style/btnGreyStyleOjoVial"
+        android:src="@drawable/cameraicon" />
+
+    <ImageView
+        android:id="@id/idPhotoImageViewN1"
+        android:layout_width="400dp"
+        android:layout_height="360dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@id/idBtnTakePhotoN2"
+        style="@style/btnGreyStyleOjoVial"
+        android:layout_marginTop="30dip"
+        android:src="@drawable/cameraicon" />
+
+    <ImageView
+        android:id="@id/idPhotoImageViewN2"
+        android:layout_width="400dp"
+        android:layout_height="360dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@id/idBtnTakePhotoN3"
+        style="@style/btnGreyStyleOjoVial"
+        android:layout_marginTop="30dip"
+        android:src="@drawable/cameraicon" />
+
+    <ImageView
+        android:id="@id/idPhotoImageViewN3"
+        android:layout_width="400dp"
+        android:layout_height="360dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@id/btnNextPhoto"
+        style="@style/btnStyleOjoVial"
+        android:layout_marginTop="30dip"
+        android:text="@string/next"
+        android:textAllCaps="false" />
+
+</LinearLayout>

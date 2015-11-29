@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,12 +47,13 @@ public class RegisterUserActivity extends ActionBarActivity {
 	private DB_BalletPaper dbBalletPaper;
 	private LinearLayout linearLayoutForm;
 	private LinearLayout linearLayoutProgress;
+	private Button btnRegisterUser;
 	RegisterUserService registerUserService=new RegisterUserServiceImpl();
 	RegisterUserBean registerUserBean=new RegisterUserBean();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.registeruser);
+		setContentView(R.layout.view_register_user);
 		System.out.println("Dentro de crear");
 		registerEmail = (EditText) findViewById(R.id.idRegisterEmail);
 		registerpassword = (EditText) findViewById(R.id.idRegisterPassword);
@@ -63,8 +65,22 @@ public class RegisterUserActivity extends ActionBarActivity {
 		registerAceptTermin = (CheckBox) findViewById(R.id.idChkAcceptTerm);
 		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterUser);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
+		btnRegisterUser=(Button)findViewById(R.id.idBtnRegister);
+//		putInformationTest();
 		createAndroidDatase();
+		
 
+	}
+	
+	private void putInformationTest(){
+		registerEmail.setText("testemail@gmail.com");
+		registerpassword.setText("12345");
+		registerpasswordConfirm.setText("12345");
+		registerName.setText("Test Prueba");
+		registerLastName.setText("Last Name");
+		registerDni.setText("45700739");
+		registerAceptTermin.setChecked(true);
+		registerAdult.setChecked(true);
 	}
 
 	private void createAndroidDatase() {
@@ -112,6 +128,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 		registerDni.setFocusable(false);
 		registerAceptTermin.setFocusable(false);
 		registerAdult.setFocusable(false);
+		btnRegisterUser.setEnabled(false);
 	}
 
 	private void setTouchModeLoginTrue(){
@@ -123,6 +140,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 		registerDni.setFocusableInTouchMode(true);
 		registerAceptTermin.setFocusableInTouchMode(true);
 		registerAdult.setFocusableInTouchMode(true);
+		btnRegisterUser.setEnabled(true);
 	}
 	
 	private void methodError(String messages){
@@ -147,6 +165,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 			System.out.println("onLoad!!!");
 			try {
 				Content=registerUserService.callRegisterUserService(registerUserBean);	
+//				Content="{'idUser':120,'codeResponse':'SUCCESS_INSERT_USER','messagesResponse':'The user was created successfully.','typeUser':0}";
 			} catch (Exception e) {
 				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 			}
@@ -172,7 +191,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 			} catch (Exception e) {
 				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 			}
-			linearLayoutForm.setVisibility(View.VISIBLE);
+//			linearLayoutForm.setVisibility(View.VISIBLE);
 			linearLayoutProgress.setVisibility(View.GONE);	
 		}
 

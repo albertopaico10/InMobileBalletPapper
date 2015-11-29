@@ -22,7 +22,7 @@ public class SuccessRecordActivity extends ActionBarActivity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.successrecord);
+		setContentView(R.layout.view_success_record);
 		lblIdComplaint=(TextView)findViewById(R.id.idTxtIdCode);
 		String idComplaint="ES....";
 		Bundle extras = getIntent().getExtras();
