@@ -63,7 +63,7 @@
     <string name="messagesValidationProccessImage">Por favor espere estamos procesando las fotos para adjuntarlas a la denuncia, solo unos segundos más. \n Gracias.</string>
 	<string name="strLblShowGPS">Coordenadas GPS (</string>
 	<string name="messagesGPSNoFound">Lo sentimos, no podemos obtener su dirección debe ser un problema de version de Android. \n Disculpe las molestias.</string>
-	
+	<string name="loadingAddress">Buscando dirección... Por favor espere.</string>
     <!-- Success Record -->
     <string name="successTitle">Denuncia registrada</string>
     <string name="strBodyMessageSuccess">El identificador de tu denuncia es :</string>
@@ -86,5 +86,7 @@
     <string name="notBackStep">No puede volver al paso #1. \n Disculpe las molestias.</string>
     <string name="notBackStepGeneral">No puede volver al paso anterior. \n Disculpe las molestias.</string>
     <string name="noActivity">Se cerró la sesión por no haber realizado ninguna actividad en la aplicación. \n Gracias.</string>
+    <string name="connectionRefused">No hay comunicación con el servidor, revise su conexión a Internet. \n Gracias.</string>
+    <string name="strLoadAddress">No se cargo la dirección, vuelva a presionar el icono \'Refrescar\'</string>
     
 </resources>

@@ -10,11 +10,21 @@
 
         <!-- Header  Starts -->
 
-        <fragment
-            android:id="@+id/idRegisterComplaintMainFrag"
+        <LinearLayout
+            android:id="@id/lnLyComplaintBody"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.inmobile.ojovial.fragment.RegisterComplaintMainFragment" />
+            android:background="#ffffff"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip" >
+
+            <fragment
+                android:id="@+id/idRegisterComplaintMainFrag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="com.inmobile.ojovial.fragment.RegisterComplaintMainFragment" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lnLyProgress"
@@ -40,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loadingSaveComplaint" />
         </LinearLayout>
+
     </RelativeLayout>
 
 </ScrollView>

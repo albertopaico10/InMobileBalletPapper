@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lnLyComplaintBody"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@+id/lnlyTitleRegisterComplaint"
-    android:background="#ffffff"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="10dip" >
@@ -39,6 +36,20 @@
         android:text="@string/strLblAutomaticAddress"
         android:textAllCaps="false"
         android:textColor="@color/black" />
+
+    <ProgressBar
+        android:id="@id/progressBarAddress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@id/txtProgressAddress"
+        style="@style/lblStyleMessagesProcessBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loadingAddress" />
 
     <TextView
         android:id="@id/idGPSAddress"

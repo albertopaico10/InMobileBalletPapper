@@ -9,20 +9,30 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-        <fragment
-            android:id="@+id/idLoginMainFrag"
+        <LinearLayout
+            android:id="@id/lnLyFormLogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.inmobile.ojovial.fragment.LoginMainFragment" />
+            android:background="#ffffff"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dip" >
 
-<!--         <fragment -->
-<!--             android:id="@+id/idSidePanelFrg" -->
-<!--             android:layout_width="150dp" -->
-<!--             android:layout_height="match_parent" -->
-<!--             class="com.inmobile.poc.fragmentslayouts.fragment.SidePanelFragment" /> -->
+            <fragment
+                android:id="@+id/idLoginMainFrag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="com.inmobile.ojovial.fragment.LoginMainFragment" />
+
+            <!-- <fragment -->
+            <!-- android:id="@+id/idSidePanelFrg" -->
+            <!-- android:layout_width="150dp" -->
+            <!-- android:layout_height="match_parent" -->
+            <!-- class="com.inmobile.poc.fragmentslayouts.fragment.SidePanelFragment" /> -->
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/lnLyProgress"
+            android:id="@id/lnLyProgress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#80000000"

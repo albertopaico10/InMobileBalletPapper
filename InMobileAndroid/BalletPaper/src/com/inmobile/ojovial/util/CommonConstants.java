@@ -5,7 +5,7 @@ public class CommonConstants {
 	public class URLService {
 		public static final String URL_SERVICE = "http://162.248.54.10/";
 //		public static final String URL_SERVICE = "http://192.168.1.39:8080/";
-//		public static final String URL_SERVICE = "http://10.65.52.235:8080/";
+//		public static final String URL_SERVICE = "http://10.65.52.225:8080/";
 		
 		public static final String SERVICE_NAME = "BallotPapperService";
 		public static final String CREATE_USER = URL_SERVICE+SERVICE_NAME+"/rest/user/create";

@@ -50,6 +50,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 	private Button btnRegisterUser;
 	RegisterUserService registerUserService=new RegisterUserServiceImpl();
 	RegisterUserBean registerUserBean=new RegisterUserBean();
+	private boolean resultServices=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,7 +67,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterUser);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		btnRegisterUser=(Button)findViewById(R.id.idBtnRegister);
-//		putInformationTest();
+		putInformationTest();
 		createAndroidDatase();
 		
 
@@ -155,6 +156,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 
 		@Override
 		protected void onPreExecute() {
+			resultServices=true;
 //			gLinearLayoutForm.setVisibility(View.GONE);
 			linearLayoutProgress.setVisibility(View.VISIBLE);
 		}
@@ -167,31 +169,35 @@ public class RegisterUserActivity extends ActionBarActivity {
 				Content=registerUserService.callRegisterUserService(registerUserBean);	
 //				Content="{'idUser':120,'codeResponse':'SUCCESS_INSERT_USER','messagesResponse':'The user was created successfully.','typeUser':0}";
 			} catch (Exception e) {
-				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
+//				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
+				resultServices=false;
 			}
 			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			
-			JSONObject jObject = null;
-			try {
-				jObject = new JSONObject(Content);
-				String codeResponse = jObject.getString("codeResponse");
-				int idUserService = jObject.getInt("idUser");
-				System.out.println("codeResponse : "+codeResponse);
-				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_USER.equals(codeResponse)){
-					registerUserService.sucessUserRegister(registerUserBean.getRegisterEmail(), String.valueOf(idUserService),dbBalletPaper);
-					Intent i = new Intent(RegisterUserActivity.this, WelcomeRegisterActivity.class);
-					startActivity(i);
-				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_EXIST.equals(codeResponse)){
-					methodError(getString(R.string.emailExit));
+			if(!resultServices){
+				methodError(getString(R.string.connectionRefused));
+			}else{
+				JSONObject jObject = null;
+				try {
+					jObject = new JSONObject(Content);
+					String codeResponse = jObject.getString("codeResponse");
+					int idUserService = jObject.getInt("idUser");
+					System.out.println("codeResponse : "+codeResponse);
+					if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_USER.equals(codeResponse)){
+						registerUserService.sucessUserRegister(registerUserBean.getRegisterEmail(), String.valueOf(idUserService),dbBalletPaper);
+						Intent i = new Intent(RegisterUserActivity.this, WelcomeRegisterActivity.class);
+						startActivity(i);
+					}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_EXIST.equals(codeResponse)){
+						methodError(getString(R.string.emailExit));
+					}
+				} catch (Exception e) {
+					methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 				}
-			} catch (Exception e) {
-				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 			}
-//			linearLayoutForm.setVisibility(View.VISIBLE);
+			linearLayoutForm.setVisibility(View.VISIBLE);
 			linearLayoutProgress.setVisibility(View.GONE);	
 		}
 

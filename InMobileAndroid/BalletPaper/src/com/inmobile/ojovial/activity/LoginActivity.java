@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inmobile.ojovial.R;
@@ -37,6 +36,7 @@ public class LoginActivity extends ActionBarActivity{
 	private Button btnRegister;
 	LoginService loginService=new LoginServiceImpl();
 	LoginBean loginBean=new LoginBean();
+	boolean resultServices=true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,11 +48,17 @@ public class LoginActivity extends ActionBarActivity{
 //		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
 		btnLogin=(Button)findViewById(R.id.ok_button);
 		btnRegister=(Button)findViewById(R.id.link_to_register);
+		dataTest();
 		createAndroidDatase();
 		if(dbBalletPaper.existUserLoginToApplication()){
 			Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
 			startActivity(i);
 		}
+	}
+	
+	private void dataTest(){
+		emailLogin.setText("alberto_j10@hotmail.com");
+		passwordLogin.setText("12345678");
 	}
 	
 	private void createAndroidDatase() {
@@ -65,7 +71,7 @@ public class LoginActivity extends ActionBarActivity{
 		loginBean=ConvertFormatClass.setValuesLoginBean(emailLogin,passwordLogin);
 		if(validateField){
 			UtilMethods.hideKeyboard(this.getCurrentFocus(),LoginActivity.this);
-			new LoginValidateService().execute();
+			new LoginValidateService().execute();	
 			setTouchModeLoginFalse();
 		}
 	}
@@ -120,46 +126,51 @@ public class LoginActivity extends ActionBarActivity{
 		private String Content="";
 		@Override
 		protected void onPreExecute() {
+			resultServices=true;
 			linearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 		@SuppressWarnings("deprecation")
 		@Override
 		protected Void doInBackground(Void... params) {
 			try {
+				
 				Content=loginService.callService(loginBean);
 			} catch (Exception e) {
-				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
+				resultServices=false;
 			}
 			return null;
 		}
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			// Close progress dialog
-			JSONObject jObject = null;
-			try {
-				jObject = new JSONObject(Content);
-				String codeResponse = jObject.getString("codeResponse");
-				String email = jObject.getString("additional");
-				int idUser = jObject.getInt("idUser");
-				System.out.println("codeResponse : "+codeResponse+"************++");
-				if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
-					try {
-						loginService.sucessLogin(String.valueOf(idUser), email,dbBalletPaper);	
-						Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
-						startActivity(i);
-					} catch (Exception e) {
-						methodError(getString(R.string.errorInGeneral));
+			if(!resultServices){
+				methodError(getString(R.string.connectionRefused));
+			}else{
+				JSONObject jObject = null;
+				try {
+					jObject = new JSONObject(Content);
+					String codeResponse = jObject.getString("codeResponse");
+					String email = jObject.getString("additional");
+					int idUser = jObject.getInt("idUser");
+					System.out.println("codeResponse : "+codeResponse+"************++");
+					if(CommonConstants.CodeResponse.RESPONSE_SUCCESS_VALIDATION.equals(codeResponse)){
+						try {
+							loginService.sucessLogin(String.valueOf(idUser), email,dbBalletPaper);	
+							Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
+							startActivity(i);
+						} catch (Exception e) {
+							methodError(getString(R.string.errorInGeneral));
+						}
+					}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){
+						methodError(getString(R.string.validationFail));
+					}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_NOT_EXIST.equals(codeResponse)){
+						methodError(getString(R.string.emailNotExit));
 					}
-				}else if(CommonConstants.CodeResponse.RESPONSE_FAIL_VALIDATION.equals(codeResponse)){
-					methodError(getString(R.string.validationFail));
-				}else if(CommonConstants.CodeResponse.RESPONSE_EMAIL_NOT_EXIST.equals(codeResponse)){
-					methodError(getString(R.string.emailNotExit));
+				} catch (Exception e) {
+					methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 				}
-			} catch (Exception e) {
-				methodError(getString(R.string.errorUser)+e+getString(R.string.sorryMessages));
 			}
-//			linearLayoutForm.setVisibility(View.VISIBLE);
+			linearLayoutForm.setVisibility(View.VISIBLE);
 			linearLayoutProgress.setVisibility(View.GONE);	
 		}
 	}

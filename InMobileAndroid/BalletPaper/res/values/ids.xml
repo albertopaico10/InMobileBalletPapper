@@ -46,5 +46,11 @@
     <item name="idRefreshAddress" type="id">false</item>
     <item name="LinerTakePhotoHeader" type="id">false</item>
     <item name="LinerTakePhoto" type="id">false</item>
+    <item name="lnLyFormLogin" type="id">false</item>
+    <item name="lnLyProgress" type="id">false</item>
+    <item name="lnLyComplaintBody" type="id">false</item>
+    <item name="progressBarAddress" type="id">false</item>
+    <item name="txtProgressAddress" type="id">false</item>
+    <item name="lnlyRegisterUser" type="id">false</item>
 
 </resources>

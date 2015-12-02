@@ -29,6 +29,7 @@ import android.location.LocationListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.test.UiThreadTest;
 import android.text.TextUtils;
@@ -77,7 +78,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	private LinearLayout linearLayoutProgress;
 	private Button btnRegisterComplaint;
 	private Button btnRefreshAddress;
-			
+	private ProgressBar progressAddress;
+	private TextView lblProcessMessage;
 	String urlPhoto1 = "", urlPhoto2 = "", urlPhoto3 = "";
 	private DB_BalletPaper dbBalletPaper;
 	
@@ -87,13 +89,15 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	public PhotoBean photoBean=new PhotoBean();
 	RegisterComplientService registerComplientService=new RegisterComplientServiceImpl();
 	
+	boolean resultServices=true;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.view_register_complient);
 		txtComment = (EditText) findViewById(R.id.idTxtAditionalComment);
 		txtNumberPlate = (EditText) findViewById(R.id.idTxtPlate);
 		lblShowCoordinates = (TextView) findViewById(R.id.idLblCoordinates);
-		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyTitleRegisterComplaint);
+		linearLayoutForm=(LinearLayout)findViewById(R.id.lnLyComplaintBody);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		
 		lblShowHours = (TextView) findViewById(R.id.idShowHour);
@@ -101,6 +105,9 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		
 		btnRegisterComplaint=(Button)findViewById(R.id.idBntRegisterComplient);
 		btnRefreshAddress=(Button)findViewById(R.id.idRefreshAddress);
+		
+		progressAddress=(ProgressBar)findViewById(R.id.progressBarAddress);
+		lblProcessMessage=(TextView)findViewById(R.id.txtProgressAddress);
 		
 		dc = (DigitalClock) findViewById(R.id.digitalClock1);
 		
@@ -115,7 +122,8 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 		photoBean=ConvertFormatClass.setValuePhotoBean(urlPhoto1,urlPhoto2,urlPhoto3);
 		
 		//--Get Address
-		getPossitionAndAddres(complaintBean);
+//		getPossitionAndAddres(complaintBean);
+		findAddress();
    		//--Process Photo Image
    		new ProcessImage().execute();
    		//--Process Aditional
@@ -135,7 +143,19 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	}
 
 	public void refreshAddress(View v){
-		getPossitionAndAddres(complaintBean);
+		System.out.println("Dentro del refresh...!!!");
+		findAddress();
+	}
+	
+	private void findAddress(){
+		enabledProgressBarAddress();
+		lblProcessMessage.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				getPossitionAndAddres(complaintBean);
+				disableProgressBarAddress();
+			}
+		}, 2000);
 	}
 	
 	private void setTouchModeLoginFalse(){
@@ -180,6 +200,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 
 		@Override
 		protected void onPreExecute() {
+			resultServices=true;
 			linearLayoutProgress.setVisibility(View.VISIBLE);
 		}
 
@@ -190,30 +211,33 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 				Content=registerComplientService.callServiceRegister(complaintBean);
 //				Content="{'idComplient':60,'codeResponse':'SUCCESS_COMPLAINT','messageResponse':'Se grabó la primera parte de la denuncia con exito'}";
 			} catch (Exception e) {
-				methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
+				resultServices=false;
 			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
+			if(!resultServices){
+				methodError(getString(R.string.connectionRefused));
+			}else{
+				JSONObject jObject = null;
 
-			JSONObject jObject = null;
-
-			try {
-				jObject = new JSONObject(Content);
-				String codeResponse = jObject.getString("codeResponse");
-				System.out.println("codeResponse : " + codeResponse);
-				int idComplaint = jObject.getInt("idComplient");
-				if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
-					Intent i = new Intent(RegisterComplientActivity.this,SuccessRecordActivity.class);
-					i.putExtra(CommonConstants.GenericValues.IDCOMPLIENT,String.valueOf(idComplaint));
-					startActivity(i);
-				} else {
-					methodError(getString(R.string.errorSaveComplaint));
+				try {
+					jObject = new JSONObject(Content);
+					String codeResponse = jObject.getString("codeResponse");
+					System.out.println("codeResponse : " + codeResponse);
+					int idComplaint = jObject.getInt("idComplient");
+					if (CommonConstants.CodeResponse.RESPONSE_SUCCESS_COMPLAINT.equals(codeResponse)) {
+						Intent i = new Intent(RegisterComplientActivity.this,SuccessRecordActivity.class);
+						i.putExtra(CommonConstants.GenericValues.IDCOMPLIENT,String.valueOf(idComplaint));
+						startActivity(i);
+					} else {
+						methodError(getString(R.string.errorSaveComplaint));
+					}
+				} catch (Exception e) {
+					methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
 				}
-			} catch (Exception e) {
-				methodError(getString(R.string.errorRegistrationComplaint)+e+getString(R.string.sorryMessages));
 			}
 		}
 
@@ -239,6 +263,18 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 			photoBean.setCompleteProcessImage(true);
 		}
 		
+	}
+	
+	private void disableProgressBarAddress(){
+		progressAddress.setVisibility(View.GONE);
+		lblProcessMessage.setVisibility(View.GONE);
+		btnRefreshAddress.setEnabled(true);
+	}
+	private void enabledProgressBarAddress(){
+		progressAddress.setVisibility(View.VISIBLE);
+		lblProcessMessage.setVisibility(TextView.VISIBLE);
+		lblGPSAddress.setText("");
+		btnRefreshAddress.setEnabled(false);
 	}
 
 	@Override
@@ -280,9 +316,9 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 	
 	@SuppressLint("NewApi")
 	public void getPossitionAndAddres(ComplaintBean complaintBean) {
+		System.out.println("Dentro del Address");
 		// create class object
 		GPSTracker gps = new GPSTracker(RegisterComplientActivity.this);
-
 		// check if GPS enabled
 		if (gps.canGetLocation()) {
 
@@ -305,9 +341,9 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 							isFirst=false;
 						}
 						if(!UtilMethods.isEmpety(beanAddress.getSubAdminArea())){
-							String deparment=UtilMethods.isEmpety(beanAddress.getSubAdminArea())?"":", "+beanAddress.getSubAdminArea();
-							String district=UtilMethods.isEmpety(beanAddress.getLocality())?"":", "+beanAddress.getLocality();
-							completeAddress=partialAddress+district+deparment;
+							String deparment=UtilMethods.isEmpety(beanAddress.getSubAdminArea())?"":beanAddress.getSubAdminArea();
+							String district=UtilMethods.isEmpety(beanAddress.getLocality())?"":beanAddress.getLocality();
+							completeAddress=partialAddress+", "+district+", "+deparment;
 							complaintBean.setGpsCompleteAddress(completeAddress);
 							complaintBean.setGpsAddress(partialAddress);
 							complaintBean.setGpsDistrict(district);
@@ -317,7 +353,7 @@ public class RegisterComplientActivity extends ActionBarActivity implements
 						}
 					}
 				} catch (IOException e) {
-					Toast.makeText(getApplicationContext(),"Ocurrio un error : " + e.getMessage(),Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(),getString(R.string.strLoadAddress) ,Toast.LENGTH_LONG).show();
 				}
 			}else{
 				completAddres=false;
