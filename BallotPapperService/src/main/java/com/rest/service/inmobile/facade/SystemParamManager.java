@@ -7,7 +7,7 @@ import com.rest.service.inmobile.bean.systemparam.SystemParamResponse;
 
 public interface SystemParamManager {
 
-	public List<SystemParamResponse> listSpecificSystemParam(List<String> listValue);
+	public List<SystemParamResponse> listSpecificSystemParam(String generalParam);
 	public EmailBean getEmailInSystemParam(String generalParam,String typeOperation);
 	public EmailBean getEmailInSystemParamGmail(String generalParam,String typeOperation);
 	public SystemParamResponse getSpecificSystemParam(String generalParam);

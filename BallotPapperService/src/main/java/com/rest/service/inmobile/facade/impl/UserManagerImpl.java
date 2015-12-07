@@ -15,6 +15,7 @@ import com.rest.service.inmobile.bean.user.UserResponse;
 import com.rest.service.inmobile.facade.ReqRespManager;
 import com.rest.service.inmobile.facade.SystemParamManager;
 import com.rest.service.inmobile.facade.UserManager;
+import com.rest.service.inmobile.facade.UtilManager;
 import com.rest.service.inmobile.hibernate.UserHibernate;
 import com.rest.service.inmobile.hibernate.bean.RequestResponse;
 import com.rest.service.inmobile.hibernate.bean.User;
@@ -35,6 +36,9 @@ public class UserManagerImpl implements UserManager {
 	
 	@Autowired
 	private SystemParamManager systemParamManager;
+	
+	@Autowired
+	private UtilManager utilManger;
 
 	public UserResponse saveUserInformation(UserRequest beanRequest) {
 		UserResponse beanUserResponse = new UserResponse();
@@ -72,7 +76,7 @@ public class UserManagerImpl implements UserManager {
 	
 	public void buidlEmailCreationUser(String emilTo,String completeName)throws MessagingException{
 		EmailBean beanEmailBean=null;
-		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)||emilTo.endsWith(CommonConstants.Email.OUTLOOK_DOMAIN)){
+		if(utilManger.isSendEmailFromOtherAccount(emilTo)){
 			beanEmailBean=systemParamManager.getEmailInSystemParamGmail(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_CREATE_USER);
 			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBodyUser(beanEmailBean.getBodyEmail(), completeName));
 			beanEmailBean.setToEmail(emilTo);

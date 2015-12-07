@@ -116,6 +116,7 @@ public class CommonConstants {
 	
 	public class SystemParam{
 		public final static String SYSTEM_PARAM_DOWNLOAD_FILE="DOWNLOAD_FILE";
+		public final static String SYSTEM_PARAM_SEND_EMAIL="SEND_EMAIL";
 	}
 	
 }

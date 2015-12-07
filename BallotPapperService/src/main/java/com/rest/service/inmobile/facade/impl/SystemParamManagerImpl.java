@@ -22,9 +22,9 @@ public class SystemParamManagerImpl implements SystemParamManager {
 	@Autowired
 	public SystemParamHibernate systemParamHibernate;
 	
-	public List<SystemParamResponse> listSpecificSystemParam(List<String> listValue) {
+	public List<SystemParamResponse> listSpecificSystemParam(String generalParam) {
 		List<SystemParamResponse> listSystemParamResponse=new ArrayList<SystemParamResponse>();
-		List<SystemParam> listSystemParam=systemParamHibernate.listsSpecificSystemParam(listValue);
+		List<SystemParam> listSystemParam=systemParamHibernate.listsByParam(generalParam);
 		for(SystemParam beanSystemParam:listSystemParam){
 			SystemParamResponse beanSystemParamResponse=ConvertClass.convertFromDataBaseToSystemParamResponse(beanSystemParam);
 			listSystemParamResponse.add(beanSystemParamResponse);
@@ -36,11 +36,7 @@ public class SystemParamManagerImpl implements SystemParamManager {
 		SystemParamResponse beanSystemParamResponse=new SystemParamResponse();
 		List<SystemParam> listSystemParam=systemParamHibernate.listsByNameParam(nameParam);
 		for(SystemParam beanSystemParam:listSystemParam){
-			beanSystemParamResponse.setId(beanSystemParam.getId());
-			beanSystemParamResponse.setNameParam(beanSystemParam.getNameParam());
-			beanSystemParamResponse.setReasonParam(beanSystemParam.getReasonParam());
-			beanSystemParamResponse.setStatus(beanSystemParam.getStatus());
-			beanSystemParamResponse.setValueParam(beanSystemParam.getValueParam());
+			beanSystemParamResponse=ConvertClass.convertFromDataBaseToSystemParamResponse(beanSystemParam);
 		}
 		return beanSystemParamResponse;
 	}

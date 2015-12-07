@@ -153,6 +153,7 @@ public class ConvertClass {
 		beanSystemParamResponse.setNameParam(beanSystemParam.getNameParam());
 		beanSystemParamResponse.setReasonParam(beanSystemParam.getReasonParam());
 		beanSystemParamResponse.setValueParam(beanSystemParam.getValueParam());
+		beanSystemParamResponse.setStatus(beanSystemParam.getStatus());
 		return beanSystemParamResponse;
 	}
 }

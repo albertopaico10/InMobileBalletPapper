@@ -17,4 +17,10 @@ insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,statu
 
 
 insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('DOWNLOAD','DOWNLOAD_FILE','Root for send image','download',1);
+
+--02/12/2015
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('SEND_EMAIL','DOMAIN_HOTMAIL','Send email to hotmail.com domain','@hotmail.com',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('SEND_EMAIL','DOMAIN_HOTMAIL_ES','Send email to hotmail.es domain','@hotmail.es',1);
+insert into tb_system_param (generalParam,nameParam,reasonParam,valueParam,status) values ('SEND_EMAIL','DOMAIN_OUTLOOK','Send email to outlook.com domain','@outlook.com',1);
+
 select * from tb_system_param where generalParam='EMAIL';

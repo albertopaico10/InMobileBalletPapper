@@ -14,10 +14,12 @@ import com.rest.service.inmobile.bean.complient.ListComplaintResponse;
 import com.rest.service.inmobile.bean.email.EmailBean;
 import com.rest.service.inmobile.bean.image.ImageRequest;
 import com.rest.service.inmobile.bean.image.ImageResponse;
+import com.rest.service.inmobile.bean.systemparam.SystemParamResponse;
 import com.rest.service.inmobile.facade.ComplientManager;
 import com.rest.service.inmobile.facade.ImageManager;
 import com.rest.service.inmobile.facade.ReqRespManager;
 import com.rest.service.inmobile.facade.SystemParamManager;
+import com.rest.service.inmobile.facade.UtilManager;
 import com.rest.service.inmobile.hibernate.ComplientHibernate;
 import com.rest.service.inmobile.hibernate.TypeComplaintHibernate;
 import com.rest.service.inmobile.hibernate.UserHibernate;
@@ -51,6 +53,9 @@ public class ComplientManagerImpl implements ComplientManager {
 	
 	@Autowired
 	private SystemParamManager systemParamManager;
+	
+	@Autowired
+	private UtilManager utilManager;
 	
 	public ComplientResponse saveComplient(ComplientRequest beanRequest) {
 		ComplientResponse beanResponse=new ComplientResponse();
@@ -110,9 +115,9 @@ public class ComplientManagerImpl implements ComplientManager {
 		return imageResponse;
 	}
 	
-	private void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
+	public void buidlEmailGeneratedComplaint(String emilTo,int idComplaint,String address,String numberPlate)throws MessagingException{
 		EmailBean beanEmailBean=null;
-		if(emilTo.endsWith(CommonConstants.Email.HOTMAIL_DOMAIN)||emilTo.endsWith(CommonConstants.Email.OUTLOOK_DOMAIN)){
+		if(utilManager.isSendEmailFromOtherAccount(emilTo)){
 			beanEmailBean=systemParamManager.getEmailInSystemParamGmail(CommonConstants.Email.SYSTEM_PARAM_GENERAL_EMAIL,CommonConstants.Email.TYPE_OPERATION_REGISTER_COMPLAINT);
 			//--Set Body with final values
 			beanEmailBean.setBodyEmail(replaceValuesIntoEmailBody(beanEmailBean.getBodyEmail(),idComplaint, address, numberPlate));
