@@ -67,7 +67,7 @@ public class RegisterUserActivity extends ActionBarActivity {
 		linearLayoutForm=(LinearLayout)findViewById(R.id.lnlyRegisterUser);
 		linearLayoutProgress=(LinearLayout)findViewById(R.id.lnLyProgress);
 		btnRegisterUser=(Button)findViewById(R.id.idBtnRegister);
-		putInformationTest();
+//		putInformationTest();
 		createAndroidDatase();
 		
 

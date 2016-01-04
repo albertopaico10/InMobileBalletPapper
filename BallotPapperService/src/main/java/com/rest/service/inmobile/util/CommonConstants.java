@@ -119,4 +119,8 @@ public class CommonConstants {
 		public final static String SYSTEM_PARAM_SEND_EMAIL="SEND_EMAIL";
 	}
 	
+	public class TypeComplaint{
+		public final static int ID_TYPE_COMPLAINT=9999;
+	}
+	
 }

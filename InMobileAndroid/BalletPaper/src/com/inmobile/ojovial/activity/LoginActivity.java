@@ -48,7 +48,7 @@ public class LoginActivity extends ActionBarActivity{
 //		txtLnkRegisterUser=(TextView)findViewById(R.id.link_to_register);
 		btnLogin=(Button)findViewById(R.id.ok_button);
 		btnRegister=(Button)findViewById(R.id.link_to_register);
-		dataTest();
+//		dataTest();
 		createAndroidDatase();
 		if(dbBalletPaper.existUserLoginToApplication()){
 			Intent i = new Intent(LoginActivity.this, PrincipalMainActivity.class);
